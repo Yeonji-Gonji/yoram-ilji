@@ -1,0 +1,67 @@
+---
+id: aresa-fe
+title: 부동산 진단·계산 서비스 (ARESA)
+subtitle: 신입 시기, 데이터가 많은 실서비스 화면으로 쌓은 프론트엔드 기초
+description: 부동산 전세안전진단·DSR 계산 서비스에서 프론트엔드 신입으로 지도·대출 계산기·관리자 화면 등 데이터가 많은 화면을 다뤘습니다. React로 공부했지만 사내 스택인 Angular에 적응해 작업하며 기초를 쌓은 시기입니다.
+category: development
+period: 2023.12 - 2024.07
+role: 프론트엔드 (신입)
+team: ARESA Korea
+thumbnail: /portfolio/aresa-app/thumbnail.webp
+color: '#4F46E5'
+order: 4
+featured: false
+techStack:
+  - Angular 16
+  - RxJS
+  - TypeScript
+  - Tailwind CSS
+  - Naver Map API
+  - amCharts 5
+  - Chart.js
+metrics:
+  - 지도·계산기·관리자 등 데이터 집약 화면
+  - React→Angular 스택 적응
+  - 관리자 사이트 신규 개발 (6개 테이블)
+images:
+  - /portfolio/aresa-app/thumbnail.webp
+  - /portfolio/aresa-app/1.webp
+  - /portfolio/aresa-app/2.webp
+  - /portfolio/aresa-app/3.webp
+  - /portfolio/aresa-app/4.webp
+  - /portfolio/aresa-app/5.webp
+  - /portfolio/aresa-app/6.webp
+  - /portfolio/aresa-app/7.webp
+  - /portfolio/aresa-app/8.webp
+  - /portfolio/aresa-app/9.webp
+  - /portfolio/aresa-app/10.webp
+  - /portfolio/aresa-app/11.webp
+  - /portfolio/aresa-app/12.webp
+  - /portfolio/aresa-app/13.webp
+links: {}
+---
+
+<Callout tone="sky">
+플래그십만큼 정량으로 방어되진 않지만, **신입 때부터 실서비스의 무거운 화면을 다뤘고 새 프레임워크에 빠르게 적응했다**는 점을 화면과 코드로 보여주는 보조 카드입니다.
+</Callout>
+
+## 한 일
+
+### 부동산 지도 (Naver Map)
+표제부 데이터 중 주거형 부동산만 조회되도록 다루고, 타일·마커 기반 렌더링으로 많은 매물을 끊김 없이 보여지게 했습니다.
+마커를 누르면 인프라·실거래·평형 정보 상세로 이동해 사용자의 의사결정을 돕는 화면을 제공했습니다.
+
+### 대출 계산기
+DSR(부채원리금상환비율) 계산 로직을 옮기고 대출 정보 CRUD를 다뤘습니다.
+입력을 클라이언트에서 실시간 상태로 처리하고, JWT로 회원·비회원을 구분해 소득 대비 대출 가능 금액을 즉시 보여줬습니다.
+막대·도넛 차트와 Range 슬라이더로 결과를 표현했습니다.
+
+### 관리자 사이트 (신규 개발)
+Angular Material 테이블을 커스터마이징하고 데이터 처리 로직을 Service로 묶어 6개 테이블에 같은 방식으로 적용했습니다.
+일반·슈퍼 관리자를 나누는 라우터 가드, REST 기반 CRUD, 유저·결제 데이터 관리 기능을 다뤘습니다.
+
+## 이 카드의 역할
+
+- **데이터 집약 화면 경험**: 신입 시기부터 지도·계산기·관리자처럼 데이터가 많고 상태가 복잡한 화면을 다뤘습니다.
+- **프레임워크 폭**: React로 배웠지만 사내 스택 Angular(클래스 기반·RxJS)에 적응해 작업했습니다. 스택에 매이지 않는다는 증거.
+- **정직한 한계**: 신입 시기 + 유지보수 비중이 있었고 git으로 기여를 분리해 증명하기 어렵습니다. 그래서 플래그십이 아닌 보조로 둡니다.

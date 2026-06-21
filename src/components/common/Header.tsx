@@ -16,7 +16,6 @@ const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/blog', label: 'Blog' },
   { href: '/portfolio', label: 'Portfolio' },
-  { href: '/playground', label: 'Playground' },
   { href: '/profile', label: 'Profile' },
 ];
 
@@ -80,11 +79,6 @@ export default function Header() {
                 href="/portfolio"
                 className="hover:text-dark-300 transition-all duration-300">
                 <p>포트폴리오</p>
-              </Link>
-              <Link
-                href="/playground"
-                className="hover:text-dark-300 transition-all duration-300">
-                <p>플레이그라운드</p>
               </Link>
               <Link
                 href="/profile"

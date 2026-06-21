@@ -1,4 +1,6 @@
 import PortfolioListClient from '@/components/portfolio/PortfolioListClient';
+import { PortfolioCategory } from '@/data/portfolio';
+import { getPortfolioCards } from '@/lib/portfolio-content';
 import { siteConfig } from '@/lib/seo';
 import { Metadata } from 'next';
 
@@ -26,11 +28,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function PortfolioPage() {
+interface PageProps {
+  searchParams: Promise<{ category?: string }>;
+}
+
+export default async function PortfolioPage({ searchParams }: PageProps) {
+  const { category } = await searchParams;
+  const cards = getPortfolioCards();
+  const initialCategory: PortfolioCategory | 'all' =
+    category === 'design' || category === 'development' ? category : 'all';
+
   return (
     <div className="max-w-7xl mx-auto max-lg:px-5">
       <h1 className="text-4xl font-medium mb-8">포트폴리오</h1>
-      <PortfolioListClient />
+      <PortfolioListClient cards={cards} initialCategory={initialCategory} />
     </div>
   );
 }

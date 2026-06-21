@@ -1,13 +1,9 @@
 'use client';
 
-import {
-  DesignPortfolio,
-  getPortfoliosByCategory,
-  isDesignPortfolio,
-} from '@/data/portfolio';
+import { PortfolioCard } from '@/lib/portfolio-content';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -16,13 +12,12 @@ import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 
-export default function DesignPortfolioSection() {
+export default function DesignPortfolioSection({
+  designPortfolios,
+}: {
+  designPortfolios: PortfolioCard[];
+}) {
   const [mounted, setMounted] = useState(false);
-  const designPortfolios = useMemo(() => {
-    return getPortfoliosByCategory('design').filter(
-      isDesignPortfolio,
-    ) as DesignPortfolio[];
-  }, []);
 
   const [activeIndex, setActiveIndex] = useState(
     Math.floor(designPortfolios.length / 2),

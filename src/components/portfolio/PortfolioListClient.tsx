@@ -1,32 +1,34 @@
 'use client';
 
-import {
-  categoryLabels,
-  isDesignPortfolio,
-  PortfolioCategory,
-  portfolioProjects,
-} from '@/data/portfolio';
+import { categoryLabels, PortfolioCategory } from '@/data/portfolio';
+import { PortfolioCard } from '@/lib/portfolio-content';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function PortfolioListClient() {
+interface Props {
+  cards: PortfolioCard[];
+  initialCategory?: PortfolioCategory | 'all';
+}
+
+export default function PortfolioListClient({
+  cards,
+  initialCategory = 'all',
+}: Props) {
   const [activeCategory, setActiveCategory] = useState<
     PortfolioCategory | 'all'
-  >('all');
+  >(initialCategory);
 
   const filteredProjects =
     activeCategory === 'all'
-      ? portfolioProjects
-      : portfolioProjects.filter(
-          (project) => project.category === activeCategory,
-        );
+      ? cards
+      : cards.filter((project) => project.category === activeCategory);
 
   const categories: (PortfolioCategory | 'all')[] = [
     'all',
-    'design',
     'development',
+    'design',
   ];
 
   return (
@@ -61,29 +63,36 @@ export default function PortfolioListClient() {
             transition={{ duration: 0.3 }}>
             <Link href={`/portfolio/${project.id}`} className="group block">
               <article className="rounded-2xl overflow-hidden bg-light-200 dark:bg-dark-800 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-                {/* 썸네일 */}
+                {/* 썸네일 (없으면 브랜드 컬러 그라데이션) */}
                 <div
                   className="relative aspect-video overflow-hidden"
                   style={{
                     background: `linear-gradient(135deg, ${project.color}30 0%, ${project.color}10 100%)`,
                   }}>
-                  <Image
-                    src={project.thumbnail}
-                    alt={project.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                  {project.thumbnail ? (
+                    <>
+                      <Image
+                        src={project.thumbnail}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                    </>
+                  ) : (
+                    <div className="flex h-full items-center justify-center px-6">
+                      <span className="text-center text-lg font-medium text-dark-600 dark:text-dark-300">
+                        {project.title}
+                      </span>
+                    </div>
+                  )}
 
                   <div className="absolute top-3 left-3">
-                    <span
-                      className="px-3 py-1 text-xs font-medium bg-white/90 dark:bg-black/70 
-                             text-gray-800 dark:text-gray-200 rounded-full backdrop-blur-sm">
+                    <span className="px-3 py-1 text-xs font-medium bg-white/90 dark:bg-black/70 text-gray-800 dark:text-gray-200 rounded-full backdrop-blur-sm">
                       {categoryLabels[project.category]}
                     </span>
                   </div>
-                  {/* 카테고리 뱃지 */}
                 </div>
 
                 {/* 정보 */}
@@ -101,30 +110,18 @@ export default function PortfolioListClient() {
                     {project.description}
                   </p>
 
-                  {/* 기술 스택 or 도구 미리보기 */}
+                  {/* 기술/도구 미리보기 */}
                   <div className="flex flex-wrap gap-1.5">
-                    {(isDesignPortfolio(project)
-                      ? project.tools
-                      : project.techStack
-                    )
-                      .slice(0, 3)
-                      .map((item) => (
-                        <span
-                          key={item}
-                          className="px-2 py-0.5 text-xs rounded-full bg-light-400 dark:bg-dark-700 text-dark-600 dark:text-dark-300">
-                          {item}
-                        </span>
-                      ))}
-                    {(isDesignPortfolio(project)
-                      ? project.tools
-                      : project.techStack
-                    ).length > 3 && (
+                    {project.skills.slice(0, 3).map((item) => (
+                      <span
+                        key={item}
+                        className="px-2 py-0.5 text-xs rounded-full bg-light-400 dark:bg-dark-700 text-dark-600 dark:text-dark-300">
+                        {item}
+                      </span>
+                    ))}
+                    {project.skills.length > 3 && (
                       <span className="px-2 py-0.5 text-xs text-dark-400">
-                        +
-                        {(isDesignPortfolio(project)
-                          ? project.tools
-                          : project.techStack
-                        ).length - 3}
+                        +{project.skills.length - 3}
                       </span>
                     )}
                   </div>
@@ -135,7 +132,6 @@ export default function PortfolioListClient() {
         ))}
       </motion.div>
 
-      {/* 빈 상태 */}
       {filteredProjects.length === 0 && (
         <div className="text-center py-20">
           <p className="text-dark-400 dark:text-dark-500 text-lg">

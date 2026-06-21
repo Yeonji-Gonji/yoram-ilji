@@ -4,6 +4,7 @@ import ContactSection from '@/components/home/ContactSection';
 import DesignPortfolioSection from '@/components/home/DesignPortfolioSection';
 import DevelopmentHeroSection from '@/components/home/DevelopmentHeroSection';
 import { getAllViewCounts } from '@/lib/firebase-admin';
+import { getFeaturedCards, getPortfolioCards } from '@/lib/portfolio-content';
 import { siteConfig } from '@/lib/seo';
 import { getBlogPosts } from '@/services/notion.api';
 import { Metadata } from 'next';
@@ -42,20 +43,23 @@ export default async function MainPage() {
     getAllViewCounts(),
   ]);
 
+  const featuredDev = getFeaturedCards(3);
+  const designCards = getPortfolioCards('design');
+
   return (
     <div className="relative flex flex-col items-center justify-center text-center overflow-x-hidden overflow-y-hidden">
       {/* 섹션 0: 개발 포트폴리오 히어로 배너 */}
       <section
         className="w-full min-h-screen flex items-center justify-center py-20 pointer-events-auto"
         aria-label="Development Portfolio Section">
-        <DevelopmentHeroSection />
+        <DevelopmentHeroSection cards={featuredDev} />
       </section>
 
       {/* 섹션 1: 디자인 포트폴리오 */}
       <section
         className="w-full min-h-screen flex items-center justify-center py-20 pointer-events-auto"
         aria-label="Design Portfolio Section">
-        <DesignPortfolioSection />
+        <DesignPortfolioSection designPortfolios={designCards} />
       </section>
 
       {/* 섹션 2: 블로그 */}

@@ -1,4 +1,5 @@
 import { ProfileHero } from '@/components/profile/ProfileHero';
+import ProfileTimeline from '@/components/profile/ProfileTimeline';
 import { generateProfilePageJsonLd, siteConfig } from '@/lib/seo';
 import { Metadata } from 'next';
 
@@ -37,6 +38,7 @@ export default function ProfilePage() {
       />
       <div>
         <ProfileHero />
+        <ProfileTimeline />
       </div>
     </>
   );
