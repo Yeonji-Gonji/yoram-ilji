@@ -97,6 +97,8 @@ export interface PortfolioCard {
   color: string;
   skills: string[]; // techStack 또는 tools
   type?: string; // 디자인 유형 배지
+  role?: string; // 카드 푸터에 노출하는 역할
+  metrics?: string[]; // 스크린샷 없는 개발 카드의 핵심 자산(숫자/성과)
   featured?: boolean;
 }
 
@@ -112,6 +114,8 @@ function toCard(m: PortfolioFrontmatter): PortfolioCard {
     color: m.color ?? '#6b6864',
     skills: m.techStack ?? m.tools ?? [],
     type: m.type,
+    role: m.role,
+    metrics: m.metrics,
     featured: m.featured,
   };
 }

@@ -61,33 +61,33 @@ export default function Header() {
         initial="visible"
         animate={hidden && !mobileMenuOpen ? 'hidden' : 'visible'}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className="fixed top-0 left-0 right-0 z-50 px-6 py-4">
-        <nav className="max-w-9xl mx-auto">
+        className="fixed top-0 left-0 right-0 px-6 py-4 z-101">
+        <nav className="mx-auto max-w-9xl">
           <div className="flex items-center justify-between">
-            <Link href="/" className="font-medium text-xl w-12 h-12">
+            <Link href="/" className="w-12 h-12 text-xl font-medium">
               <Logo />
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-6 hover:cursor-pointer">
+            <div className="items-center hidden gap-6 md:flex hover:cursor-pointer">
               <Link
                 href="/blog"
-                className="hover:text-dark-300 transition-all duration-300">
+                className="transition-all duration-300 hover:text-dark-300">
                 <p>블로그</p>
               </Link>
               <Link
                 href="/portfolio"
-                className="hover:text-dark-300 transition-all duration-300">
+                className="transition-all duration-300 hover:text-dark-300">
                 <p>포트폴리오</p>
               </Link>
               <Link
                 href="/profile"
-                className="hover:text-dark-300 transition-all duration-300">
+                className="transition-all duration-300 hover:text-dark-300">
                 <p>프로필</p>
               </Link>
-              <div className="border border-r border-gray-200 h-4" />
+              <div className="h-4 border border-r border-gray-200" />
               <button
-                className="p-1 rounded-md group cursor-pointer hover:text-dark-300 transition-all duration-300"
+                className="p-1 transition-all duration-300 rounded-md cursor-pointer group hover:text-dark-300"
                 onClick={() =>
                   setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')
                 }>
@@ -102,7 +102,7 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden p-2 cursor-pointer"
+              className="p-2 cursor-pointer md:hidden"
               onClick={() => setMobileMenuOpen(true)}
               aria-label="메뉴 열기">
               <MenuIcon className="size-6" />
@@ -121,10 +121,10 @@ export default function Header() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-100 bg-black/80 backdrop-blur-sm md:hidden">
             {/* Close Button & Logo */}
-            <div className="absolute top-4 left-6 right-6 flex items-center justify-between">
+            <div className="absolute flex items-center justify-between top-4 left-6 right-6">
               <Link
                 href="/"
-                className="font-medium text-xl w-12 h-12"
+                className="w-12 h-12 text-xl font-medium"
                 onClick={() => setMobileMenuOpen(false)}>
                 <Logo />
               </Link>
@@ -137,7 +137,7 @@ export default function Header() {
             </div>
 
             {/* Navigation Links */}
-            <nav className="h-full flex flex-col items-end justify-center pr-8 gap-6">
+            <nav className="flex flex-col items-end justify-center h-full gap-6 pr-8">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
@@ -146,7 +146,7 @@ export default function Header() {
                   transition={{ delay: index * 0.1, duration: 0.3 }}>
                   <Link
                     href={link.href}
-                    className="text-white text-2xl font-medium hover:text-gray-300 transition-colors"
+                    className="text-2xl font-medium text-white transition-colors hover:text-gray-300"
                     onClick={() => setMobileMenuOpen(false)}>
                     {link.label}
                   </Link>
@@ -159,7 +159,7 @@ export default function Header() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.1, duration: 0.3 }}>
                 <button
-                  className="p-2 text-white cursor-pointer hover:text-gray-300 transition-colors"
+                  className="p-2 text-white transition-colors cursor-pointer hover:text-gray-300"
                   onClick={() => {
                     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
                   }}>

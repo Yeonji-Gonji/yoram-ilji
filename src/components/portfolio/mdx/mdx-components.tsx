@@ -1,6 +1,7 @@
 import type { MDXComponents } from 'mdx/types';
 import Image from 'next/image';
 import Callout from './Callout';
+import { BrowserFrame, PhoneFrame, PhoneRow } from './DeviceFrame';
 import Figure from './Figure';
 import MetricGrid from './MetricGrid';
 import { ProcessStep, ProcessSteps } from './ProcessSteps';
@@ -84,4 +85,7 @@ export const portfolioMdxComponents: MDXComponents = {
   MetricGrid,
   ProcessSteps,
   ProcessStep,
+  BrowserFrame,
+  PhoneFrame,
+  PhoneRow,
 };
