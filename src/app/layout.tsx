@@ -1,4 +1,6 @@
 import '@/assets/styles/globals.css';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 import AppProvider from '@/components/AppProvider';
 import Header from '@/components/common/Header';
 import RouteChangeLoader from '@/components/common/RouteChangeLoader';

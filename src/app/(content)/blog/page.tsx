@@ -7,7 +7,7 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '블로그',
   description:
-    '프론트엔드 개발, React, Next.js, TypeScript 등 웹 개발 관련 기술 글을 공유합니다. 다양한 카테고리의 포스트를 확인하세요.',
+    '프론트엔드 개발, React, Next.js, TypeScript 등 웹 개발을 공부하며 정리한 기술 글을 기록합니다.',
   keywords: [
     '기술 블로그',
     '프론트엔드',

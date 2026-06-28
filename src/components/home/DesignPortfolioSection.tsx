@@ -8,10 +8,6 @@ import type { Swiper as SwiperType } from 'swiper';
 import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-import 'swiper/css/navigation';
-
 export default function DesignPortfolioSection({
   designPortfolios,
 }: {
@@ -33,16 +29,16 @@ export default function DesignPortfolioSection({
   }
 
   return (
-    <div className="w-full mx-auto px-6 py-16 relative z-10 pointer-events-auto">
+    <div className="relative z-10 w-full px-6 py-16 mx-auto pointer-events-auto">
       <div className="mb-8">
         <Link
           href="/portfolio?category=design"
-          className="group inline-flex items-center gap-2">
-          <h2 className="text-3xl md:text-4xl font-medium group-hover:text-point transition-all duration-300">
-            디자인 포트폴리오
+          className="inline-flex items-center gap-2 group">
+          <h2 className="text-3xl font-medium transition-all duration-300 md:text-4xl group-hover:text-point">
+            Designs
           </h2>
           <svg
-            className="w-6 h-6 text-dark-400 group-hover:text-point group-hover:translate-x-1 transition-all duration-300"
+            className="w-6 h-6 transition-all duration-300 text-dark-400 group-hover:text-point group-hover:translate-x-1"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24">
@@ -54,8 +50,8 @@ export default function DesignPortfolioSection({
             />
           </svg>
         </Link>
-        <p className="text-dark-300 dark:text-dark-500 mt-2">
-          다양한 디자인 프로젝트를 경험해보세요
+        <p className="mt-2 text-dark-300 dark:text-dark-500">
+          개발로 전향하기 전, 디자이너로 일하던 시절의 작업입니다.
         </p>
       </div>
 
@@ -106,10 +102,10 @@ export default function DesignPortfolioSection({
                       <span className="px-2 py-0.5 bg-white/20 backdrop-blur-sm text-white text-xs rounded-full">
                         {project.type}
                       </span>
-                      <h3 className="text-xl font-medium text-white mb-1">
+                      <h3 className="mb-1 text-xl font-medium text-white">
                         {project.title}
                       </h3>
-                      <p className="text-white/70 text-sm line-clamp-2">
+                      <p className="text-sm text-white/70 line-clamp-2">
                         {project.subtitle}
                       </p>
 
@@ -142,7 +138,7 @@ export default function DesignPortfolioSection({
           })}
         </Swiper>
       ) : (
-        <div className="flex gap-6 justify-center py-10">
+        <div className="flex justify-center gap-6 py-10">
           {[1, 2, 3].map((i) => (
             <div
               key={i}

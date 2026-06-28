@@ -9,9 +9,6 @@ import { EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import BlogCard from '../common/BlogCard';
 
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
-
 interface Props {
   posts: NotionPage[];
   viewCounts: Record<string, number>;
@@ -42,14 +39,14 @@ export default function BlogSection({ posts, viewCounts }: Props) {
   }, []);
 
   return (
-    <div className="w-full mx-auto px-6 py-16 relative z-10 pointer-events-auto">
+    <div className="relative z-10 w-full px-6 py-16 mx-auto pointer-events-auto">
       <div className="mb-8">
-        <Link href="/blog" className="group inline-flex items-center gap-2">
-          <h2 className="text-3xl md:text-4xl font-bold group-hover:text-point transition-all duration-300">
-            블로그
+        <Link href="/blog" className="inline-flex items-center gap-2 group">
+          <h2 className="text-3xl font-bold transition-all duration-300 md:text-4xl group-hover:text-point">
+            Blog
           </h2>
           <svg
-            className="w-6 h-6 text-dark-400 group-hover:text-point group-hover:translate-x-1 transition-all duration-300"
+            className="w-6 h-6 transition-all duration-300 text-dark-400 group-hover:text-point group-hover:translate-x-1"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24">
@@ -61,8 +58,8 @@ export default function BlogSection({ posts, viewCounts }: Props) {
             />
           </svg>
         </Link>
-        <p className="text-dark-300 dark:text-dark-500 mt-2">
-          인기 있는 최신 글들을 만나보세요
+        <p className="mt-2 text-dark-300 dark:text-dark-500">
+          공부하며 정리한 글을 기록합니다.
         </p>
       </div>
 
@@ -102,7 +99,7 @@ export default function BlogSection({ posts, viewCounts }: Props) {
           })}
         </Swiper>
       ) : (
-        <div className="flex gap-6 justify-center py-4">
+        <div className="flex justify-center gap-6 py-4">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
