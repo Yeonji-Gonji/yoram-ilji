@@ -1,0 +1,77 @@
+---
+id: booth-3d-webapp
+title: 전시 부스 체험 웹앱
+subtitle: 3D 부스·제품 뷰어와 AI 음성 채팅을 한 브라우저에서 — 전시 현장용 체험 앱
+description: 반도체 전시회(SEMICON Korea 2026, 코엑스) 부스 체험용 브라우저 앱입니다. GLTF 3D 부스·제품 뷰어, 끊겨도 스스로 복구하는 실시간 AI 채팅(네이티브 WebSocket), 음성 입력, 3개 국어를 직접 구현했고 프론트엔드를 거의 전부 맡았습니다.
+category: development
+period: '2026'
+role: 프론트엔드 (거의 전담)
+team: 주식회사 업폴 (Upfall) · 4인
+thumbnail: ''
+color: '#14B8A6'
+order: 3.1
+featured: false
+techStack:
+  - Next.js
+  - React
+  - react-three-fiber
+  - drei / three
+  - meshoptimizer
+  - WebSocket
+  - Web Speech API
+  - next-intl
+  - next-pwa
+  - Zustand
+metrics:
+  - 프론트엔드 거의 전담 (4인 팀)
+  - GLTF 3D 부스·제품 뷰어 직접 구현 (Meshopt 압축)
+  - 자동 복구형 실시간 채팅 (WebSocket 싱글톤·블루그린 배포 대응)
+  - 음성 입력 + 3개 국어(ko·en·ja)
+links: {}
+---
+
+<Callout>
+전시 현장에서 사흘 내내 도는 앱이라, 3D가 무겁지 않게 뜨고 실시간 연결이 끊겨도 스스로 복구되는 안정성이 기능보다 먼저였습니다.
+</Callout>
+
+## 배경
+
+반도체 전시회(SEMICON Korea 2026, 코엑스) 3일 일정의 부스 체험용 브라우저 앱입니다. 방문객이 부스 화면에서 직접 조작하는 키오스크성 앱이라, 3D 렌더링·실시간 AI 채팅·음성 입력이 한 화면에서 끊김 없이 돌아가야 했습니다. 4인 팀에서 프론트엔드를 거의 전담했습니다.
+
+## 한 일
+
+<ProcessSteps>
+  <ProcessStep number="01" title="3D 부스·제품 뷰어 직접 구현">
+    GLTF 기반 부스 뷰어와 제품 뷰어를 react-three-fiber로 구현했습니다.
+    드라이(drei)의 Environment·ContactShadows·MeshReflectorMaterial·OrbitControls로 전시장 느낌의 반사·그림자를 주고,
+    모델은 `meshoptimizer`로 압축해 디코딩하고 CDN에서 불러왔습니다. 디바이스 픽셀 비율을 2로 제한하고 모델을 프리로드해, 저사양 기기에서도 초기 로딩이 무겁지 않도록 했습니다.
+  </ProcessStep>
+  <ProcessStep number="02" title="끊겨도 스스로 복구되는 실시간 채팅">
+    채팅은 모듈 레벨 싱글톤으로 관리되는 네이티브 WebSocket 위에 올렸습니다.
+    40초간 메시지가 없으면 지터를 섞어 ping을 보내고 10초 안에 pong이 없으면 재연결하는 keep-alive,
+    지수 백오프(최대 5회)·전송 재시도(3회)를 넣었습니다.
+    특히 운영의 **블루그린 배포로 연결이 끊기는 경우를 별도 재연결 경로(2~5초 분산 대기)** 로 다뤄, 배포 중에도 사용자가 대화를 잃지 않게 했습니다.
+    종료 코드(정상·비정상·인증 실패 4001/4003 등)를 구분해 인증 오류와 일시 단절을 다르게 처리했습니다.
+  </ProcessStep>
+  <ProcessStep number="03" title="에이전트 응답을 화면으로 — A2UI·음성 입력">
+    봇이 텍스트뿐 아니라 구조화된 UI(A2UI) 컴포넌트를 내려주면 이를 동적으로 렌더링하도록 만들었습니다(액션 카드·링크 미리보기·진행 상태·추론 과정 표시).
+    Web Speech API로 음성 입력(ko-KR, 실시간 중간 결과)을 붙여, 키보드 없이 말로 질문할 수 있게 했습니다.
+  </ProcessStep>
+  <ProcessStep number="04" title="전시 환경 대응">
+    부스 안내용 인터랙티브 맵, 제품 상세·기능 패널을 구성하고, PWA(next-pwa)와 3개 국어(next-intl: ko·en·ja)를 적용했습니다. 전역 상태는 Zustand로 관리했습니다.
+  </ProcessStep>
+</ProcessSteps>
+
+## 결과
+
+<MetricGrid items={[
+  { value: "ko·en·ja", label: "3개 국어 (next-intl)" },
+  { value: "40s / 10s", label: "ping / pong keep-alive" },
+  { value: "×5", label: "지수 백오프 재연결" },
+]} />
+
+3D·실시간 채팅·음성을 한 화면에서 안정적으로 돌리는 전시용 앱을, 프론트엔드 거의 전부를 직접 구현해 사흘 행사 동안 운영했습니다.
+
+## 정리
+
+화면이 화려한 것보다, 현장에서 끊기지 않는 것이 핵심인 앱이었습니다. 그래서 3D는 압축·프리로드로 가볍게, 실시간 연결은 배포·네트워크 단절까지 가정해 스스로 복구되도록 설계하는 데 가장 공을 들였습니다.
