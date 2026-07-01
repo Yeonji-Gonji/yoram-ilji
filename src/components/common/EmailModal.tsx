@@ -1,5 +1,6 @@
 'use client';
 
+import { appConfig } from '@/lib/config';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Loader2, Mail, Send, X } from 'lucide-react';
 import { FormEvent, useEffect, useState } from 'react';
@@ -283,7 +284,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
             <div className="px-6 pb-6">
               <p className="text-xs text-center text-dark-500 dark:text-dark-400">
                 이메일은{' '}
-                <span className="font-medium">juni940302@gmail.com</span>
+                <span className="font-medium">{appConfig.contactEmail}</span>
                 으로 전송됩니다.
               </p>
             </div>

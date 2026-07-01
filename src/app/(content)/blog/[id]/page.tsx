@@ -1,4 +1,3 @@
-import ViewCounter from '@/components/blog/ViewCounter';
 import NotionBlock from '@/components/common/NotionBlock';
 import {
   generateArticleJsonLd,
@@ -136,12 +135,11 @@ export default async function PostPage({ params }: Props) {
           <div className="flex items-center mb-8 gap-2 text-dark-400">
             <span>
               작성일:{' '}
-              {dayjs(post.properties.생성일.created_time).format(
-                'YYYY년 MM월 DD일',
-              )}
+              {dayjs(
+                post.properties.날짜?.date?.start ??
+                  post.properties.생성일.created_time,
+              ).format('YYYY년 MM월 DD일')}
             </span>
-            <span>·</span>
-            <ViewCounter postId={id} />
           </div>
           <article className="text-dark-900 dark:text-light-300">
             {blocks.map((block) => (

@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
+import { appConfig } from './config';
 
 export const siteConfig = {
   name: '요람일지',
   description:
     '프론트엔드 개발자 준희의 기술 블로그입니다. React, Next.js, TypeScript 등 웹 개발 지식과 프로젝트 경험을 공유합니다.',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://yoram-ilji.vercel.app',
+  url: appConfig.siteUrl,
   author: {
     name: 'MODAC',
     url: 'https://github.com/MODAC0',

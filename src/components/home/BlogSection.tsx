@@ -12,19 +12,22 @@ import BlogCard from '../common/BlogCard';
 
 interface Props {
   posts: NotionPage[];
-  viewCounts: Record<string, number>;
 }
 
-export default function BlogSection({ posts, viewCounts }: Props) {
+export default function BlogSection({ posts }: Props) {
   const [mounted, setMounted] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
 
   const displayPosts = useMemo(
     () =>
-      posts
+      [...posts]
         .sort((a, b) =>
-          dayjs(b.properties.생성일.created_time).diff(
-            dayjs(a.properties.생성일.created_time),
+          dayjs(
+            b.properties.날짜?.date?.start ?? b.properties.생성일.created_time,
+          ).diff(
+            dayjs(
+              a.properties.날짜?.date?.start ?? a.properties.생성일.created_time,
+            ),
           ),
         )
         .slice(0, 6),
@@ -76,7 +79,7 @@ export default function BlogSection({ posts, viewCounts }: Props) {
                   className={`transition-all duration-300 ${
                     isActive ? 'scale-100' : 'scale-95 opacity-70'
                   }`}>
-                  <BlogCard post={post} viewCount={viewCounts[post.id]} />
+                  <BlogCard post={post} />
                 </div>
               </SwiperSlide>
             );

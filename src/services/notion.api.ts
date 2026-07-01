@@ -1,3 +1,4 @@
+import { appConfig } from '@/lib/config';
 import { NotionPage } from '@/types/notion.type';
 import {
   Client,
@@ -10,7 +11,7 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
-const dataSourceId = process.env.NOTION_DATA_SOURCE_ID!;
+const dataSourceId = appConfig.notion.blogDataSourceId;
 
 // 자식 블록을 포함한 확장된 블록 타입
 export type BlockWithChildren = BlockObjectResponse & {

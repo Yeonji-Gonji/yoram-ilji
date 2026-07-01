@@ -8,11 +8,10 @@ import BlogCard from '../common/BlogCard';
 
 interface Props {
   posts: NotionPage[];
-  viewCounts: Record<string, number>;
 }
 const ITEMS_PER_LOAD = 9;
 
-export default function BlogListClient({ posts, viewCounts }: Props) {
+export default function BlogListClient({ posts }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [displayCount, setDisplayCount] = useState(ITEMS_PER_LOAD);
   const loaderRef = useRef<HTMLDivElement>(null);
@@ -130,7 +129,7 @@ export default function BlogListClient({ posts, viewCounts }: Props) {
                 duration: 0.3,
                 delay: (index % ITEMS_PER_LOAD) * 0.05,
               }}>
-              <BlogCard post={post} viewCount={viewCounts[post.id]} />
+              <BlogCard post={post} />
             </motion.div>
           ))}
         </motion.div>

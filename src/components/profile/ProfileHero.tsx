@@ -1,11 +1,12 @@
 'use client';
 
+import { appConfig } from '@/lib/config';
 import { motion } from 'framer-motion';
 import { Mail, MapPin } from 'lucide-react';
 import { SphereModel } from '../common/SphereModel';
 
 export function ProfileHero() {
-  const email = process.env.GMAIL_USER;
+  const email = appConfig.contactEmail;
   return (
     <div className="flex items-center justify-center w-full dark:bg-dark-900">
       <div className="flex flex-col-reverse items-center justify-between w-full">
