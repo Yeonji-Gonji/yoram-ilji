@@ -9,7 +9,6 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const PORTFOLIO_DS_ID = '390765fe-8b67-804b-9445-000b5c5ed7d1';
 
 /* ───────── property 추출 헬퍼 ───────── */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const asTitle = (p: any): string => p?.title?.[0]?.plain_text ?? '';
 const asText = (p: any): string => p?.rich_text?.[0]?.plain_text ?? '';
 const asSelect = (p: any): string | undefined => p?.select?.name ?? undefined;
