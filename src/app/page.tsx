@@ -4,7 +4,7 @@ import ContactSection from '@/components/home/ContactSection';
 import DesignPortfolioSection from '@/components/home/DesignPortfolioSection';
 import DevelopmentHeroSection from '@/components/home/DevelopmentHeroSection';
 import { getAllViewCounts } from '@/lib/firebase-admin';
-import { getFeaturedCards, getPortfolioCards } from '@/lib/portfolio-content';
+import { getFeaturedCards, getPortfolioCards } from '@/services/portfolio.notion.api';
 import { siteConfig } from '@/lib/seo';
 import { getBlogPosts } from '@/services/notion.api';
 import { Metadata } from 'next';
@@ -43,8 +43,10 @@ export default async function MainPage() {
     getAllViewCounts(),
   ]);
 
-  const featuredDev = getFeaturedCards(3);
-  const designCards = getPortfolioCards('design');
+  const [featuredDev, designCards] = await Promise.all([
+    getFeaturedCards(3),
+    getPortfolioCards('design'),
+  ]);
 
   return (
     <div className="relative flex flex-col items-center justify-center text-center overflow-x-hidden overflow-y-hidden">

@@ -13,7 +13,7 @@ function Inline({ md }: { md: string }) {
           <strong key={i}>{p.slice(2, -2)}</strong>
         ) : (
           <Fragment key={i}>{p}</Fragment>
-        )
+        ),
       )}
     </>
   );
@@ -37,14 +37,15 @@ export default function ResumeDocument() {
           PDF로 저장 / 인쇄
         </button>
         <span className="hint">
-          인쇄 대화상자에서 여백 &ldquo;기본&rdquo;, 배경 그래픽 켜기 · 머리글/바닥글 끄기를 권장합니다.
+          인쇄 대화상자에서 여백 &ldquo;기본&rdquo;, 배경 그래픽 켜기 ·
+          머리글/바닥글 끄기를 권장합니다.
         </span>
       </div>
 
       <article className="resume-doc">
         <div className="doc-head">
           <div className="name">
-            {resume.name} <span>— {resume.title}</span>
+            {resume.name} <span>: {resume.title}</span>
           </div>
           <div className="tag">{resume.tagline}</div>
           <div className="contact">
@@ -72,7 +73,7 @@ export default function ResumeDocument() {
           {resume.experience.map((exp) => (
             <div className="job" key={exp.company}>
               <h3>
-                {exp.company} — {exp.role} &nbsp;|&nbsp; {exp.period}
+                {exp.company}: {exp.role} &nbsp;|&nbsp; {exp.period}
               </h3>
               {exp.note && <div className="meta">{exp.note}</div>}
               <ul>
