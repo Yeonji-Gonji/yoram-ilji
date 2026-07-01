@@ -1,5 +1,7 @@
 'use client';
 
+import CarouselDots from '@/components/common/CarouselDots';
+import SectionHeader from '@/components/common/SectionHeader';
 import { PortfolioCard } from '@/lib/portfolio-content';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -29,31 +31,12 @@ export default function DesignPortfolioSection({
   }
 
   return (
-    <div className="relative z-10 w-full px-6 py-16 mx-auto pointer-events-auto">
-      <div className="mb-8">
-        <Link
-          href="/portfolio?category=design"
-          className="inline-flex items-center gap-2 group">
-          <h2 className="text-3xl font-medium transition-all duration-300 md:text-4xl group-hover:text-point">
-            Designs
-          </h2>
-          <svg
-            className="w-6 h-6 transition-all duration-300 text-dark-400 group-hover:text-point group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
-        <p className="mt-2 text-dark-300 dark:text-dark-500">
-          개발로 전향하기 전, 디자이너로 일하던 시절의 작업입니다.
-        </p>
-      </div>
+    <div className="pointer-events-auto relative z-10 mx-auto w-full max-w-7xl px-6">
+      <SectionHeader
+        title="Designs"
+        href="/portfolio?category=design"
+        subtitle="개발로 전향하기 전, 디자이너로 일하던 시절의 작업입니다."
+      />
 
       {mounted ? (
         <Swiper
@@ -149,20 +132,11 @@ export default function DesignPortfolioSection({
         </div>
       )}
 
-      <div className="flex justify-center gap-2 mt-8">
-        {designPortfolios.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => swiperInstance?.slideTo(index)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              index === activeIndex
-                ? 'bg-point w-6'
-                : 'bg-dark-300 dark:bg-dark-500 hover:bg-point/50 w-2'
-            }`}
-            aria-label={`카드 ${index + 1}`}
-          />
-        ))}
-      </div>
+      <CarouselDots
+        count={designPortfolios.length}
+        activeIndex={activeIndex}
+        onSelect={(index) => swiperInstance?.slideTo(index)}
+      />
     </div>
   );
 }

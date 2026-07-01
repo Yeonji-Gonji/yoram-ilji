@@ -1,8 +1,9 @@
 'use client';
 
+import CarouselDots from '@/components/common/CarouselDots';
+import SectionHeader from '@/components/common/SectionHeader';
 import { NotionPage } from '@/types/notion.type';
 import dayjs from 'dayjs';
-import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { EffectCoverflow } from 'swiper/modules';
@@ -39,29 +40,12 @@ export default function BlogSection({ posts, viewCounts }: Props) {
   }, []);
 
   return (
-    <div className="relative z-10 w-full px-6 py-16 mx-auto pointer-events-auto">
-      <div className="mb-8">
-        <Link href="/blog" className="inline-flex items-center gap-2 group">
-          <h2 className="text-3xl font-bold transition-all duration-300 md:text-4xl group-hover:text-point">
-            Blog
-          </h2>
-          <svg
-            className="w-6 h-6 transition-all duration-300 text-dark-400 group-hover:text-point group-hover:translate-x-1"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
-          </svg>
-        </Link>
-        <p className="mt-2 text-dark-300 dark:text-dark-500">
-          공부하며 정리한 글을 기록합니다.
-        </p>
-      </div>
+    <div className="pointer-events-auto relative z-10 mx-auto w-full max-w-7xl px-6">
+      <SectionHeader
+        title="Blog"
+        href="/blog"
+        subtitle="공부하며 정리한 글을 기록합니다."
+      />
 
       {mounted ? (
         <Swiper
@@ -109,21 +93,11 @@ export default function BlogSection({ posts, viewCounts }: Props) {
         </div>
       )}
 
-      {/* 인디케이터 */}
-      <div className="flex justify-center gap-2 mt-8">
-        {displayPosts.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => swiperInstance?.slideTo(index)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              activeIndex === index
-                ? 'w-6 bg-point'
-                : 'w-1.5 bg-light-400 dark:bg-dark-600 hover:bg-point/50'
-            }`}
-            aria-label={`${index + 1}번 포스트로 이동`}
-          />
-        ))}
-      </div>
+      <CarouselDots
+        count={displayPosts.length}
+        activeIndex={activeIndex}
+        onSelect={(index) => swiperInstance?.slideTo(index)}
+      />
     </div>
   );
 }

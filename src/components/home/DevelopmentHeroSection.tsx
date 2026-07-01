@@ -1,5 +1,6 @@
+import SectionHeader from '@/components/common/SectionHeader';
 import { PortfolioCard } from '@/lib/portfolio-content';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { CSSProperties } from 'react';
@@ -17,20 +18,12 @@ export default function DevelopmentHeroSection({ cards }: Props) {
   if (cards.length === 0) return null;
 
   return (
-    <div className="w-full px-6 max-w-7xl z-100">
-      <div className="mb-8 ">
-        <Link
-          href="/portfolio?category=development"
-          className="inline-flex items-center gap-2 text-center group">
-          <h2 className="text-3xl font-medium transition-colors duration-300 group-hover:text-point md:text-4xl">
-            Development
-          </h2>
-          <ArrowRight className="w-6 h-6 transition-all duration-300 text-dark-400 group-hover:translate-x-1 group-hover:text-point" />
-        </Link>
-        <p className="mt-2 text-dark-300 dark:text-dark-500">
-          기획과 개발을 함께 진행한 작업입니다.
-        </p>
-      </div>
+    <div className="relative z-10 mx-auto w-full max-w-7xl px-6">
+      <SectionHeader
+        title="Development"
+        href="/portfolio?category=development"
+        subtitle="기획과 개발을 함께 진행한 작업입니다."
+      />
 
       <div className="grid gap-5 md:grid-cols-3">
         {cards.map((card) => (

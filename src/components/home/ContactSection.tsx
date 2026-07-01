@@ -5,6 +5,7 @@ import { Github, LucideIcon, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import EmailModal from '../common/EmailModal';
+import SectionHeader from '../common/SectionHeader';
 
 // 연락처 정보 (임의의 플레이스홀더)
 const contactInfo = {
@@ -64,25 +65,7 @@ export default function ContactSection() {
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
         className="max-w-md">
-        <div className="flex mb-6 items-center justify-center">
-          <Link href="/profile" className="group flex items-center gap-2">
-            <h2 className="text-3xl md:text-4xl font-medium group-hover:text-point transition-all duration-300">
-              Contact Me
-            </h2>
-            <svg
-              className="w-6 h-6 text-dark-400 group-hover:text-point group-hover:translate-x-1 transition-all duration-300"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </Link>
-        </div>
+        <SectionHeader title="Contact Me" href="/profile" align="center" />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
           {/* 이메일 보내기 버튼 */}
           <button
