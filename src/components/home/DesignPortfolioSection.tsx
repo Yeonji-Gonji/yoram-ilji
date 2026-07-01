@@ -90,6 +90,7 @@ export default function DesignPortfolioSection({
                       src={project.thumbnail}
                       alt={project.title}
                       fill
+                      unoptimized
                       draggable={false}
                       className={`object-cover pointer-events-none transition-all duration-500 ${
                         isActive ? 'blur-0 scale-100' : 'blur-[2px] scale-105'
