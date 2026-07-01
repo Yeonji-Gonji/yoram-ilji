@@ -1,8 +1,10 @@
 import PortfolioListClient from '@/components/portfolio/PortfolioListClient';
 import { PortfolioCategory } from '@/data/portfolio';
-import { getPortfolioCards } from '@/lib/portfolio-content';
+import { getPortfolioCards } from '@/services/portfolio.notion.api';
 import { siteConfig } from '@/lib/seo';
 import { Metadata } from 'next';
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: '포트폴리오',
@@ -34,7 +36,7 @@ interface PageProps {
 
 export default async function PortfolioPage({ searchParams }: PageProps) {
   const { category } = await searchParams;
-  const cards = getPortfolioCards();
+  const cards = await getPortfolioCards();
   const initialCategory: PortfolioCategory | 'all' =
     category === 'design' || category === 'development' ? category : 'all';
 
