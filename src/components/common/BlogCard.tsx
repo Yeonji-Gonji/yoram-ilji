@@ -19,9 +19,10 @@ export default function BlogCard({
   const originalCoverUrl = getNotionBlogImageUrl(post);
   const coverImageUrl = getProxiedCoverUrl(originalCoverUrl, post.id);
   const category = post.properties.카테고리.select?.name;
-  const createdDate = dayjs(post.properties.생성일.created_time).format(
-    'YYYY.MM.DD',
-  );
+  // 표시 날짜는 '날짜'(실제 발행일) 우선, 없으면 생성일로 폴백
+  const displayDate =
+    post.properties.날짜?.date?.start ?? post.properties.생성일.created_time;
+  const createdDate = dayjs(displayDate).format('YYYY.MM.DD');
 
   return (
     <Link href={`/blog/${post.id}`} className="group block select-none">

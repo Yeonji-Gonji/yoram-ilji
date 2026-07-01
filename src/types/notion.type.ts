@@ -93,6 +93,14 @@ export interface NotionSelectProperty extends NotionPropertyBase {
 }
 
 /**
+ * "날짜" 속성 (type: "date") — 글의 실제 발행일
+ */
+export interface NotionDateProperty extends NotionPropertyBase {
+  type: 'date';
+  date: NotionDate | null;
+}
+
+/**
  * "수정일" 속성 (type: "last_edited_time")
  */
 export interface NotionUpdateDateProperty extends NotionPropertyBase {
@@ -128,6 +136,7 @@ export interface NotionCheckboxProperty extends NotionPropertyBase {
 
 export interface MyDatabaseProperties {
   카테고리: NotionSelectProperty;
+  날짜: NotionDateProperty;
   생성일: NotionCreateDateProperty;
   조회수: NotionNumberProperty;
   발행: NotionCheckboxProperty;
