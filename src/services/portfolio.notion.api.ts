@@ -41,11 +41,6 @@ export interface PortfolioNotionMeta {
   live?: string;
 }
 
-function coverThumbnail(page: any): string {
-  // 페이지 커버를 설정하면 카드 썸네일로 사용 (notion-image 프록시 경유).
-  return page?.cover ? `/api/notion-image?type=cover&pageId=${page.id}` : '';
-}
-
 function toMeta(page: any): PortfolioNotionMeta {
   const props = page.properties;
   const category = (asSelect(props['분류']) ?? 'development') as PortfolioCategory;
@@ -66,7 +61,8 @@ function toMeta(page: any): PortfolioNotionMeta {
     skills,
     type: asText(props['유형']) || undefined,
     metrics: splitMid(asText(props['지표'])),
-    thumbnail: coverThumbnail(page),
+    // 카드 썸네일: 상대경로 썸네일 속성 (없으면 그라데이션 폴백)
+    thumbnail: asText(props['썸네일']),
     color: '#6b6864',
     featured: asCheck(props['대표']),
     github: asUrl(props['GitHub']),
