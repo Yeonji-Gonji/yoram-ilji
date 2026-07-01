@@ -1,0 +1,164 @@
+import { PortfolioCategory } from '@/data/portfolio';
+import { PortfolioCard } from '@/lib/portfolio-content';
+import { Client } from '@notionhq/client';
+
+const notion = new Client({ auth: process.env.NOTION_API_KEY });
+
+// 포트폴리오 data source ID는 비밀이 아니라 상수로 관리 (env 불필요).
+// API 키(NOTION_API_KEY)는 블로그와 동일한 integration을 재사용한다.
+const PORTFOLIO_DS_ID = '390765fe-8b67-804b-9445-000b5c5ed7d1';
+
+/* ───────── property 추출 헬퍼 ───────── */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const asTitle = (p: any): string => p?.title?.[0]?.plain_text ?? '';
+const asText = (p: any): string => p?.rich_text?.[0]?.plain_text ?? '';
+const asSelect = (p: any): string | undefined => p?.select?.name ?? undefined;
+const asNumber = (p: any): number | undefined => p?.number ?? undefined;
+const asCheck = (p: any): boolean => p?.checkbox ?? false;
+const asUrl = (p: any): string | undefined => p?.url ?? undefined;
+const splitComma = (s: string): string[] =>
+  s ? s.split(',').map((v) => v.trim()).filter(Boolean) : [];
+const splitMid = (s: string): string[] =>
+  s ? s.split(' · ').map((v) => v.trim()).filter(Boolean) : [];
+
+export interface PortfolioNotionMeta {
+  id: string; // slug (URL)
+  pageId: string; // Notion 페이지 id
+  title: string;
+  subtitle: string;
+  description: string;
+  category: PortfolioCategory;
+  period: string;
+  role: string;
+  team?: string;
+  skills: string[]; // 기술스택 또는 도구
+  type?: string; // 디자인 유형
+  metrics: string[];
+  thumbnail: string; // 페이지 커버(있으면) → 프록시 URL, 없으면 ''
+  color: string;
+  featured: boolean;
+  github?: string;
+  live?: string;
+}
+
+function coverThumbnail(page: any): string {
+  // 페이지 커버를 설정하면 카드 썸네일로 사용 (notion-image 프록시 경유).
+  return page?.cover ? `/api/notion-image?type=cover&pageId=${page.id}` : '';
+}
+
+function toMeta(page: any): PortfolioNotionMeta {
+  const props = page.properties;
+  const category = (asSelect(props['분류']) ?? 'development') as PortfolioCategory;
+  const skills =
+    category === 'design'
+      ? splitComma(asText(props['도구']))
+      : splitComma(asText(props['기술스택']));
+  return {
+    id: asText(props['slug']) || page.id,
+    pageId: page.id,
+    title: asTitle(props['이름']),
+    subtitle: asText(props['부제']),
+    description: asText(props['설명']),
+    category,
+    period: asText(props['기간']),
+    role: asText(props['역할']),
+    team: asText(props['팀']) || undefined,
+    skills,
+    type: asText(props['유형']) || undefined,
+    metrics: splitMid(asText(props['지표'])),
+    thumbnail: coverThumbnail(page),
+    color: '#6b6864',
+    featured: asCheck(props['대표']),
+    github: asUrl(props['GitHub']),
+    live: asUrl(props['Live']),
+  };
+}
+
+function toCard(m: PortfolioNotionMeta): PortfolioCard {
+  return {
+    id: m.id,
+    title: m.title,
+    subtitle: m.subtitle,
+    description: m.description,
+    category: m.category,
+    period: m.period,
+    thumbnail: m.thumbnail,
+    color: m.color,
+    skills: m.skills,
+    type: m.type,
+    role: m.role,
+    metrics: m.metrics,
+    featured: m.featured,
+  };
+}
+
+/** 발행된 모든 케이스 메타 (정렬: 순서 오름차순 → 기간 역순). */
+async function getAllMeta(): Promise<PortfolioNotionMeta[]> {
+  try {
+    const res = await notion.dataSources.query({
+      data_source_id: PORTFOLIO_DS_ID,
+      filter: { property: '발행', checkbox: { equals: true } },
+      sorts: [{ property: '순서', direction: 'ascending' }],
+    });
+    return (res.results as any[]).map(toMeta);
+  } catch (error) {
+    console.error('[Portfolio Notion] query error:', error);
+    return [];
+  }
+}
+
+/** 목록/홈용 카드. category로 필터. */
+export async function getPortfolioCards(
+  category?: PortfolioCategory,
+): Promise<PortfolioCard[]> {
+  const all = await getAllMeta();
+  return all.filter((m) => !category || m.category === category).map(toCard);
+}
+
+/** 홈 Selected Work용: featured 우선, 없으면 개발 케이스 상위 N. */
+export async function getFeaturedCards(limit = 3): Promise<PortfolioCard[]> {
+  const dev = (await getAllMeta()).filter((m) => m.category === 'development');
+  const featured = dev.filter((m) => m.featured);
+  return (featured.length > 0 ? featured : dev).slice(0, limit).map(toCard);
+}
+
+/** generateStaticParams · sitemap용 slug 목록. */
+export async function getPortfolioSlugs(): Promise<string[]> {
+  return (await getAllMeta()).map((m) => m.id);
+}
+
+/** slug로 단일 케이스 메타 조회. 없으면 null. */
+export async function getPortfolioBySlug(
+  slug: string,
+): Promise<PortfolioNotionMeta | null> {
+  try {
+    const res = await notion.dataSources.query({
+      data_source_id: PORTFOLIO_DS_ID,
+      filter: {
+        and: [
+          { property: '발행', checkbox: { equals: true } },
+          { property: 'slug', rich_text: { equals: slug } },
+        ],
+      },
+    });
+    const page = (res.results as any[])[0];
+    return page ? toMeta(page) : null;
+  } catch (error) {
+    console.error('[Portfolio Notion] getBySlug error:', error);
+    return null;
+  }
+}
+
+/** 이전/다음 케이스 (순서 기준). */
+export async function getAdjacent(slug: string): Promise<{
+  prev: PortfolioNotionMeta | null;
+  next: PortfolioNotionMeta | null;
+}> {
+  const all = await getAllMeta();
+  const idx = all.findIndex((m) => m.id === slug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? all[idx - 1] : null,
+    next: idx < all.length - 1 ? all[idx + 1] : null,
+  };
+}

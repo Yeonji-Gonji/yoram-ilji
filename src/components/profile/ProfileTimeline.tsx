@@ -44,12 +44,12 @@ const STAGES: Stage[] = [
 
 export default function ProfileTimeline() {
   return (
-    <section className="mx-auto w-full max-w-3xl px-6 py-20">
+    <section className="w-full py-20">
       <h2 className="mb-12 text-2xl font-medium md:text-3xl">
         디자인에서 개발까지
       </h2>
 
-      <div className="relative border-l-2 border-light-400 pl-8 dark:border-dark-700">
+      <div className="relative pl-8 border-l-2 border-light-400 dark:border-dark-700">
         {STAGES.map((stage, i) => (
           <motion.div
             key={i}
@@ -60,7 +60,7 @@ export default function ProfileTimeline() {
             className="relative pb-12 last:pb-0">
             {/* 노드 */}
             <span className="absolute -left-[41px] top-1 h-4 w-4 rounded-full border-2 border-light-100 bg-point dark:border-dark-900" />
-            <p className="text-xs font-medium uppercase tracking-wider text-point">
+            <p className="text-xs font-medium tracking-wider uppercase text-point">
               {stage.period}
             </p>
             <h3 className="mt-1 text-lg font-semibold">{stage.role}</h3>

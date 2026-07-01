@@ -1,6 +1,6 @@
-import { getPortfolioContentSlugs } from '@/lib/portfolio-content';
 import { siteConfig } from '@/lib/seo';
 import { getBlogPosts } from '@/services/notion.api';
+import { getPortfolioSlugs } from '@/services/portfolio.notion.api';
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -35,14 +35,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
 
   // 포트폴리오 상세 페이지들
-  const portfolioPages: MetadataRoute.Sitemap = getPortfolioContentSlugs().map(
-    (slug) => ({
-      url: `${baseUrl}/portfolio/${slug}`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly' as const,
-      priority: 0.6,
-    }),
-  );
+  const portfolioSlugs = await getPortfolioSlugs();
+  const portfolioPages: MetadataRoute.Sitemap = portfolioSlugs.map((slug) => ({
+    url: `${baseUrl}/portfolio/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }));
 
   // 블로그 포스트들
   try {
