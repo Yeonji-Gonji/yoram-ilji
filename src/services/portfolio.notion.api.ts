@@ -33,7 +33,8 @@ export interface PortfolioNotionMeta {
   skills: string[]; // 기술스택 또는 도구
   type?: string; // 디자인 유형
   metrics: string[];
-  thumbnail: string; // 페이지 커버(있으면) → 프록시 URL, 없으면 ''
+  thumbnail: string; // 카드 썸네일: 썸네일 속성(상대경로) 우선, 없으면 커버 프록시
+  coverImage: string; // 상세 상단 커버(프록시 URL), 없으면 ''
   color: string;
   featured: boolean;
   github?: string;
@@ -42,6 +43,10 @@ export interface PortfolioNotionMeta {
 
 function toMeta(page: any): PortfolioNotionMeta {
   const props = page.properties;
+  // 페이지 커버가 있으면 프록시 URL (S3 만료 대응). 없으면 ''.
+  const coverProxy = page.cover
+    ? `/api/notion-image?type=cover&pageId=${page.id}`
+    : '';
   const category = (asSelect(props['분류']) ?? 'development') as PortfolioCategory;
   const skills =
     category === 'design'
@@ -60,8 +65,9 @@ function toMeta(page: any): PortfolioNotionMeta {
     skills,
     type: asText(props['유형']) || undefined,
     metrics: splitMid(asText(props['지표'])),
-    // 카드 썸네일: 상대경로 썸네일 속성 (없으면 그라데이션 폴백)
-    thumbnail: asText(props['썸네일']),
+    // 카드 썸네일: 썸네일 속성(상대경로) 우선, 없으면 페이지 커버 프록시
+    thumbnail: asText(props['썸네일']) || coverProxy,
+    coverImage: coverProxy,
     color: '#6b6864',
     featured: asCheck(props['대표']),
     github: asUrl(props['GitHub']),

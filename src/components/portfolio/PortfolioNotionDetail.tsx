@@ -2,6 +2,10 @@ import NotionBlock from '@/components/common/NotionBlock';
 import RichText from '@/components/common/RechText';
 import { PortfolioNotionMeta } from '@/services/portfolio.notion.api';
 import { BlockWithChildren } from '@/services/notion.api';
+import {
+  getBlockImageProxyUrl,
+  isNotionS3Url,
+} from '@/utils/notion-image-url';
 import { ArrowLeft, ArrowRight, Github, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
@@ -21,6 +25,33 @@ function renderBlocks(blocks: BlockWithChildren[], pageId: string): ReactNode[] 
   const nodes: ReactNode[] = [];
   for (let i = 0; i < blocks.length; ) {
     const type = blocks[i].type;
+    // 이미지: aspect-video 강제 대신 자연 비율로 (세로 이미지·GIF 대응)
+    if (type === 'image') {
+      const img = (blocks[i] as any).image;
+      const orig = img.type === 'file' ? img.file.url : img.external.url;
+      const src = isNotionS3Url(orig)
+        ? getBlockImageProxyUrl(pageId, blocks[i].id)
+        : orig;
+      const cap = img.caption?.[0]?.plain_text ?? '';
+      nodes.push(
+        <figure key={blocks[i].id} className="my-4">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={src}
+            alt={cap || 'portfolio image'}
+            loading="lazy"
+            className="mx-auto w-full rounded-lg"
+          />
+          {cap && (
+            <figcaption className="mt-2 text-center text-sm text-dark-400">
+              {cap}
+            </figcaption>
+          )}
+        </figure>,
+      );
+      i++;
+      continue;
+    }
     if (type === 'numbered_list_item' || type === 'bulleted_list_item') {
       const run: BlockWithChildren[] = [];
       while (i < blocks.length && blocks[i].type === type) {
@@ -68,6 +99,16 @@ export default function PortfolioNotionDetail({
 }: Props) {
   return (
     <div className="w-full dark:bg-dark-800">
+      {meta.coverImage && (
+        <div className="relative h-[38vh] w-full overflow-hidden">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={meta.coverImage}
+            alt={meta.title}
+            className="h-full w-full object-cover"
+          />
+        </div>
+      )}
       <div className="max-w-4xl px-4 py-20 mx-auto">
         <Link
           href="/portfolio"

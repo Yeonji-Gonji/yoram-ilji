@@ -75,6 +75,7 @@ export default function PortfolioListClient({
                         src={project.thumbnail}
                         alt={project.title}
                         fill
+                        unoptimized
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       />
