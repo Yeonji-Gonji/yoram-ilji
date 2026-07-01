@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'velog.velcdn.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'www.notion.so',
       },
       {
