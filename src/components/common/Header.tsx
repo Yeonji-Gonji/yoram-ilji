@@ -17,6 +17,7 @@ const navLinks = [
   { href: '/blog', label: 'Blog' },
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/profile', label: 'Profile' },
+  { href: '/resume', label: 'Resume' },
 ];
 
 export default function Header() {
@@ -84,6 +85,11 @@ export default function Header() {
                 href="/profile"
                 className="transition-all duration-300 hover:text-dark-300">
                 <p>프로필</p>
+              </Link>
+              <Link
+                href="/resume"
+                className="transition-all duration-300 hover:text-dark-300">
+                <p>이력서</p>
               </Link>
               <div className="h-4 border border-r border-gray-200" />
               <button
