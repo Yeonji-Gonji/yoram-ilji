@@ -31,14 +31,24 @@ function RouteChangeLoaderContent() {
       const target = e.target as HTMLElement;
       const anchor = target.closest("a");
 
-      if (anchor) {
-        const href = anchor.getAttribute("href");
-        // 내부 링크인 경우만 처리
-        if (href && href.startsWith("/") && !href.startsWith("//")) {
-          // 현재 경로와 다른 경우만 로딩 표시
-          if (href !== pathname) {
-            setIsLoading(true);
-          }
+      if (!anchor) return;
+
+      // 다운로드 링크·새 탭 링크는 클라이언트 라우트 변경이 아니므로 제외.
+      // (예: 이력서 PDF 다운로드 버튼 → pathname이 안 바뀌어 로더가 영영 안 꺼짐)
+      if (anchor.hasAttribute("download") || anchor.target === "_blank") {
+        return;
+      }
+
+      const href = anchor.getAttribute("href");
+      // 내부 링크인 경우만 처리
+      if (href && href.startsWith("/") && !href.startsWith("//")) {
+        // 정적 파일(확장자 포함) 경로는 라우트 변경이 아니므로 제외
+        const lastSegment = href.split(/[?#]/)[0].split("/").pop() ?? "";
+        if (lastSegment.includes(".")) return;
+
+        // 현재 경로와 다른 경우만 로딩 표시
+        if (href !== pathname) {
+          setIsLoading(true);
         }
       }
     };
@@ -46,6 +56,13 @@ function RouteChangeLoaderContent() {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
   }, [pathname]);
+
+  // 안전장치: 라우트 변경이 감지되지 않아도 일정 시간 후 로더를 강제 종료
+  useEffect(() => {
+    if (!isLoading) return;
+    const failSafe = setTimeout(() => setIsLoading(false), 8000);
+    return () => clearTimeout(failSafe);
+  }, [isLoading]);
 
   return <FullScreenLoader isLoading={isInitialLoad || isLoading} />;
 }
