@@ -64,6 +64,11 @@ export const getPost = async (id: string): Promise<GetPageResponse> => {
   return response;
 };
 
+/** 단일 블록을 ID로 직접 조회 (중첩·페이지네이션과 무관하게 안전). */
+export const getBlock = async (blockId: string) => {
+  return notion.blocks.retrieve({ block_id: blockId });
+};
+
 export const getPostContent = async (
   id: string,
 ): Promise<ListBlockChildrenResponse> => {

@@ -1,4 +1,4 @@
-import { getPost, getPostContent } from '@/services/notion.api';
+import { getBlock, getPost } from '@/services/notion.api';
 import { NotionPage } from '@/types/notion.type';
 import { BlockObjectResponse } from '@notionhq/client';
 import { NextRequest, NextResponse } from 'next/server';
@@ -22,12 +22,9 @@ export async function GET(request: NextRequest) {
       } else if (cover?.type === 'external') {
         imageUrl = cover.external.url;
       }
-    } else if (type === 'block' && blockId && pageId) {
-      // 본문 내 이미지 블록
-      const content = await getPostContent(pageId);
-      const block = content.results.find(
-        (b) => b.id === blockId,
-      ) as BlockObjectResponse;
+    } else if (type === 'block' && blockId) {
+      // 본문 내 이미지 블록: ID로 직접 조회 (중첩·페이지네이션 안전)
+      const block = (await getBlock(blockId)) as BlockObjectResponse;
 
       if (block && 'type' in block && block.type === 'image') {
         const imageBlock = block.image;
