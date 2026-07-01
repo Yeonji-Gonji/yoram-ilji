@@ -3,7 +3,6 @@ import BubbleModelScene from '@/components/home/BubbleModelScene';
 import ContactSection from '@/components/home/ContactSection';
 import DesignPortfolioSection from '@/components/home/DesignPortfolioSection';
 import DevelopmentHeroSection from '@/components/home/DevelopmentHeroSection';
-import { getAllViewCounts } from '@/lib/firebase-admin';
 import { getFeaturedCards, getPortfolioCards } from '@/services/portfolio.notion.api';
 import { siteConfig } from '@/lib/seo';
 import { getBlogPosts } from '@/services/notion.api';
@@ -38,10 +37,7 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function MainPage() {
-  const [posts, viewCounts] = await Promise.all([
-    getBlogPosts(),
-    getAllViewCounts(),
-  ]);
+  const posts = await getBlogPosts();
 
   const [featuredDev, designCards] = await Promise.all([
     getFeaturedCards(3),
@@ -68,7 +64,7 @@ export default async function MainPage() {
       <section
         className="w-full min-h-screen flex items-center justify-center py-20"
         aria-label="Blog Section">
-        <BlogSection posts={posts} viewCounts={viewCounts} />
+        <BlogSection posts={posts} />
       </section>
 
       {/* 섹션 3: Contact */}

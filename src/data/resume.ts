@@ -4,6 +4,8 @@
 // - 픽셀 단위로 동일한 PDF 산출을 위해 자유 MDX가 아니라 구조화 데이터로 관리합니다.
 // 정본 참조: obsidian/portfolio/resume.md (아티팩트 6원칙 적용본)
 
+import { appConfig } from '@/lib/config';
+
 export interface ResumeBullet {
   md: string; // **강조** 지원
   metric?: string; // 회색 정량 지표
@@ -42,7 +44,7 @@ export const resume: ResumeData = {
     '디자인 감각을 갖춘 프론트엔드 · 기획과 개발 사이를 직접 메우는 사람',
   contacts: [
     { label: 'GitHub', value: 'github.com/MODAC0' },
-    { label: 'Email', value: 'juni940302@gmail.com' },
+    { label: 'Email', value: appConfig.contactEmail },
     { label: '포트폴리오', value: 'yoramilji.kr' },
     { label: 'Blog', value: 'modac.tistory.com' },
   ],
@@ -66,7 +68,7 @@ export const resume: ResumeData = {
     {
       company: '업폴 (Upfall)',
       role: '프론트엔드 / PM 겸',
-      period: '2024.08 ~ 재직 중',
+      period: '2025.02 ~ 재직 중',
       note: '고객사 자사몰에 임베드형 AI 에이전트를 붙이는 SaaS 스타트업',
       bullets: [
         {

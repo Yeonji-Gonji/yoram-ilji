@@ -8,13 +8,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import RetryImage from './RetryImage';
 
-export default function BlogCard({
-  post,
-  viewCount,
-}: {
-  post: NotionPage;
-  viewCount: number;
-}) {
+export default function BlogCard({ post }: { post: NotionPage }) {
   const title = getNotionBlogTitle(post);
   const originalCoverUrl = getNotionBlogImageUrl(post);
   const coverImageUrl = getProxiedCoverUrl(originalCoverUrl, post.id);
@@ -68,10 +62,6 @@ export default function BlogCard({
             </h3>
             <div className="flex items-center text-sm gap-2">
               <p className="text-dark-400! mt-auto">{createdDate}</p>
-              <span className="text-dark-400! mt-auto">·</span>
-              <span className="text-dark-400! mt-auto">
-                {viewCount ?? 0} view
-              </span>
             </div>
           </div>
         </div>

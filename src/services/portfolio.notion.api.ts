@@ -1,12 +1,12 @@
+import { appConfig } from '@/lib/config';
 import { PortfolioCategory } from '@/data/portfolio';
 import { PortfolioCard } from '@/lib/portfolio-content';
 import { Client } from '@notionhq/client';
 
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
-// 포트폴리오 data source ID는 비밀이 아니라 상수로 관리 (env 불필요).
 // API 키(NOTION_API_KEY)는 블로그와 동일한 integration을 재사용한다.
-const PORTFOLIO_DS_ID = '390765fe-8b67-804b-9445-000b5c5ed7d1';
+const PORTFOLIO_DS_ID = appConfig.notion.portfolioDataSourceId;
 
 /* ───────── property 추출 헬퍼 ───────── */
 const asTitle = (p: any): string => p?.title?.[0]?.plain_text ?? '';

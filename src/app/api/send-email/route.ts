@@ -1,3 +1,4 @@
+import { appConfig } from '@/lib/config';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
@@ -12,8 +13,8 @@ interface EmailRequestBody {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.GMAIL_USER, // 본인 Gmail 주소
-    pass: process.env.GMAIL_APP_PASSWORD, // Gmail 앱 비밀번호
+    user: appConfig.contactEmail, // 본인 Gmail 주소
+    pass: process.env.GMAIL_APP_PASSWORD, // Gmail 앱 비밀번호 (시크릿)
   },
 });
 
@@ -41,8 +42,8 @@ export async function POST(request: NextRequest) {
 
     // Gmail SMTP를 통해 이메일 전송
     await transporter.sendMail({
-      from: `"요람일지 문의" <${process.env.GMAIL_USER}>`,
-      to: process.env.GMAIL_USER, // 본인에게 전송
+      from: `"요람일지 문의" <${appConfig.contactEmail}>`,
+      to: appConfig.contactEmail, // 본인에게 전송
       replyTo: email, // 발신자 이메일로 답장 가능
       subject: `[요람일지] ${subject}`,
       html: `

@@ -1,5 +1,6 @@
 'use client';
 
+import { appConfig } from '@/lib/config';
 import { motion, Variants } from 'framer-motion';
 import { Github, LucideIcon, Mail } from 'lucide-react';
 import Link from 'next/link';
@@ -7,9 +8,9 @@ import { useState } from 'react';
 import EmailModal from '../common/EmailModal';
 import SectionHeader from '../common/SectionHeader';
 
-// 연락처 정보 (임의의 플레이스홀더)
+// 연락처 정보
 const contactInfo = {
-  email: 'juni940302@gmail.com',
+  email: appConfig.contactEmail,
   github: 'https://github.com/modac0',
 };
 
