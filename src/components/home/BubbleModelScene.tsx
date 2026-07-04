@@ -33,9 +33,29 @@ function useScrollState() {
       const maxScroll = document.documentElement.scrollHeight - viewportHeight;
 
       const scrollProgress = maxScroll > 0 ? scrollY / maxScroll : 0;
-      const scrollInSections = scrollY / viewportHeight;
-      const section = Math.floor(scrollInSections);
-      const sectionProgress = scrollInSections - section;
+
+      // 섹션 높이가 제각각(예: 디자인 띠배너)이어도 동작하도록 실제 DOM 경계로 판정.
+      // 규칙은 기존과 동일: 섹션 상단이 뷰포트 상단을 지나면 그 섹션이 활성.
+      const sectionEls = Array.from(
+        document.querySelectorAll<HTMLElement>('section[aria-label]'),
+      );
+      let section = 0;
+      let sectionProgress = 0;
+      if (sectionEls.length > 0) {
+        for (let i = 0; i < sectionEls.length; i++) {
+          if (sectionEls[i].offsetTop <= scrollY + 1) section = i;
+        }
+        const active = sectionEls[section];
+        sectionProgress = Math.min(
+          1,
+          Math.max(0, (scrollY - active.offsetTop) / active.offsetHeight),
+        );
+      } else {
+        // 폴백: 모든 섹션이 100vh라는 기존 가정
+        const scrollInSections = scrollY / viewportHeight;
+        section = Math.floor(scrollInSections);
+        sectionProgress = scrollInSections - section;
+      }
 
       setState({
         scrollProgress: Math.min(1, Math.max(0, scrollProgress)),

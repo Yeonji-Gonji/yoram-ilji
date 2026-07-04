@@ -60,6 +60,54 @@ export async function getBlogPosts() {
   }
 }
 
+/**
+ * 목록·카드용 본문 요약. DB에 요약 property가 없어 본문 앞쪽 paragraph의
+ * 텍스트를 이어붙여 만든다. 홈처럼 서버에서 소수의 글에만 사용할 것
+ * (글마다 블록 조회 1회가 추가되므로 전체 목록에는 부적합).
+ */
+export const getPostExcerpt = async (
+  pageId: string,
+  maxLength = 150,
+): Promise<string> => {
+  try {
+    const response = await notion.blocks.children.list({
+      block_id: pageId,
+      page_size: 12,
+    });
+    const blocks = response.results.filter(
+      (block): block is BlockObjectResponse => 'type' in block,
+    );
+    const collect = (types: string[]) =>
+      blocks
+        .map((block) => {
+          if (!types.includes(block.type)) return '';
+          const value = (block as unknown as Record<string, unknown>)[
+            block.type
+          ] as { rich_text?: { plain_text: string }[] };
+          return value?.rich_text?.map((rt) => rt.plain_text).join('') ?? '';
+        })
+        .filter(Boolean)
+        .join(' ');
+
+    // 문단 우선, 문단이 없는 글(목록·소제목으로 시작)은 목록/제목 텍스트로 폴백
+    const text =
+      collect(['paragraph']) ||
+      collect([
+        'bulleted_list_item',
+        'numbered_list_item',
+        'heading_2',
+        'heading_3',
+        'quote',
+        'callout',
+      ]);
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, maxLength).trimEnd()}…`;
+  } catch (error) {
+    console.error('Notion excerpt fetch error:', error);
+    return '';
+  }
+};
+
 export const getPost = async (id: string): Promise<GetPageResponse> => {
   const response = await notion.pages.retrieve({ page_id: id });
   return response;
