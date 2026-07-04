@@ -33,7 +33,12 @@ export default function DesignBannerSection({ designPortfolios }: Props) {
     const canClick =
       !swiperInstance ||
       (swiperInstance as SwiperType & { allowClick: boolean }).allowClick;
-    if (!canClick) e.preventDefault();
+    if (!canClick) {
+      e.preventDefault();
+      // RouteChangeLoader가 document 클릭으로 로더를 켜므로,
+      // 이동하지 않는 클릭은 전파를 끊어 로더 오작동을 막는다
+      e.stopPropagation();
+    }
   };
 
   return (

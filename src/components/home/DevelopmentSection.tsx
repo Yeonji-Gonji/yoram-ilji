@@ -114,13 +114,18 @@ export default function DevelopmentSection({ cards }: Props) {
                   card={card}
                   isActive={isActive}
                   onClick={(e) => {
-                    // 드래그 끝에 발생한 클릭은 무시, 옆 카드는 가운데로
+                    // 드래그 끝에 발생한 클릭은 무시, 옆 카드는 가운데로.
+                    // 네비게이션을 취소할 땐 전파도 끊는다 — RouteChangeLoader가
+                    // document 클릭으로 로더를 켜서, 이동 없는 클릭에도
+                    // 풀스크린 로더가 8초간 떠버린다
                     if (drag.current.moved) {
                       e.preventDefault();
+                      e.stopPropagation();
                       return;
                     }
                     if (!isActive) {
                       e.preventDefault();
+                      e.stopPropagation();
                       setActive(i);
                     }
                   }}
