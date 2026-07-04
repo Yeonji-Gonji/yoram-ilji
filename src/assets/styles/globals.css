@@ -48,9 +48,10 @@
   /* ===== Animations ===== */
   --animate-scroll-chevron: scroll-chevron 1.5s ease-in-out infinite;
   --animate-hero-fade-up: hero-fade-up 0.8s ease-out both;
-  --animate-hero-float: hero-float 5s ease-in-out infinite;
-  --animate-cradle-rock: cradle-rock 6s ease-in-out infinite;
-  --animate-hero-orbit: hero-orbit 60s linear infinite;
+  --animate-turtle-swim: turtle-swim 7s ease-in-out infinite;
+  --animate-turtle-blink: turtle-blink 5s ease-in-out infinite;
+  --animate-turtle-paddle: turtle-paddle 2.8s ease-in-out infinite;
+  --animate-bubble-rise: bubble-rise 8s linear infinite;
 
   @keyframes scroll-chevron {
     0%,
@@ -75,29 +76,55 @@
     }
   }
 
-  @keyframes hero-float {
+  /* 연지곤지: 물결을 따라 전체가 떠다님 */
+  @keyframes turtle-swim {
     0%,
     100% {
-      transform: translateY(0);
+      transform: translateY(0) rotate(-0.5deg);
     }
     50% {
-      transform: translateY(-10px);
+      transform: translateY(-12px) rotate(0.8deg);
     }
   }
 
-  @keyframes cradle-rock {
+  /* 눈 깜빡임: 주기 대부분은 뜨고 있다가 짧게 감았다 뜬다 */
+  @keyframes turtle-blink {
+    0%,
+    91%,
+    98%,
+    100% {
+      transform: scaleY(1);
+    }
+    94%,
+    95% {
+      transform: scaleY(0.12);
+    }
+  }
+
+  @keyframes turtle-paddle {
     0%,
     100% {
       transform: rotate(-3deg);
     }
     50% {
-      transform: rotate(3deg);
+      transform: rotate(4deg);
     }
   }
 
-  @keyframes hero-orbit {
-    to {
-      transform: rotate(360deg);
+  @keyframes bubble-rise {
+    0% {
+      transform: translateY(0) scale(0.6);
+      opacity: 0;
+    }
+    12% {
+      opacity: 0.55;
+    }
+    80% {
+      opacity: 0.4;
+    }
+    100% {
+      transform: translateY(-90px) scale(1);
+      opacity: 0;
     }
   }
 }
