@@ -8,8 +8,8 @@ export const siteConfig = {
   url: appConfig.siteUrl,
   author: {
     name: 'MODAC',
-    url: 'https://github.com/MODAC0',
-    email: 'modac0@naver.com',
+    url: 'https://github.com/Yeonji-Gonji',
+    email: 'juni940302@gmail.com',
   },
   locale: 'ko_KR',
   language: 'ko',
@@ -29,7 +29,7 @@ export const siteConfig = {
     'MODAC',
   ],
   social: {
-    github: 'https://github.com/MODAC0',
+    github: 'https://github.com/Yeonji-Gonji',
   },
   verification: {
     google: 'UimLmElRI67QcT3q6TV1e69w7TLIEIapPPodlLsUk-k',
