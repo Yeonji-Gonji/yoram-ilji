@@ -1,5 +1,5 @@
-import { appConfig } from '@/lib/config';
 import { PortfolioCategory } from '@/data/portfolio';
+import { appConfig } from '@/lib/config';
 import { PortfolioCard } from '@/lib/portfolio-content';
 import { Client } from '@notionhq/client';
 
@@ -16,9 +16,19 @@ const asNumber = (p: any): number | undefined => p?.number ?? undefined;
 const asCheck = (p: any): boolean => p?.checkbox ?? false;
 const asUrl = (p: any): string | undefined => p?.url ?? undefined;
 const splitComma = (s: string): string[] =>
-  s ? s.split(',').map((v) => v.trim()).filter(Boolean) : [];
+  s
+    ? s
+        .split(',')
+        .map((v) => v.trim())
+        .filter(Boolean)
+    : [];
 const splitMid = (s: string): string[] =>
-  s ? s.split(' · ').map((v) => v.trim()).filter(Boolean) : [];
+  s
+    ? s
+        .split(' · ')
+        .map((v) => v.trim())
+        .filter(Boolean)
+    : [];
 
 export interface PortfolioNotionMeta {
   id: string; // slug (URL)
@@ -57,7 +67,8 @@ function toMeta(page: any): PortfolioNotionMeta {
       coverUrl = `/api/notion-image?type=cover&pageId=${page.id}`;
     }
   }
-  const category = (asSelect(props['분류']) ?? 'development') as PortfolioCategory;
+  const category = (asSelect(props['분류']) ??
+    'development') as PortfolioCategory;
   const skills =
     category === 'design'
       ? splitComma(asText(props['도구']))
@@ -125,11 +136,12 @@ export async function getPortfolioCards(
   return all.filter((m) => !category || m.category === category).map(toCard);
 }
 
-/** 홈 Selected Work용: featured 우선, 없으면 개발 케이스 상위 N. */
-export async function getFeaturedCards(limit = 3): Promise<PortfolioCard[]> {
+/** 홈 Selected Work용: featured를 앞세우고, 남는 자리는 나머지 개발 케이스로 채워 N개. */
+export async function getFeaturedCards(limit = 6): Promise<PortfolioCard[]> {
   const dev = (await getAllMeta()).filter((m) => m.category === 'development');
   const featured = dev.filter((m) => m.featured);
-  return (featured.length > 0 ? featured : dev).slice(0, limit).map(toCard);
+  const rest = dev.filter((m) => !m.featured);
+  return [...featured, ...rest].slice(0, limit).map(toCard);
 }
 
 /** generateStaticParams · sitemap용 slug 목록. */
