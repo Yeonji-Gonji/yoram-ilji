@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
-import { EffectCoverflow } from 'swiper/modules';
+import { EffectCoverflow, Mousewheel } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 export default function DesignPortfolioSection({
@@ -30,21 +30,51 @@ export default function DesignPortfolioSection({
     return null;
   }
 
+  // coverflow는 한 화면에 여러 장이 보여서, 원본이 적으면 loop가 비활성화된다
+  // (Swiper Loop Warning). 8장 이상이 되도록 원본을 복제해 채운다.
+  const copies = Math.max(1, Math.ceil(8 / designPortfolios.length));
+  const loopSlides = Array.from({ length: copies }, () => designPortfolios)
+    .flat();
+
+  /**
+   * 카드 전체가 상세 링크. 단 드래그(스와이프) 끝에 발생하는 클릭은 이동으로
+   * 치지 않고(allowClick: v12 타입 정의에서 빠졌지만 런타임엔 존재),
+   * 옆의 흐린 카드는 상세 대신 가운데로 데려온다.
+   */
+  const handleCardClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    index: number,
+  ) => {
+    const canClick =
+      swiperInstance &&
+      (swiperInstance as SwiperType & { allowClick: boolean }).allowClick;
+    if (!canClick) {
+      e.preventDefault();
+      return;
+    }
+    if (index !== activeIndex) {
+      e.preventDefault();
+      swiperInstance.slideToLoop(index);
+    }
+  };
+
   return (
-    <div className="pointer-events-auto relative z-10 mx-auto w-full max-w-7xl px-6">
+    <div className="relative z-10 w-full px-6 mx-auto pointer-events-auto max-w-7xl">
       <SectionHeader
-        title="Designs"
+        title="Design"
         href="/portfolio?category=design"
         subtitle="개발로 전향하기 전, 디자이너로 일하던 시절의 작업입니다."
       />
 
       {mounted ? (
         <Swiper
-          modules={[EffectCoverflow]}
+          modules={[EffectCoverflow, Mousewheel]}
           effect="coverflow"
           grabCursor={true}
           centeredSlides={true}
           slidesPerView="auto"
+          loop={true}
+          mousewheel={{ forceToAxis: true }}
           initialSlide={Math.floor(designPortfolios.length / 2)}
           coverflowEffect={{
             rotate: 10,
@@ -57,15 +87,19 @@ export default function DesignPortfolioSection({
           onSwiper={setSwiperInstance}
           onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
           className="overflow-visible! py-10">
-          {designPortfolios.map((project, index) => {
+          {loopSlides.map((project, index) => {
             const isActive = index === activeIndex;
 
             return (
               <SwiperSlide
-                key={project.id}
+                key={`${project.id}-${Math.floor(index / designPortfolios.length)}`}
                 className="w-[280px]! md:w-[350px]! select-none">
-                <div
-                  className={`aspect-3/4 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 ${
+                <Link
+                  href={`/portfolio/${project.id}`}
+                  onClick={(e) => handleCardClick(e, index)}
+                  draggable={false}
+                  aria-label={`${project.title} 상세 보기`}
+                  className={`block aspect-3/4 rounded-2xl overflow-hidden shadow-2xl transition-all duration-300 ${
                     isActive ? 'ring-4 ring-point/50' : ''
                   }`}>
                   <div className="relative w-full h-full">
@@ -92,31 +126,9 @@ export default function DesignPortfolioSection({
                       <p className="text-sm text-white/70 line-clamp-2">
                         {project.subtitle}
                       </p>
-
-                      <Link
-                        href={`/portfolio/${project.id}`}
-                        className={`mt-4 inline-flex items-center gap-1 text-white text-sm font-medium hover:text-point transition-all duration-300 ${
-                          isActive
-                            ? 'opacity-100 translate-y-0'
-                            : 'opacity-0 translate-y-2 pointer-events-none'
-                        }`}>
-                        <span>자세히 보기</span>
-                        <svg
-                          className="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24">
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M9 5l7 7-7 7"
-                          />
-                        </svg>
-                      </Link>
                     </div>
                   </div>
-                </div>
+                </Link>
               </SwiperSlide>
             );
           })}
@@ -132,10 +144,11 @@ export default function DesignPortfolioSection({
         </div>
       )}
 
+      {/* 점 인디케이터는 복제본이 아닌 원본 기준 (activeIndex는 복제 포함 인덱스) */}
       <CarouselDots
         count={designPortfolios.length}
-        activeIndex={activeIndex}
-        onSelect={(index) => swiperInstance?.slideTo(index)}
+        activeIndex={activeIndex % designPortfolios.length}
+        onSelect={(index) => swiperInstance?.slideToLoop(index)}
       />
     </div>
   );

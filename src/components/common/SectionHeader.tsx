@@ -3,7 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
 interface Props {
-  /** 섹션 제목 (예: Development, Designs, Blog) */
+  /** 섹션 제목 (예: Development, Design, Blog) */
   title: string;
   /** 제목 클릭 시 이동할 경로 */
   href: string;
@@ -25,11 +25,11 @@ export default function SectionHeader({
 }: Props) {
   return (
     <div className={clsx('mb-8', align === 'center' && 'text-center')}>
-      <Link href={href} className="group inline-flex items-center gap-2">
-        <h2 className="text-3xl font-medium transition-colors duration-300 group-hover:text-point md:text-4xl">
+      <Link href={href} className="inline-flex items-center gap-2 group">
+        <h2 className="text-3xl font-bold transition-colors duration-300 group-hover:text-point md:text-4xl">
           {title}
         </h2>
-        <ArrowRight className="h-6 w-6 text-dark-400 transition-all duration-300 group-hover:translate-x-1 group-hover:text-point" />
+        <ArrowRight className="w-6 h-6 transition-all duration-300 text-dark-400 group-hover:translate-x-1 group-hover:text-point" />
       </Link>
       {subtitle && (
         <p className="mt-2 text-dark-300 dark:text-dark-500">{subtitle}</p>
