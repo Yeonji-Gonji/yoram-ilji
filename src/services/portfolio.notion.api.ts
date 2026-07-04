@@ -43,10 +43,20 @@ export interface PortfolioNotionMeta {
 
 function toMeta(page: any): PortfolioNotionMeta {
   const props = page.properties;
-  // 페이지 커버가 있으면 프록시 URL (S3 만료 대응). 없으면 ''.
-  const coverProxy = page.cover
-    ? `/api/notion-image?type=cover&pageId=${page.id}`
-    : '';
+  // 카드 썸네일·상세 커버 = 항상 Notion 페이지 커버 (단일 소스).
+  // - Notion 파일 커버: S3 URL이 만료되므로 프록시 경유
+  // - 외부 URL 커버: 직접 사용하되, 자기 도메인이면 상대경로로 변환 (로컬 dev에서도 동작)
+  let coverUrl = '';
+  if (page.cover) {
+    if (page.cover.type === 'external') {
+      const url: string = page.cover.external.url;
+      coverUrl = url.startsWith(appConfig.siteUrl)
+        ? url.slice(appConfig.siteUrl.length)
+        : url;
+    } else {
+      coverUrl = `/api/notion-image?type=cover&pageId=${page.id}`;
+    }
+  }
   const category = (asSelect(props['분류']) ?? 'development') as PortfolioCategory;
   const skills =
     category === 'design'
@@ -65,9 +75,8 @@ function toMeta(page: any): PortfolioNotionMeta {
     skills,
     type: asText(props['유형']) || undefined,
     metrics: splitMid(asText(props['지표'])),
-    // 카드 썸네일: 썸네일 속성(상대경로) 우선, 없으면 페이지 커버 프록시
-    thumbnail: asText(props['썸네일']) || coverProxy,
-    coverImage: coverProxy,
+    thumbnail: coverUrl,
+    coverImage: coverUrl,
     color: '#6b6864',
     featured: asCheck(props['대표']),
     github: asUrl(props['GitHub']),
