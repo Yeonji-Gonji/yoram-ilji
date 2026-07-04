@@ -53,8 +53,12 @@ function RouteChangeLoaderContent() {
       }
     };
 
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
+    // document가 아닌 window에 건다: React(App Router)는 이벤트를 document에
+    // 위임하므로, 카드 캐러셀처럼 네비게이션을 취소하는 컴포넌트가
+    // stopPropagation()을 호출하면 window까지 오지 않아 로더가 안 켜진다.
+    // (document에 걸면 같은 노드라 stopPropagation으로 못 막는다)
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
   }, [pathname]);
 
   // 안전장치: 라우트 변경이 감지되지 않아도 일정 시간 후 로더를 강제 종료
