@@ -11,10 +11,11 @@ import vertexShader from './vertexShader.glsl';
 
 // 섹션 정의
 const SECTIONS = {
-  DEVELOPMENT: 0, // 개발 포트폴리오 히어로 배너 - 퍼진 상태
-  DESIGN: 1, // 디자인 포트폴리오 - 구체
-  BLOG: 2, // 블로그 섹션 - 모인 상태
-  CONTACT: 3, // Contact - 구체가 왼쪽으로
+  HERO: 0, // 인트로 히어로 - 완전히 퍼진 상태 (배경 입자)
+  DEVELOPMENT: 1, // 개발 포트폴리오 - 퍼진 상태에서 모이기 시작
+  DESIGN: 2, // 디자인 포트폴리오 - 구체
+  BLOG: 3, // 블로그 섹션 - 모인 상태
+  CONTACT: 4, // Contact - 구체가 왼쪽으로
 };
 
 // 섹션별 스크롤 상태 계산
@@ -61,6 +62,15 @@ function useObjectState(section: number, sectionProgress: number) {
 
   const getState = () => {
     switch (section) {
+      case SECTIONS.HERO:
+        // 인트로 히어로: 완전히 퍼진 입자가 텍스트 뒤의 배경 역할
+        return {
+          spread: 1,
+          morph: 0,
+          scale: 1.0,
+          positionX: 0,
+        };
+
       case SECTIONS.DEVELOPMENT:
         // 개발 포트폴리오: 퍼진 상태에서 시작, 점점 모임
         return {
@@ -153,8 +163,8 @@ const CameraController = ({
     let targetZ = 4;
     let lookAtX = objectPositionX;
 
-    if (section === SECTIONS.DEVELOPMENT) {
-      // 개발 포트폴리오: 정면에서 약간씩 회전
+    if (section === SECTIONS.HERO || section === SECTIONS.DEVELOPMENT) {
+      // 히어로·개발 포트폴리오: 정면에서 약간씩 회전
       const angle = scrollProgress * Math.PI * 0.3;
       targetX = Math.sin(angle) * 0.5;
       targetY = Math.cos(angle) * 0.2;
