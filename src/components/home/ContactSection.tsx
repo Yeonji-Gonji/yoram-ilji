@@ -11,7 +11,7 @@ import SectionHeader from '../common/SectionHeader';
 // 연락처 정보
 const contactInfo = {
   email: appConfig.contactEmail,
-  github: 'https://github.com/modac0',
+  github: 'https://github.com/Yeonji-Gonji',
 };
 
 interface SocialLink {

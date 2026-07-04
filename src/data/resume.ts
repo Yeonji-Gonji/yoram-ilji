@@ -43,7 +43,7 @@ export const resume: ResumeData = {
   tagline:
     '디자인 감각을 갖춘 프론트엔드 · 기획과 개발 사이를 직접 메우는 사람',
   contacts: [
-    { label: 'GitHub', value: 'github.com/MODAC0' },
+    { label: 'GitHub', value: 'github.com/Yeonji-Gonji' },
     { label: 'Email', value: appConfig.contactEmail },
     { label: '포트폴리오', value: 'yoramilji.kr' },
     { label: 'Blog', value: 'modac.tistory.com' },
