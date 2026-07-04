@@ -47,6 +47,10 @@
 
   /* ===== Animations ===== */
   --animate-scroll-chevron: scroll-chevron 1.5s ease-in-out infinite;
+  --animate-hero-fade-up: hero-fade-up 0.8s ease-out both;
+  --animate-hero-float: hero-float 5s ease-in-out infinite;
+  --animate-cradle-rock: cradle-rock 6s ease-in-out infinite;
+  --animate-hero-orbit: hero-orbit 60s linear infinite;
 
   @keyframes scroll-chevron {
     0%,
@@ -57,6 +61,43 @@
     50% {
       opacity: 1;
       transform: translateY(4px);
+    }
+  }
+
+  @keyframes hero-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hero-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  @keyframes cradle-rock {
+    0%,
+    100% {
+      transform: rotate(-3deg);
+    }
+    50% {
+      transform: rotate(3deg);
+    }
+  }
+
+  @keyframes hero-orbit {
+    to {
+      transform: rotate(360deg);
     }
   }
 }
@@ -110,6 +151,23 @@
 @utility animate-scroll-chevron-3 {
   animation: var(--animate-scroll-chevron);
   animation-delay: 0.3s;
+}
+
+/* 히어로 등장/부유 애니메이션의 시차. animate-* 클래스와 조합해서 사용 */
+@utility hero-delay-1 {
+  animation-delay: 0.15s;
+}
+
+@utility hero-delay-2 {
+  animation-delay: 0.3s;
+}
+
+@utility hero-delay-3 {
+  animation-delay: 0.45s;
+}
+
+@utility hero-delay-4 {
+  animation-delay: 0.6s;
 }
 
 /* PrismJS Dark Theme (One Dark) */

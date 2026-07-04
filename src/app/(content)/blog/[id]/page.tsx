@@ -80,9 +80,12 @@ export default async function PostPage({ params }: Props) {
   const coverImage = getProxiedCoverUrl(originalCoverImage, id);
   const publishedTime = post.properties.생성일.created_time;
 
+  // meta description(generateMetadata)과 동일한 조합을 사용
+  const description = `${category ? `[${category}] ` : ''}${title} - ${siteConfig.description}`;
+
   const jsonLd = generateArticleJsonLd({
     title,
-    description: title,
+    description: description || title,
     publishedTime,
     modifiedTime: post.properties.생성일.created_time,
     author: siteConfig.author.name,

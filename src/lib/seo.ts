@@ -52,13 +52,14 @@ export function generateSeoMetadata({
   noIndex = false,
   pathname = '',
 }: GenerateMetadataProps = {}): Metadata {
+  // OG용 전체 제목. <title>은 루트 layout의 template(%s | 요람일지)이 사이트명을
+  // 붙이므로 여기서 붙이면 "… | 요람일지 | 요람일지"로 중복된다.
   const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
   const pageDescription = description || siteConfig.description;
   const pageUrl = `${siteConfig.url}${pathname}`;
-  const ogImage = image || `${siteConfig.url}/og-image.png`;
 
   return {
-    title: pageTitle,
+    ...(title ? { title } : {}),
     description: pageDescription,
     metadataBase: new URL(siteConfig.url),
     alternates: {
@@ -71,20 +72,26 @@ export function generateSeoMetadata({
       siteName: siteConfig.name,
       locale: siteConfig.locale,
       type: 'website',
-      images: [
-        {
-          url: ogImage,
-          width: 1200,
-          height: 630,
-          alt: pageTitle,
-        },
-      ],
+      // image 미지정 시 파일 컨벤션(opengraph-image.tsx) OG 이미지가 적용되도록
+      // images 필드를 아예 넣지 않는다.
+      ...(image
+        ? {
+            images: [
+              {
+                url: image,
+                width: 1200,
+                height: 630,
+                alt: pageTitle,
+              },
+            ],
+          }
+        : {}),
     },
     twitter: {
       card: 'summary_large_image',
       title: pageTitle,
       description: pageDescription,
-      images: [ogImage],
+      ...(image ? { images: [image] } : {}),
     },
     robots: noIndex
       ? { index: false, follow: false }

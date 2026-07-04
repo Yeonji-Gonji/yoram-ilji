@@ -14,8 +14,13 @@ export const size = {
 
 export const contentType = 'image/png';
 
-export default async function Image({ params }: { params: { id: string } }) {
-  const post = (await getPost(params.id)) as NotionPage;
+export default async function Image({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const post = (await getPost(id)) as NotionPage;
   const title = getNotionBlogTitle(post);
   const category = post.properties.카테고리?.select?.name || '블로그';
 

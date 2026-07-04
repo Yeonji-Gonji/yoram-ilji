@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     languages: {
       'ko-KR': '/',
     },
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
   },
   openGraph: {
     title: siteConfig.name,
@@ -44,20 +47,11 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     locale: siteConfig.locale,
     type: 'website',
-    images: [
-      {
-        url: '/og-image.png',
-        width: 1200,
-        height: 630,
-        alt: siteConfig.name,
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
-    images: ['/og-image.png'],
     creator: `@${siteConfig.author.name}`,
   },
   robots: {
@@ -86,7 +80,6 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [{ url: '/favicon.ico', sizes: 'any' }],
-    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
   },
   manifest: '/manifest.json',
   verification: {
