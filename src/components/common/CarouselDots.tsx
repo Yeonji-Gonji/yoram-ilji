@@ -15,7 +15,7 @@ interface Props {
  */
 export default function CarouselDots({ count, activeIndex, onSelect }: Props) {
   return (
-    <div className="mt-8 flex justify-center gap-2">
+    <div className="flex justify-center gap-2 mt-0">
       {Array.from({ length: count }).map((_, index) => (
         <button
           key={index}

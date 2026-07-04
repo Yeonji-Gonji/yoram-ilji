@@ -6,56 +6,66 @@ import { PortfolioCard } from '@/lib/portfolio-content';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import type { Swiper as SwiperType } from 'swiper';
-import { EffectCoverflow, Mousewheel } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useRef, useState } from 'react';
 
 interface Props {
   cards: PortfolioCard[];
 }
 
+/** 카드 사이 부채꼴 간격(도). 커질수록 부채가 활짝 펴진다 */
+const STEP_DEG = 17;
+/** 부채꼴 회전축까지의 거리(px). 커질수록 호가 완만해진다 */
+const RADIUS = 980;
+/** 중심 기준 양옆으로 보여줄 카드 수 (그 밖은 숨김) */
+const VISIBLE_RANGE = 2;
+
 /**
- * 홈 Selected Work — 플래그십 개발 케이스를 coverflow 캐러셀로 노출.
- * 드래그·스와이프·가로 휠 스크롤로 이동, 무한 루프, 카드 클릭 시 상세 이동.
+ * 홈 Selected Work — 개발 케이스를 부채꼴(fan)로 펼친 갤러리.
+ * 카드들이 호를 따라 기울어져 늘어서고, 가운데 카드만 똑바로 서서
+ * 확대되며 설명이 펼쳐진다. 드래그·스와이프·가로 휠로 회전, 무한 루프,
+ * 옆 카드 클릭은 가운데로, 가운데 카드 클릭은 상세로 이동.
  */
 export default function DevelopmentSection({ cards }: Props) {
-  const [mounted, setMounted] = useState(false);
+  const [active, setActive] = useState(0);
+  const drag = useRef({ startX: 0, moved: false, dragging: false });
+  const wheelLock = useRef(0);
 
-  const [activeIndex, setActiveIndex] = useState(Math.floor(cards.length / 2));
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const n = cards.length;
+  if (n === 0) return null;
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const move = (dir: 1 | -1) => setActive((a) => (a + dir + n) % n);
 
-  if (cards.length === 0) return null;
+  /** i번 카드의 중심(active) 기준 순환 오프셋: -n/2 ~ n/2 범위로 접는다 */
+  const offsetOf = (i: number) => {
+    let o = (i - active) % n;
+    if (o > n / 2) o -= n;
+    if (o < -n / 2) o += n;
+    return o;
+  };
 
-  // coverflow는 한 화면에 여러 장이 보여서, 원본이 적으면 loop가 비활성화된다
-  // (Swiper Loop Warning). 8장 이상이 되도록 원본을 복제해 채운다.
-  const copies = Math.max(1, Math.ceil(8 / cards.length));
-  const loopSlides = Array.from({ length: copies }, () => cards).flat();
-
-  /**
-   * 카드 전체가 상세 링크. 단 드래그(스와이프) 끝에 발생하는 클릭은 이동으로
-   * 치지 않고(allowClick: v12 타입 정의에서 빠졌지만 런타임엔 존재),
-   * 옆의 흐린 카드는 상세 대신 가운데로 데려온다.
-   */
-  const handleCardClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    index: number,
-  ) => {
-    const canClick =
-      swiperInstance &&
-      (swiperInstance as SwiperType & { allowClick: boolean }).allowClick;
-    if (!canClick) {
-      e.preventDefault();
+  const onPointerDown = (e: React.PointerEvent) => {
+    drag.current = { startX: e.clientX, moved: false, dragging: true };
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!drag.current.dragging) return;
+    if (Math.abs(e.clientX - drag.current.startX) > 10) {
+      drag.current.moved = true;
+    }
+  };
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (!drag.current.dragging) return;
+    drag.current.dragging = false;
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 50) move(dx < 0 ? 1 : -1);
+  };
+  /** 가로 휠(트랙패드)만 반응, 세로 스크롤은 페이지에 그대로 둔다 */
+  const onWheel = (e: React.WheelEvent) => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY) || Math.abs(e.deltaX) < 20)
       return;
-    }
-    if (index !== activeIndex) {
-      e.preventDefault();
-      swiperInstance.slideToLoop(index);
-    }
+    const now = Date.now();
+    if (now - wheelLock.current < 450) return;
+    wheelLock.current = now;
+    move(e.deltaX > 0 ? 1 : -1);
   };
 
   return (
@@ -66,172 +76,155 @@ export default function DevelopmentSection({ cards }: Props) {
         subtitle="기획과 개발을 함께 진행한 작업입니다."
       />
 
-      {mounted ? (
-        <Swiper
-          modules={[EffectCoverflow, Mousewheel]}
-          effect="coverflow"
-          grabCursor={true}
-          centeredSlides={true}
-          slidesPerView="auto"
-          loop={true}
-          mousewheel={{ forceToAxis: true }}
-          initialSlide={Math.floor(cards.length / 2)}
-          coverflowEffect={{
-            rotate: 8,
-            stretch: 0,
-            depth: 160,
-            modifier: 1,
-            slideShadows: false,
-          }}
-          speed={500}
-          onSwiper={setSwiperInstance}
-          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          className="overflow-visible! py-6">
-          {loopSlides.map((card, index) => {
-            const isActive = index === activeIndex;
+      {/* 부채꼴 스테이지: 컨테이너를 벗어나 화면 전체 폭으로. 양끝 카드는
+          레퍼런스처럼 화면 가장자리에서 잘리는 연출이 된다.
+          세로 스크롤은 통과시키고 가로 제스처만 받는다 */}
+      <div
+        className="relative left-1/2 h-[560px] w-screen -translate-x-1/2 cursor-grab overflow-hidden select-none active:cursor-grabbing md:h-[600px]"
+        style={{ touchAction: 'pan-y' }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
+        onWheel={onWheel}>
+        {cards.map((card, i) => {
+          const o = offsetOf(i);
+          const isActive = o === 0;
+          const hidden = Math.abs(o) > VISIBLE_RANGE;
 
-            return (
-              <SwiperSlide
-                key={`${card.id}-${Math.floor(index / cards.length)}`}
-                className="w-[300px]! md:w-[380px]! select-none">
-                <div
-                  className={`transition-all duration-300 ${
-                    isActive ? 'scale-100' : 'scale-95 opacity-60'
-                  }`}>
-                  <DevelopmentCard
-                    card={card}
-                    onClick={(e) => handleCardClick(e, index)}
-                  />
-                </div>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      ) : (
-        <div className="flex justify-center gap-6 py-6">
-          {[1, 2, 3].map((i) => (
+          return (
             <div
-              key={i}
-              className="h-[380px] w-[300px] animate-pulse rounded-2xl bg-light-300 md:w-[380px] dark:bg-dark-700"
-            />
-          ))}
-        </div>
-      )}
+              key={card.id}
+              className={`absolute top-10 left-1/2 -ml-[130px] w-[260px] transition-all duration-500 ease-out motion-reduce:transition-none md:-ml-[145px] md:w-[290px] ${
+                hidden ? 'pointer-events-none opacity-0' : ''
+              }`}
+              style={{
+                // 회전만 부채꼴 축 기준. 확대는 안쪽에서 카드 중심 기준으로
+                // (여기에 scale을 함께 넣으면 먼 축 기준으로 커져 카드가 위로 밀린다)
+                transform: `rotate(${o * STEP_DEG}deg)`,
+                transformOrigin: `50% ${RADIUS}px`,
+                zIndex: 10 - Math.abs(o),
+              }}>
+              <div
+                className="transition-transform duration-500 ease-out motion-reduce:transition-none"
+                style={{
+                  transform: isActive ? 'translateY(-6px) scale(1.05)' : 'none',
+                }}>
+                <FanCard
+                  card={card}
+                  isActive={isActive}
+                  onClick={(e) => {
+                    // 드래그 끝에 발생한 클릭은 무시, 옆 카드는 가운데로
+                    if (drag.current.moved) {
+                      e.preventDefault();
+                      return;
+                    }
+                    if (!isActive) {
+                      e.preventDefault();
+                      setActive(i);
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
 
-      {/* 점 인디케이터는 복제본이 아닌 원본 기준 (activeIndex는 복제 포함 인덱스) */}
       <CarouselDots
-        count={cards.length}
-        activeIndex={activeIndex % cards.length}
-        onSelect={(index) => swiperInstance?.slideToLoop(index)}
+        count={n}
+        activeIndex={active}
+        onSelect={(index) => setActive(index)}
       />
     </div>
   );
 }
 
 /**
- * 플래그십 개발 케이스 카드. 회사 작업은 스크린샷이 없으므로 케이스별
- * 브랜드 컬러 + 핵심 지표(metrics)로 카드를 세운다.
+ * 부채꼴 카드. 옆 카드는 이미지+제목만, 가운데 카드는 요약·스킬·CTA가
+ * 아래로 펼쳐진다 (max-height 트랜지션).
  */
-function DevelopmentCard({
+function FanCard({
   card,
+  isActive,
   onClick,
 }: {
   card: PortfolioCard;
+  isActive: boolean;
   onClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }) {
-  const metrics = card.metrics?.slice(0, 3) ?? [];
-
   return (
     <Link
       href={`/portfolio/${card.id}`}
       onClick={onClick}
       draggable={false}
       aria-label={`${card.title} 케이스 자세히 보기`}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-light-300 bg-light-100 text-left transition-all duration-300 hover:border-point hover:shadow-[0_18px_40px_-18px_var(--color-point)] dark:border-dark-700 dark:bg-dark-800">
-      {/* 상단 악센트 — 썸네일이 있으면 이미지, 없으면 컬러 헤더 */}
-      {card.thumbnail ? (
-        <div className="relative overflow-hidden aspect-video">
+      className={`block rounded-3xl border bg-light-100 p-3 text-left shadow-xl transition-all duration-500 dark:bg-dark-800 ${
+        isActive
+          ? 'cursor-pointer border-point/60 shadow-[0_24px_60px_-20px_var(--color-point)]'
+          : 'border-light-300 dark:border-dark-700'
+      }`}>
+      {/* 상단 비주얼: 썸네일 또는 케이스 컬러 헤더 */}
+      <div className="relative overflow-hidden aspect-4/3 rounded-2xl">
+        {card.thumbnail ? (
           <Image
             src={card.thumbnail}
             alt={card.title}
             fill
             unoptimized
             draggable={false}
-            className="object-cover transition-transform duration-500 pointer-events-none group-hover:scale-105"
-            sizes="(max-width: 768px) 300px, 380px"
+            className="object-cover pointer-events-none"
+            sizes="290px"
           />
-        </div>
-      ) : (
-        <div
-          className="relative px-5 pt-6 pb-5 overflow-hidden"
-          style={{
-            background: `linear-gradient(135deg, ${card.color}1f 0%, ${card.color}08 60%, transparent 100%)`,
-          }}>
-          <span
-            className="absolute inset-y-0 left-0 w-1"
-            style={{ backgroundColor: card.color }}
-          />
-          <span
-            className="text-[11px] font-semibold uppercase tracking-wider"
-            style={{ color: card.color }}>
-            {card.period}
-          </span>
-          <h3 className="mt-1 text-lg font-semibold leading-snug transition-colors text-dark-800 group-hover:text-point dark:text-light-100">
-            {card.title}
-          </h3>
-        </div>
-      )}
-
-      <div className="flex flex-col flex-1 gap-4 p-5">
-        {/* 썸네일이 있을 때만 본문 영역에서 제목 노출 (헤더에 이미 있으면 생략) */}
-        {card.thumbnail && (
-          <h3 className="text-lg font-semibold leading-snug transition-colors text-dark-800 group-hover:text-point dark:text-light-100">
-            {card.title}
-          </h3>
+        ) : (
+          <div
+            className="flex flex-col justify-between w-full h-full p-4"
+            style={{
+              background: `linear-gradient(150deg, ${card.color}33 0%, ${card.color}0d 100%)`,
+            }}>
+            <span
+              className="text-[11px] font-semibold uppercase tracking-wider"
+              style={{ color: card.color }}>
+              {card.period}
+            </span>
+            <span
+              className="h-1.5 w-10 rounded-full"
+              style={{ backgroundColor: card.color }}
+            />
+          </div>
         )}
+      </div>
 
-        <p className="text-sm leading-relaxed line-clamp-2 text-dark-500 dark:text-dark-300">
+      <h3
+        className={`mt-3 px-1 font-semibold leading-snug transition-colors ${
+          isActive
+            ? 'text-dark-900 dark:text-light-100'
+            : 'text-dark-600 dark:text-dark-300'
+        }`}>
+        {card.title}
+      </h3>
+
+      {/* 가운데 카드에서만 펼쳐지는 상세 */}
+      <div
+        className={`overflow-hidden transition-all duration-500 ease-out ${
+          isActive ? 'max-h-44 opacity-100' : 'max-h-0 opacity-0'
+        }`}>
+        <p className="mt-1.5 px-1 text-sm leading-relaxed line-clamp-2 text-dark-500 dark:text-dark-300">
           {card.subtitle}
         </p>
-
-        {/* 핵심 지표 — 스크린샷 대신 카드의 무게중심 */}
-        {metrics.length > 0 && (
-          <ul className="space-y-1.5 rounded-xl bg-light-300/60 p-3 dark:bg-dark-900/50">
-            {metrics.map((m) => (
-              <li
-                key={m}
-                className="flex items-start gap-2 text-xs leading-relaxed text-dark-700 dark:text-light-300">
-                <span
-                  className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full"
-                  style={{ backgroundColor: card.color }}
-                />
-                <span>{m}</span>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className="flex flex-col gap-3 mt-auto">
-          <div className="flex flex-wrap gap-1.5">
-            {card.skills.slice(0, 3).map((s) => (
-              <span
-                key={s}
-                className="rounded-full bg-light-400 px-2 py-0.5 text-xs text-dark-600 dark:bg-dark-700 dark:text-dark-300">
-                {s}
-              </span>
-            ))}
-          </div>
-
-          <div className="flex items-center justify-between pt-3 border-t border-light-300 dark:border-dark-700">
-            <span className="text-xs text-dark-400 dark:text-dark-400">
-              {card.role}
+        <div className="mt-2.5 flex flex-wrap gap-1.5 px-1">
+          {card.skills.slice(0, 3).map((s) => (
+            <span
+              key={s}
+              className="rounded-full bg-light-400 px-2 py-0.5 text-xs text-dark-600 dark:bg-dark-700 dark:text-dark-300">
+              {s}
             </span>
-            <span className="inline-flex items-center gap-1 text-xs font-medium transition-colors text-dark-500 group-hover:text-point dark:text-dark-300">
-              케이스 보기
-              <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </span>
-          </div>
+          ))}
         </div>
+        <span className="inline-flex items-center gap-1 px-1 mt-3 mb-1 text-xs font-medium text-point">
+          케이스 보기
+          <ArrowUpRight className="h-3.5 w-3.5" />
+        </span>
       </div>
     </Link>
   );
