@@ -154,9 +154,11 @@ export default function NotionBlock({
       return (
         <Alert
           className="my-4"
+          hideIconWrapper
+          classNames={{ alertIcon: 'text-xl' }}
           icon={
             block.callout.icon?.type === 'emoji' ? (
-              <span className="text-xl">{block.callout.icon.emoji}</span>
+              <span>{block.callout.icon.emoji}</span>
             ) : null
           }>
           <RichText richTexts={block.callout.rich_text} />

@@ -93,6 +93,9 @@ importers:
       '@eslint/eslintrc':
         specifier: ^3.3.3
         version: 3.3.3
+      '@heroui/theme':
+        specifier: 2.4.25
+        version: 2.4.25(tailwindcss@4.1.16)
       '@next/eslint-plugin-next':
         specifier: ^16.1.1
         version: 16.1.1
