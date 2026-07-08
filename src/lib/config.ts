@@ -17,4 +17,18 @@ export const appConfig = {
     blogDataSourceId: '2ec765fe-8b67-80fb-94d5-000b1661d660',
     portfolioDataSourceId: '390765fe-8b67-804b-9445-000b5c5ed7d1',
   },
+
+  /**
+   * GA4 / GTM 식별자 (시크릿 아님, 서비스 계정 private_key만 .env로 관리).
+   * - gtmId          : 브라우저에 노출되는 GTM 컨테이너 ID
+   * - ga4MeasurementId: GA4 측정 ID (G-xxx)
+   * - ga4PropertyId  : GA4 숫자 속성 ID (Data API 조회용)
+   * - gaClientEmail  : 서비스 계정 이메일 (식별자일 뿐, 단독으로는 권한 없음)
+   */
+  analytics: {
+    gtmId: 'GTM-5FGH28HC',
+    ga4MeasurementId: 'G-1NRC5X4X0M',
+    ga4PropertyId: '544610937',
+    gaClientEmail: 'claudedev@yoramilji-d3183.iam.gserviceaccount.com',
+  },
 } as const;

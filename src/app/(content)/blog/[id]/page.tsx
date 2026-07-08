@@ -1,4 +1,6 @@
 import NotionBlock from '@/components/common/NotionBlock';
+import ViewCount from '@/components/common/ViewCount';
+import { getViewsForPath } from '@/lib/analytics';
 import {
   generateArticleJsonLd,
   generateBreadcrumbJsonLd,
@@ -74,6 +76,7 @@ export default async function PostPage({ params }: Props) {
   const { id } = await params;
   const post = (await getPost(id)) as NotionPage;
   const blocks = await getPostContentWithChildren(id);
+  const views = await getViewsForPath(`/blog/${id}`);
   const category = post.properties.카테고리.select?.name;
   const title = getNotionBlogTitle(post);
   const originalCoverImage = getNotionBlogImageUrl(post);
@@ -135,7 +138,7 @@ export default async function PostPage({ params }: Props) {
               {post.properties.이름.title[0].plain_text}
             </h1>
           </div>
-          <div className="flex items-center mb-8 gap-2 text-dark-400">
+          <div className="flex items-center mb-8 gap-4 text-dark-400">
             <span>
               작성일:{' '}
               {dayjs(
@@ -143,6 +146,7 @@ export default async function PostPage({ params }: Props) {
                   post.properties.생성일.created_time,
               ).format('YYYY년 MM월 DD일')}
             </span>
+            <ViewCount count={views} />
           </div>
           <article className="text-dark-900 dark:text-light-300">
             {blocks.map((block) => (

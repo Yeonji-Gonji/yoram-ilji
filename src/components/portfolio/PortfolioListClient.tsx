@@ -6,15 +6,19 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import ViewCount from '../common/ViewCount';
 
 interface Props {
   cards: PortfolioCard[];
   initialCategory?: PortfolioCategory | 'all';
+  /** 경로별 누적 조회수 맵 (GA4). 미설정/실패 시 null. */
+  viewsMap?: Record<string, number> | null;
 }
 
 export default function PortfolioListClient({
   cards,
   initialCategory = 'all',
+  viewsMap,
 }: Props) {
   const [activeCategory, setActiveCategory] = useState<
     PortfolioCategory | 'all'
@@ -99,9 +103,19 @@ export default function PortfolioListClient({
                 {/* 정보 */}
                 <div className="p-5">
                   <div className="mb-4">
-                    <h2 className="font-medium text-lg group-hover:text-point transition-colors">
-                      {project.title}
-                    </h2>
+                    <div className="flex items-start justify-between gap-2">
+                      <h2 className="font-medium text-lg group-hover:text-point transition-colors">
+                        {project.title}
+                      </h2>
+                      <ViewCount
+                        count={
+                          viewsMap
+                            ? (viewsMap[`/portfolio/${project.id}`] ?? 0)
+                            : null
+                        }
+                        className="shrink-0 pt-1"
+                      />
+                    </div>
                     <p className="text-sm text-dark-400 dark:text-dark-500">
                       {project.subtitle}
                     </p>

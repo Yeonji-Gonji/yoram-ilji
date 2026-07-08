@@ -3,6 +3,7 @@ import AppProvider from '@/components/AppProvider';
 import Header from '@/components/common/Header';
 import RouteChangeLoader from '@/components/common/RouteChangeLoader';
 import CursorTrail from '@/components/effects/CursorTrail';
+import { appConfig } from '@/lib/config';
 import {
   generatePersonJsonLd,
   generateWebsiteJsonLd,
@@ -13,7 +14,7 @@ import type { Metadata, Viewport } from 'next';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 
-const GTM_ID = 'GTM-5FGH28HC';
+const GTM_ID = appConfig.analytics.gtmId;
 
 export const viewport: Viewport = {
   width: 'device-width',

@@ -1,4 +1,5 @@
 allowBuilds:
   '@heroui/shared-utils': false
+  protobufjs: false
   sharp: false
   unrs-resolver: false
