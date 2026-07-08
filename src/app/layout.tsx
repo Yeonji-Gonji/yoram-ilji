@@ -1,3 +1,4 @@
+import '@/assets/styles/globals.css';
 import AppProvider from '@/components/AppProvider';
 import Header from '@/components/common/Header';
 import RouteChangeLoader from '@/components/common/RouteChangeLoader';
@@ -9,6 +10,8 @@ import {
 } from '@/lib/seo';
 import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
 
 const GTM_ID = 'GTM-5FGH28HC';
 
