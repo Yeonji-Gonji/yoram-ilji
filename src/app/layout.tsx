@@ -1,6 +1,3 @@
-import '@/assets/styles/globals.css';
-import 'swiper/css';
-import 'swiper/css/effect-coverflow';
 import AppProvider from '@/components/AppProvider';
 import Header from '@/components/common/Header';
 import RouteChangeLoader from '@/components/common/RouteChangeLoader';
@@ -10,7 +7,10 @@ import {
   generateWebsiteJsonLd,
   siteConfig,
 } from '@/lib/seo';
+import { GoogleTagManager } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
+
+const GTM_ID = 'GTM-5FGH28HC';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -121,8 +121,19 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
+        <GoogleTagManager gtmId={GTM_ID} />
       </head>
       <body>
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <AppProvider>
           <CursorTrail />
           <RouteChangeLoader />
