@@ -1,4 +1,5 @@
 import BlogListClient from '@/components/blog/BlogListClient';
+import { getPageViewsMap } from '@/lib/analytics';
 import { siteConfig } from '@/lib/seo';
 import { getBlogPosts } from '@/services/notion.api';
 import { Metadata } from 'next';
@@ -32,12 +33,15 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function BlogPage() {
-  const posts = await getBlogPosts();
+  const [posts, viewsMap] = await Promise.all([
+    getBlogPosts(),
+    getPageViewsMap(),
+  ]);
 
   return (
-    <div className="max-w-7xl mx-auto max-lg:px-5">
+    <div className="max-w-7xl mx-auto px-5 lg:px-8">
       <h1 className="text-4xl font-medium mb-8">블로그</h1>
-      <BlogListClient posts={posts} />
+      <BlogListClient posts={posts} viewsMap={viewsMap} />
     </div>
   );
 }

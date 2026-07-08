@@ -8,10 +8,12 @@ import BlogCard from '../common/BlogCard';
 
 interface Props {
   posts: NotionPage[];
+  /** 경로별 누적 조회수 맵 (GA4). 미설정/실패 시 null. */
+  viewsMap?: Record<string, number> | null;
 }
 const ITEMS_PER_LOAD = 9;
 
-export default function BlogListClient({ posts }: Props) {
+export default function BlogListClient({ posts, viewsMap }: Props) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [displayCount, setDisplayCount] = useState(ITEMS_PER_LOAD);
   const loaderRef = useRef<HTMLDivElement>(null);
@@ -129,7 +131,10 @@ export default function BlogListClient({ posts }: Props) {
                 duration: 0.3,
                 delay: (index % ITEMS_PER_LOAD) * 0.05,
               }}>
-              <BlogCard post={post} />
+              <BlogCard
+                post={post}
+                views={viewsMap ? (viewsMap[`/blog/${post.id}`] ?? 0) : null}
+              />
             </motion.div>
           ))}
         </motion.div>

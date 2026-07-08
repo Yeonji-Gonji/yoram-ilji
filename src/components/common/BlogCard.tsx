@@ -7,8 +7,15 @@ import dayjs from 'dayjs';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import RetryImage from './RetryImage';
+import ViewCount from './ViewCount';
 
-export default function BlogCard({ post }: { post: NotionPage }) {
+export default function BlogCard({
+  post,
+  views,
+}: {
+  post: NotionPage;
+  views?: number | null;
+}) {
   const title = getNotionBlogTitle(post);
   const originalCoverUrl = getNotionBlogImageUrl(post);
   const coverImageUrl = getProxiedCoverUrl(originalCoverUrl, post.id);
@@ -60,8 +67,9 @@ export default function BlogCard({ post }: { post: NotionPage }) {
                         group-hover:text-point transition-all duration-300">
               {title}
             </h3>
-            <div className="flex items-center text-sm gap-2">
+            <div className="flex items-center justify-between text-sm gap-2">
               <p className="text-dark-400! mt-auto">{createdDate}</p>
+              <ViewCount count={views} />
             </div>
           </div>
         </div>

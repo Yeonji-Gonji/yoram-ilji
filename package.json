@@ -10,7 +10,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google-analytics/data": "^6.1.0",
     "@heroui/react": "^2.8.7",
+    "@next/third-parties": "16.2.2",
     "@notionhq/client": "^5.6.0",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.4.2",
@@ -36,8 +38,7 @@
     "rehype-slug": "^6.0.0",
     "swiper": "^12.1.0",
     "tailwindcss": "4.1.16",
-    "three": "^0.182.0",
-    "@next/third-parties": "16.2.2"
+    "three": "^0.182.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.3",

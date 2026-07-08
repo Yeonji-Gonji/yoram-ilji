@@ -9,12 +9,15 @@ import {
 import { ArrowLeft, ArrowRight, Github, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { ReactNode } from 'react';
+import ViewCount from '@/components/common/ViewCount';
 
 interface Props {
   meta: PortfolioNotionMeta;
   blocks: BlockWithChildren[];
   prev: PortfolioNotionMeta | null;
   next: PortfolioNotionMeta | null;
+  /** 이 프로젝트의 누적 조회수 (GA4). 미설정/실패 시 null. */
+  views?: number | null;
 }
 
 /**
@@ -96,6 +99,7 @@ export default function PortfolioNotionDetail({
   blocks,
   prev,
   next,
+  views,
 }: Props) {
   return (
     <div className="w-full dark:bg-dark-800">
@@ -130,10 +134,11 @@ export default function PortfolioNotionDetail({
             </p>
           )}
 
-          <dl className="flex flex-wrap gap-x-6 gap-y-1 mt-5 font-mono text-xs text-dark-400">
+          <dl className="flex flex-wrap items-center gap-x-6 gap-y-1 mt-5 font-mono text-xs text-dark-400">
             {meta.period && <span>{meta.period}</span>}
             {meta.role && <span>{meta.role}</span>}
             {meta.team && <span>{meta.team}</span>}
+            <ViewCount count={views} />
           </dl>
 
           {meta.skills.length > 0 && (

@@ -1,5 +1,6 @@
 import PortfolioListClient from '@/components/portfolio/PortfolioListClient';
 import { PortfolioCategory } from '@/data/portfolio';
+import { getPageViewsMap } from '@/lib/analytics';
 import { getPortfolioCards } from '@/services/portfolio.notion.api';
 import { siteConfig } from '@/lib/seo';
 import { Metadata } from 'next';
@@ -36,14 +37,21 @@ interface PageProps {
 
 export default async function PortfolioPage({ searchParams }: PageProps) {
   const { category } = await searchParams;
-  const cards = await getPortfolioCards();
+  const [cards, viewsMap] = await Promise.all([
+    getPortfolioCards(),
+    getPageViewsMap(),
+  ]);
   const initialCategory: PortfolioCategory | 'all' =
     category === 'design' || category === 'development' ? category : 'all';
 
   return (
-    <div className="max-w-7xl mx-auto max-lg:px-5">
+    <div className="max-w-7xl mx-auto px-5 lg:px-8">
       <h1 className="text-4xl font-medium mb-8">포트폴리오</h1>
-      <PortfolioListClient cards={cards} initialCategory={initialCategory} />
+      <PortfolioListClient
+        cards={cards}
+        initialCategory={initialCategory}
+        viewsMap={viewsMap}
+      />
     </div>
   );
 }

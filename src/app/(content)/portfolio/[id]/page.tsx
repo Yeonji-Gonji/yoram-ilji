@@ -1,4 +1,5 @@
 import PortfolioNotionDetail from '@/components/portfolio/PortfolioNotionDetail';
+import { getViewsForPath } from '@/lib/analytics';
 import {
   generateBreadcrumbJsonLd,
   generatePortfolioJsonLd,
@@ -62,9 +63,10 @@ export default async function PortfolioDetailPage({ params }: Props) {
     notFound();
   }
 
-  const [blocks, adjacent] = await Promise.all([
+  const [blocks, adjacent, views] = await Promise.all([
     getPostContentWithChildren(meta.pageId),
     getAdjacent(id),
+    getViewsForPath(`/portfolio/${id}`),
   ]);
 
   const portfolioJsonLd = generatePortfolioJsonLd({
@@ -96,6 +98,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         blocks={blocks}
         prev={adjacent.prev}
         next={adjacent.next}
+        views={views}
       />
     </>
   );
