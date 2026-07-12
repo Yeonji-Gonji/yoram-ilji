@@ -56,24 +56,69 @@ export default function NotionBlock({
   }
 
   switch (block.type) {
-    case 'heading_1':
-      return (
-        <h1 className="text-3xl font-medium mt-8 mb-4">
+    case 'heading_1': {
+      const heading = (
+        <h1 className="text-3xl font-medium">
           <RichText richTexts={block.heading_1.rich_text} />
         </h1>
       );
-    case 'heading_2':
-      return (
-        <h2 className="text-2xl font-medium mt-8 mb-4">
+      if (block.heading_1.is_toggleable) {
+        return (
+          <Accordion className="mt-8 mb-4" defaultExpandedKeys="all">
+            <AccordionItem title={heading}>
+              <RenderChildren
+                children={block.children}
+                pageId={pageId}
+                depth={depth}
+              />
+            </AccordionItem>
+          </Accordion>
+        );
+      }
+      return <div className="mt-8 mb-4">{heading}</div>;
+    }
+    case 'heading_2': {
+      const heading = (
+        <h2 className="text-2xl font-medium">
           <RichText richTexts={block.heading_2.rich_text} />
         </h2>
       );
-    case 'heading_3':
-      return (
-        <h3 className="text-xl font-medium mt-6 mb-3">
+      if (block.heading_2.is_toggleable) {
+        return (
+          <Accordion className="mt-8 mb-4" defaultExpandedKeys="all">
+            <AccordionItem title={heading}>
+              <RenderChildren
+                children={block.children}
+                pageId={pageId}
+                depth={depth}
+              />
+            </AccordionItem>
+          </Accordion>
+        );
+      }
+      return <div className="mt-8 mb-4">{heading}</div>;
+    }
+    case 'heading_3': {
+      const heading = (
+        <h3 className="text-xl font-medium">
           <RichText richTexts={block.heading_3.rich_text} />
         </h3>
       );
+      if (block.heading_3.is_toggleable) {
+        return (
+          <Accordion className="mt-6 mb-3" defaultExpandedKeys="all">
+            <AccordionItem title={heading}>
+              <RenderChildren
+                children={block.children}
+                pageId={pageId}
+                depth={depth}
+              />
+            </AccordionItem>
+          </Accordion>
+        );
+      }
+      return <div className="mt-6 mb-3">{heading}</div>;
+    }
     case 'bulleted_list_item':
       return (
         <div className="mb-1">
