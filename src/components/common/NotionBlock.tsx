@@ -293,7 +293,7 @@ export default function NotionBlock({
                       return (
                         <CellTag
                           key={cellIndex}
-                          className={`border border-gray-300 dark:border-gray-600 px-4 py-2 text-left ${
+                          className={`whitespace-nowrap border border-gray-300 dark:border-gray-600 px-4 py-2 text-left ${
                             isHeader || isRowHeader
                               ? 'font-semibold bg-gray-100 dark:bg-gray-800'
                               : ''

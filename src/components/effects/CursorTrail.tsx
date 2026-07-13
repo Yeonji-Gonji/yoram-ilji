@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useCursorTrail } from "./CursorTrailContext";
 
 interface Point {
   x: number;
@@ -9,6 +10,7 @@ interface Point {
 }
 
 export default function CursorTrail() {
+  const { enabled } = useCursorTrail();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointsRef = useRef<Point[]>([]);
   const animationRef = useRef<number>(0);
@@ -16,6 +18,10 @@ export default function CursorTrail() {
 
   useEffect(() => {
     setIsTouchDevice("ontouchstart" in window || navigator.maxTouchPoints > 0);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -115,9 +121,9 @@ export default function CursorTrail() {
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(animationRef.current);
     };
-  }, []);
+  }, [enabled]);
 
-  if (isTouchDevice) return null;
+  if (isTouchDevice || !enabled) return null;
 
   return (
     <canvas
