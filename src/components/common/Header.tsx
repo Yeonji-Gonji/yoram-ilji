@@ -6,10 +6,18 @@ import {
   useMotionValueEvent,
   useScroll,
 } from 'framer-motion';
-import { MenuIcon, MoonIcon, SunIcon, XIcon } from 'lucide-react';
+import { Switch } from '@heroui/react';
+import {
+  MenuIcon,
+  MoonIcon,
+  MousePointer2,
+  SunIcon,
+  XIcon,
+} from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useCursorTrail } from '../effects/CursorTrailContext';
 import { Logo } from './SvgIcons';
 
 const navLinks = [
@@ -22,6 +30,11 @@ const navLinks = [
 export default function Header() {
   const { scrollY } = useScroll();
   const { resolvedTheme, setTheme } = useTheme();
+  const {
+    enabled: cursorEnabled,
+    toggle: toggleCursor,
+    mounted: cursorMounted,
+  } = useCursorTrail();
   const [hidden, setHidden] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -86,6 +99,29 @@ export default function Header() {
                 <p>프로필</p>
               </Link>
               <div className="h-4 border border-r border-gray-200" />
+              {cursorMounted && (
+                <div className="flex items-center gap-2">
+                  <Switch
+                    size="sm"
+                    isSelected={cursorEnabled}
+                    onValueChange={() => toggleCursor()}
+                    aria-label="마우스 효과 켜기/끄기"
+                    title={cursorEnabled ? '마우스 효과 끄기' : '마우스 효과 켜기'}
+                  />
+                  <span
+                    className="relative inline-flex text-current"
+                    aria-hidden="true">
+                    <MousePointer2 className="size-5" />
+                    <span
+                      className="absolute bottom-0 right-0 size-3 rounded-full transition-opacity duration-300"
+                      style={{
+                        backgroundColor: 'rgba(80,200,255,0.6)',
+                        opacity: cursorEnabled ? 1 : 0.25,
+                      }}
+                    />
+                  </span>
+                </div>
+              )}
               <button
                 className="p-1 transition-all duration-300 rounded-md cursor-pointer group hover:text-dark-300"
                 onClick={() =>
@@ -119,7 +155,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-100 bg-black/80 backdrop-blur-sm md:hidden">
+            className="fixed inset-0 z-102 bg-black/80 backdrop-blur-sm md:hidden">
             {/* Close Button & Logo */}
             <div className="absolute flex items-center justify-between top-4 left-6 right-6">
               <Link
