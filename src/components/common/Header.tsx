@@ -101,15 +101,10 @@ export default function Header() {
               <div className="h-4 border border-r border-gray-200" />
               {cursorMounted && (
                 <div className="flex items-center gap-2">
-                  <Switch
-                    size="sm"
-                    isSelected={cursorEnabled}
-                    onValueChange={() => toggleCursor()}
-                    aria-label="마우스 효과 켜기/끄기"
-                    title={cursorEnabled ? '마우스 효과 끄기' : '마우스 효과 켜기'}
-                  />
-                  <span
-                    className="relative inline-flex text-current"
+                  <button
+                    type="button"
+                    onClick={() => toggleCursor()}
+                    className="relative inline-flex cursor-pointer text-current"
                     aria-hidden="true">
                     <MousePointer2 className="size-5" />
                     <span
@@ -119,7 +114,7 @@ export default function Header() {
                         opacity: cursorEnabled ? 1 : 0.25,
                       }}
                     />
-                  </span>
+                  </button>
                 </div>
               )}
               <button
