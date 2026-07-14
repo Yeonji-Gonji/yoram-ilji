@@ -55,6 +55,38 @@ export default function NotionBlock({
     );
   }
 
+  // Notion API는 SDK 타입 정의(heading_1~3)에 없는 heading_4를 런타임에 반환할 수 있어
+  // switch가 아닌 별도 가드로 처리한다. payload 구조는 heading_3와 동일하므로 타입 재사용.
+  if ((block.type as string) === 'heading_4') {
+    const heading_4 = (
+      block as unknown as {
+        heading_4: Extract<
+          BlockWithChildren,
+          { type: 'heading_3' }
+        >['heading_3'];
+      }
+    ).heading_4;
+    const heading = (
+      <h4 className="text-lg font-medium">
+        <RichText richTexts={heading_4.rich_text} />
+      </h4>
+    );
+    if (heading_4.is_toggleable) {
+      return (
+        <Accordion className="mt-6 mb-3" defaultExpandedKeys="all">
+          <AccordionItem title={heading}>
+            <RenderChildren
+              children={block.children}
+              pageId={pageId}
+              depth={depth}
+            />
+          </AccordionItem>
+        </Accordion>
+      );
+    }
+    return <div className="mt-6 mb-3">{heading}</div>;
+  }
+
   switch (block.type) {
     case 'heading_1': {
       const heading = (
