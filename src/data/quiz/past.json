@@ -1,0 +1,3909 @@
+{
+  "category": "past",
+  "categoryLabel": "기출복원(웹수집)",
+  "sourcePdf": null,
+  "questions": [
+    {
+      "id": "past-2023-1-01",
+      "number": 1,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "아래 자바 코드에서 출력되는 값을 작성하시오.",
+      "passage": null,
+      "code": "class Static{\n    public int a = 20;\n    static int b = 0;   \n}\n\npublic class Test{\n    public static void main(String[] args) {\n        int  a = 10;\n        Static.b = a;\n        Static st = new Static();\n        System.out.println(Static.b++);\n        System.out.println(st.b);\n        System.out.println(a);\n        System.out.print(st.a);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "10, 11, 10, 20",
+          "aliases": [
+            "10\n11\n10\n20"
+          ]
+        }
+      ],
+      "explanation": "Static.b++는 후치증가라 먼저 현재값 10을 출력한 뒤 b가 11이 되고, st.b는 static 필드를 인스턴스로 공유 참조하므로 11이 출력된다. 지역변수 a는 그대로 10, 인스턴스 필드 st.a는 20이다. newbt.kr 원문과 velog(@mjieun, 변수선언 방식만 다른 동일 문제)에서 정답이 '10, 11, 10, 20'으로 일치했고, 코드를 직접 한 줄씩 트레이싱해 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-02",
+      "number": 2,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 C언어의 출력값을 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n\nint main(){\n    char a[] = \"Art\";\n    char* p = NULL;\n    p = a;\n\n    printf(\"%s\\n\", a);\n    printf(\"%c\\n\", *p);\n    printf(\"%c\\n\", *a);\n    printf(\"%s\\n\", p);\n\n    for(int i = 0; a[i] != '\\0'; i++)\n    printf(\"%c\", a[i]);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Art, A, A, Art, Art",
+          "aliases": [
+            "Art\nA\nA\nArt\nArt"
+          ]
+        }
+      ],
+      "explanation": "%s는 문자열 전체를, %c는 포인터/배열이 가리키는 첫 문자를 출력하며 마지막 for문은 문자열을 한 글자씩 이어서 출력한다. newbt.kr과 velog(@mjieun)의 코드·정답이 완전히 일치했고, 코드를 직접 트레이싱해 Art/A/A/Art/Art를 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-03",
+      "number": 3,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 C언어의 출력값을 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n\nint main(){\n    char* a = \"qwer\";\n    char* b = \"qwtety\";\n\n    for(int i = 0; a[i] != '\\0' ; i++){\n        for(int j = 0; b[j] != '\\0'; j++){\n            if(a[i] == b[j]) printf(\"%c\", a[i]);\n        }\n    }\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "qwe",
+          "aliases": []
+        }
+      ],
+      "explanation": "a의 각 문자가 b에 존재하는지 이중 for문으로 검사해 있으면 출력한다. q(있음)->출력, w(있음)->출력, e(있음)->출력, r(없음)->미출력이므로 'qwe'가 된다. newbt.kr과 velog(@mjieun)의 코드·정답이 일치했고, 직접 트레이싱으로도 동일한 결과를 확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-04",
+      "number": 4,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 괄호안에 들어가는 용어의 Full Name 또는 약자를 작성하시오.",
+      "passage": "( )은/는 비동기적인 웹 애플리케이션의 제작을 위해 JavaScript와 XML을 이용한 비동기적 정보 교환 기법이다. ( )은/는 필요한 데이터만을 웹서버에 요청해서 받은 후 클라이언트에서 데이터에 대한 처리를 할 수 있다. 보통 SOAP이나 XML 기반의 웹 서비스 프로토콜이 사용되며, 웹 서버의 응답을 처리하기 위해 클라이언트 쪽에서는 자바스크립트를 쓴다. ( )은/는 Google Map과 Google pages에서 사용한 기술에 기반하여 제작되었다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "AJAX",
+          "aliases": [
+            "Asynchronous JavaScript and XML"
+          ]
+        }
+      ],
+      "explanation": "JavaScript+XML 기반 비동기 정보교환, Google Maps 등에서 사용된 기술이라는 설명은 AJAX(Asynchronous JavaScript and XML)를 가리키는 표준 정의와 정확히 일치한다. newbt.kr 원문 페이지에도 해설 링크가 'Ajax'로 연결되어 있어 확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-05",
+      "number": 6,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "아래 내용을 확인하여 알맞는 답을 작성하시오.",
+      "passage": "○ 2 계층(데이터링크 계층)에서 구현되는 터널링 기술 중 하나\n○ L2F와 PPTP가 결합된 프로토콜로 VPN과 인터넷 서비스 제공자(ISP)가 이용\n○ IPsec을 함께 사용하면 PPTP보다 훨씬 안전하지만 보안보다 익명화에 더 적합",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "L2TP",
+          "aliases": [
+            "Layer 2 Tunneling Protocol"
+          ]
+        }
+      ],
+      "explanation": "L2F와 PPTP를 결합해 만든 2계층 터널링 프로토콜이라는 설명은 L2TP(Layer 2 Tunneling Protocol)의 표준 정의와 일치한다. newbt.kr 원문의 해설 링크도 'L2TP'로 연결되어 있어 확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-06",
+      "number": 7,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 알맞은 용어를 영문 3글자로 쓰시오.",
+      "passage": "○ 다른 컴퓨터에 로그인, 원격 명령 실행, 파일 복사 등을 수행할 수 있도록 다양한 기능을 지원하는 프로토콜 또는 이를 이용한 응용 프로그램이다.\n○ 데이터 암호화와 강력한 인증 방법으로 보안성이 낮은 네트워크에서도 안전하게 통신할 수 있다.\n○ 키(Key)를 통한 인증 방법으로 사용하려면 사전에 클라이언트의 공개키를 서버에 등록해야 한다.\n○ 기본적으로는 22번 포트를 사용한다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "SSH",
+          "aliases": [
+            "Secure Shell"
+          ]
+        }
+      ],
+      "explanation": "22번 포트, 키 기반 인증, 암호화된 원격 로그인/명령실행/파일복사 설명은 SSH(Secure Shell)의 표준 정의와 정확히 일치하며 '영문 3글자' 조건도 SSH에 부합한다. newbt.kr 원문의 해설 링크도 'SSH'로 연결되어 있다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-07",
+      "number": 9,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 아래 코드에서 이진수 101110를 십진수로 변환하는 C언어 코드에 대해 괄호 (a) (b)의 적합한 답을 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int input = 101110;\n    int di = 1;\n    int sum = 0;\n    while (1) {\n        if (input == 0) break;\n        else {\n            sum = sum + (input ( a )( b )) * di;\n            di = di * 2;\n            input = input / 10;\n        }\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": "a",
+          "answer": "%",
+          "aliases": []
+        },
+        {
+          "label": "b",
+          "answer": "10",
+          "aliases": []
+        }
+      ],
+      "explanation": "input을 10으로 나눈 나머지(%10)로 이진수 형태로 입력된 숫자의 마지막 자리를 하나씩 꺼내고, 자리값 di(1,2,4,8...)를 곱해 누적하면 십진수 값이 된다. newbt.kr, 김테드 블로그(idkim97), velog(@mjieun) 세 출처 모두 '%','10'으로 일치했고, 직접 트레이싱한 결과도 101110(2)=46(10)으로 정답과 일치함을 확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-08",
+      "number": 10,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 보안 관련 설명으로 괄호안에 알맞는 용어를 작성하시오.",
+      "passage": "( )은/는 TCP/IP에서 IP 패킷을 처리할 때 발생되는 문제를 알려주는 프로토콜이다. ( ) 프로토콜은 보통 다른 호스트나 게이트웨이와 연결된 네트웍에 문제가 있는지 확인하기 위한 목적으로 주로 사용된다. ( )을/를 이용한 공격에는 ( ) Flooding가 있는데 ping 명령어를 통한 ( ) 패킷을 연속적으로 계속 보내어 서버의 요청에 응답으로 인한 다른 작업을 하지 못하도록 하는 공격이다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "ICMP",
+          "aliases": [
+            "Internet Control Message Protocol"
+          ]
+        }
+      ],
+      "explanation": "IP 패킷 처리 오류를 알리는 프로토콜, ping 기반 Flooding 공격이라는 설명은 ICMP(Internet Control Message Protocol)의 표준 정의 및 ICMP Flooding(핑 플러딩) 공격과 정확히 일치한다. newbt.kr 원문의 해설 링크도 'ICMP'로 연결되어 있다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-09",
+      "number": 14,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 코드에서 괄호안에 알맞는 값을 변수명으로 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nvoid swap(int *a, int idx1, int idx2) {\n    int t = a[idx1];\n    a[idx1] = a[idx2];\n    a[( ① )] = t;\n}\nvoid Usort(int *a, int len) {\n    for(int i = 0; i < len - 1; i++)\n        for(int j = 0; j < len - 1 - i; j++)\n            if(a[j] > a[j+1]) swap(a,j,j+1);\n}\nvoid main(){\n    int a[] = {85, 75, 50, 100, 95};\n    int nx = 5;\n    Usort(a, ( ② ));\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "idx2",
+          "aliases": []
+        },
+        {
+          "label": "②",
+          "answer": "nx",
+          "aliases": []
+        }
+      ],
+      "explanation": "swap 함수는 표준 교환(swap) 로직으로 t=a[idx1]; a[idx1]=a[idx2]; a[idx2]=t; 순서를 따라야 하므로 ①은 idx2다. Usort는 배열과 '길이'를 인자로 받는데 배열 길이가 5인 nx가 그 값이므로 ②는 nx다. newbt.kr(C언어 버전)과 velog(@mjieun, 동일 로직의 자바 변형 버전) 모두 'idx2, nx'로 일치했고, 버블소트 스왑 로직을 직접 트레이싱해 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-10",
+      "number": 15,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 파이썬 코드의 알맞는 출력값을 작성하시오.",
+      "passage": null,
+      "code": "a = {'한국', '중국', '일본'}\na.add('베트남')\na.add('중국')\na.remove('일본')\na.update({'홍콩', '한국', '태국'})\nprint(a)",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "{'한국', '중국', '베트남', '홍콩', '태국'}",
+          "aliases": [
+            "한국, 중국, 베트남, 홍콩, 태국 (순서 무관, set이므로 출력 순서는 상관없음)"
+          ]
+        }
+      ],
+      "explanation": "add로 베트남 추가, 중복된 중국 add는 무시, remove로 일본 제거, update({'홍콩','한국','태국'})에서 이미 있는 한국은 무시하고 홍콩·태국이 추가되어 최종 5개 원소(한국,중국,베트남,홍콩,태국)가 남는다. newbt.kr 원문과 velog(@mjieun) 두 출처 모두 홍콩을 포함한 5개 원소로 일치했으며, 코드를 한 줄씩 직접 트레이싱해 재확인했다. (참고: 김테드 블로그 요약본은 홍콩이 빠진 4개 원소로 소개해 상충이 발견되었으나, 2개 출처 일치 + 직접 실행 검증 결과를 근거로 5개 원소 답을 채택했다.)",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-11",
+      "number": 17,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 JAVA 코드에서 알맞는 출력 값을 작성하시오.",
+      "passage": null,
+      "code": "abstract class Vehicle {\n    String name;\n    abstract public String getName(String val);\n    public String getName() {\n        return \"Vehicle name: \" + name;\n    }\n}\nclass Car extends Vehicle {\n    public Car(String val) {\n        name = super.name = val;\n    }\n    public String getName(String val) {\n        return \"Car name:\" + val;\n    }\n    public String getName(byte val[]) {\n        return \"Car name:\" + val;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Vehicle obj = new Car(\"Spark\");\n        System.out.println(obj.getName());\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Vehicle name: Spark",
+          "aliases": [
+            "Vehicle name : Spark"
+          ]
+        }
+      ],
+      "explanation": "Car 클래스는 getName(String)과 getName(byte[])만 '오버로딩'했을 뿐 인자가 없는 getName()은 오버라이딩하지 않았으므로, obj.getName() 호출은 Vehicle의 getName()(인자없음)을 그대로 사용한다. 생성자에서 name=\"Spark\"로 설정되었으므로 결과는 'Vehicle name: Spark'. newbt.kr과 김테드 블로그(idkim97) 두 출처가 동일 코드·동일 정답으로 일치했고, 오버로딩과 오버라이딩의 구분 규칙에 따라 직접 트레이싱해 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-1-12",
+      "number": 20,
+      "examRound": "2023년 1회",
+      "type": "short",
+      "question": "다음 Java 코드에 대한 출력 값을 작성하시오.",
+      "passage": null,
+      "code": "class Parent {\n    int x = 100;\n    Parent() { this(500); }\n    Parent(int x) { this.x = x; }\n    int getX() { return x; }\n}\nclass Child extends Parent {\n    int x = 4000;\n    Child() { this(5000); }\n    Child(int x) { this.x = x; }\n}\npublic class Main {\n    public static void main(String[] args) {\n        Child obj = new Child();\n        System.out.println(obj.getX());\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "500",
+          "aliases": []
+        }
+      ],
+      "explanation": "Child()→Child(5000) 호출 전에 암시적 super()가 Parent()를 실행하고, Parent()는 this(500)으로 위임되어 Parent 자신의 필드 x가 500으로 설정된다(필드 은닉으로 Parent.x와 Child.x는 별개 저장공간). getX()는 Parent 클래스에 정의되어 오버라이드되지 않았으므로 정적으로 Parent.x를 반환해 500이 출력된다. newbt.kr과 velog(@mjieun, 동일 로직) 두 출처 모두 '500'으로 일치했고, 생성자 체이닝과 필드 은닉 규칙에 따라 직접 트레이싱해 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2023%EB%85%84%201%ED%9A%8C/%EC%98%A4%EC%86%8C%ED%94%84%ED%8A%B80506"
+    },
+    {
+      "id": "past-2023-2-01",
+      "number": 1,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "학생 테이블에 다음 데이터를 삽입하는 SQL INSERT문을 작성하시오.",
+      "passage": "| 학번 | 이름 | 학년 | 전공 | 번호 |\n|---|---|---|---|---|\n| 98170823 | 한국산 | 3 | 경영학개론 | 050-1234-1234 |",
+      "code": null,
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "INSERT INTO 학생 VALUES(98170823, '한국산', 3, '경영학개론', '050-1234-1234');",
+          "aliases": [
+            "INSERT INTO 학생(학번, 이름, 학년, 전공, 번호) VALUES(98170823, '한국산', 3, '경영학개론', '050-1234-1234');"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안(23년2회)에 게재된 정답. 컬럼명을 명시하지 않은 VALUES 문법과 명시한 문법 모두 인정됨. INSERT INTO 테이블 [ (컬럼...) ] VALUES(값...) 문법 규칙에 값의 개수·순서가 테이블 컬럼과 일치하는지 직접 검증함(문자열은 단일 인용부호 사용).",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-02",
+      "number": 2,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 SQL문의 빈 칸에 들어갈 명령어를 쓰시오. (뷰를 삭제하면서, 해당 뷰를 참조하는 다른 개체도 함께 연쇄적으로 삭제)",
+      "passage": null,
+      "code": "DROP VIEW 뷰이름 ( ? );",
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "CASCADE",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안에서 확인. DROP TABLE/VIEW 구문에서 참조 개체까지 연쇄적으로 삭제하는 표준 SQL 키워드는 CASCADE(반대는 RESTRICT)이며, 이는 SQL 표준 문법 지식으로 직접 검증 가능한 사실이다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-03",
+      "number": 3,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "데이터베이스 설계 순서를 보기에서 골라 순서대로 배열하시오.",
+      "passage": "보기: ㉠논리적 설계, ㉡구현, ㉢물리적 설계, ㉣요구사항분석, ㉤개념적 설계",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "요구사항분석 → 개념적 설계 → 논리적 설계 → 물리적 설계 → 구현",
+          "aliases": [
+            "㉣ → ㉤ → ㉠ → ㉢ → ㉡"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안 확인. 데이터베이스 설계의 표준 교과서적 순서(요구사항분석-개념적 설계-논리적 설계-물리적 설계-구현)와 일치하여 일반 DB 이론 지식으로도 직접 검증 가능.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-04",
+      "number": 4,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 C언어 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int c = 0;\n    for (int i = 1; i <= 2023; i++) {\n        if (i % 4 == 0) c++;\n    }\n    printf(\"%d\", c);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "505",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글 2개 출처가 일치. 1~2023 사이 4의 배수 개수는 floor(2023/4)=505로 직접 계산해 검증함.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-05",
+      "number": 5,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 Python 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "a = \"engineer information programming\"\nb = a[:3]\nc = a[4:6]\nd = a[29:]\ne = b + c + d\nprint(e)",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "engneing",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글이 일치. 직접 Python으로 실행해 재검증함: a[:3]='eng', a[4:6]='ne', a[29:]='ing' → 'eng'+'ne'+'ing'='engneing'.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-06",
+      "number": 6,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 화이트박스 테스트 커버리지(검증 기준)의 명칭을 쓰시오.",
+      "passage": "전체 조건식의 참과 거짓 결과에 상관없이, 결정 포인트 내에 있는 모든 개별 조건식이 참 한 번, 거짓 한 번을 모두 갖도록 조합하는 커버리지",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "조건 커버리지",
+          "aliases": [
+            "Condition Coverage"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안에서 확인. 소프트웨어 테스트 커버리지의 표준 정의(개별 조건식 각각 참/거짓 1회 이상 수행)와 정확히 일치해 SW공학 일반 지식으로도 직접 검증 가능.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-07",
+      "number": 7,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "통합 테스트에서, 하향식 통합 테스트와 상향식 통합 테스트 각각에 사용되는 테스트용 모듈의 명칭을 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①(하향식)",
+          "answer": "스텁",
+          "aliases": [
+            "Stub",
+            "테스트 스텁"
+          ]
+        },
+        {
+          "label": "②(상향식)",
+          "answer": "드라이버",
+          "aliases": [
+            "Driver",
+            "테스트 드라이버"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@summer_today, 시나공 기출문제집 기반 정리 글) 2개 출처가 모두 하향식=스텁, 상향식=드라이버로 일치. 표준 SW공학 통합 테스트 용어 정의와도 부합.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-08",
+      "number": 8,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 Java 프로그램의 실행 결과를 순서대로 쓰시오.",
+      "passage": null,
+      "code": "class Gisafirst {\n    public static void main(String[] args) {\n        String str1 = \"Programming\";\n        String str2 = \"Programming\";\n        String str3 = new String(\"Programming\");\n        System.out.println(str1 == str2);\n        System.out.println(str1 == str3);\n        System.out.println(str1.equals(str3));\n        System.out.println(str2.equals(str3));\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "true\nfalse\ntrue\ntrue",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 코드가 동일하며 정답도 일치. Java 문자열 리터럴 풀(String pool) 동작 원리로 직접 검증: str1·str2는 같은 리터럴을 참조해 ==가 true, str3은 new String()으로 별도 객체가 생성되어 ==가 false, equals()는 내용 비교이므로 항상 true.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-09",
+      "number": 9,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 C언어 프로그램이 배열 {5,4,3,2,1}을 회전시켜 '43215'를 출력하도록 빈 칸을 채우시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int n[5] = {5, 4, 3, 2, 1};\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d\", ( ? ));\n    }\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "n[(i+1)%5]",
+          "aliases": [
+            "n[(i + 1) % 5]"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글이 일치. 직접 트레이싱으로 검증: i=0→n[1]=4, i=1→n[2]=3, i=2→n[3]=2, i=3→n[4]=1, i=4→n[0]=5 → 출력 '43215'와 일치. (댓글에서 포인터/주소 관련 이견이 있었으나 두 출처 모두 일반 배열 선언으로 일치해 반영하지 않음)",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-10",
+      "number": 10,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 C언어 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int n[3] = {73, 95, 82};\n    int sum = 0;\n    for (int i = 0; i < 3; i++) {\n        sum += n[i];\n    }\n    switch (sum / 30) {\n        case 10:\n        case 9: printf(\"A\");\n        case 8: printf(\"B\");\n        case 7:\n        case 6: printf(\"C\");\n        default: printf(\"D\");\n    }\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "BCD",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글이 일치. 직접 트레이싱으로 검증: sum=73+95+82=250, 250/30=8(정수 나눗셈)이므로 case 8부터 시작해 break문 없이 순차 실행되어 B, C, D가 출력됨.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-11",
+      "number": 11,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 C언어 스택(배열 기반) 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n#define MAX_SIZE 10\nint isWhat[MAX_SIZE];\nint point = -1;\nint isEmpty() {\n    if (point == -1) return 1;\n    return 0;\n}\nint isFull() {\n    if (point == 10) return 1;\n    return 0;\n}\nvoid into(int num) {\n    if (point >= 10) printf(\"Full\");\n    isWhat[++point] = num;\n}\nint take() {\n    if (isEmpty() == 1) printf(\"Empty\");\n    return isWhat[point--];\n}\nint main(int argc, char const *argv[]) {\n    into(5); into(2);\n    while (!isEmpty()) {\n        printf(\"%d\", take());\n        into(4); into(1); printf(\"%d\", take());\n        into(3); printf(\"%d\", take()); printf(\"%d\", take());\n        into(6); printf(\"%d\", take()); printf(\"%d\", take());\n    }\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "213465",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글이 일치. 직접 스택 연산을 트레이싱해 검증: into(5),into(2) 후 take()=2, into(4),into(1) 후 take()=1, into(3) 후 take()=3,take()=4, into(6) 후 take()=6,take()=5 → 출력 순서 2,1,3,4,6,5.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-12",
+      "number": 12,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 C언어 프로그램에서 홍길동 → 김철수 → 박영희 순으로 입력했을 때, n1, n2, n3의 출력 결과를 각각 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nchar n[30];\nchar* getname() {\n    printf(\"입력:\");\n    gets(n);\n    return n;\n}\nint main() {\n    char* n1 = getname();\n    char* n2 = getname();\n    char* n3 = getname();\n    printf(\"%s \", n1);\n    printf(\"%s \", n2);\n    printf(\"%s \", n3);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "박영희 박영희 박영희",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글이 일치. n1, n2, n3는 모두 전역 배열 n[30]을 가리키는 동일한 포인터이므로, 마지막에 입력된 값('박영희')으로 덮어써진 동일 버퍼를 세 포인터 모두가 가리키게 되어 셋 다 '박영희'가 출력됨(C 포인터 앨리어싱 원리로 직접 검증).",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-13",
+      "number": 13,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "4620원을 1000원, 500원, 100원, 10원 단위로 최소 개수로 나누는 프로그램에서 a, b, c, d에 들어갈 코드를 순서대로 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int m = 4620;\n    int a, b, c, d;\n    a = ? ;   // 1000원 개수\n    b = ? ;   // 500원 개수\n    c = ? ;   // 100원 개수\n    d = ? ;   // 10원 개수\n    printf(\"1000원 개수:%d \", a);\n    printf(\"500원 개수:%d \", b);\n    printf(\"100원 개수:%d \", c);\n    printf(\"10원 개수:%d \", d);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": "a",
+          "answer": "m / 1000",
+          "aliases": []
+        },
+        {
+          "label": "b",
+          "answer": "(m % 1000) / 500",
+          "aliases": []
+        },
+        {
+          "label": "c",
+          "answer": "(m % 500) / 100",
+          "aliases": []
+        },
+        {
+          "label": "d",
+          "answer": "(m % 100) / 10",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글이 일치. 직접 계산으로 검증: m=4620일 때 a=4620/1000=4, b=(4620%1000)/500=620/500=1, c=(4620%500)/100=120/100=1, d=(4620%100)/10=20/10=2로, 화폐 단위별 최소 개수를 구하는 표준 나눗셈-나머지 로직임.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-14",
+      "number": 14,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 C언어 정렬 프로그램이 배열을 오름차순으로 정렬하도록 빈 칸에 들어갈 비교 연산자를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int E[] = {64, 25, 12, 22, 11};\n    int n = sizeof(E) / sizeof(E[0]);\n    int i = 0;\n    do {\n        int j = i + 1;\n        do {\n            if (E[i] ( ? ) E[j]) {\n                int tmp = E[i];\n                E[i] = E[j];\n                E[j] = tmp;\n            }\n            j++;\n        } while (j < n);\n        i++;\n    } while (i < n - 1);\n    for (int i = 0; i <= 4; i++)\n        printf(\"%d \", E[i]);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": ">",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@cam080421) 복원 글이 일치. 선택정렬 유사 로직에서 E[i]가 E[j]보다 크면 교환하는 것이 오름차순 정렬 조건이므로 '>' 가 맞음을 알고리즘 논리로 직접 검증.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-15",
+      "number": 15,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 암호화 알고리즘을 대칭키(비밀키) 방식과 비대칭키(공개키) 방식으로 구분하시오: DES, AES, ARIA, SEED, RSA, ECC",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "대칭키",
+          "answer": "DES, AES, ARIA, SEED",
+          "aliases": []
+        },
+        {
+          "label": "비대칭키",
+          "answer": "RSA, ECC",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@summer_today, 시나공 기출문제집 기반 정리 글) 2개 출처가 일치. 표준 암호 알고리즘 분류(대칭키: DES/AES/ARIA/SEED, 비대칭키: RSA/ECC) 지식과도 부합.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-16",
+      "number": 16,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "임의의 길이의 입력 데이터를 고정된 길이의 값(키)으로 변환하는 단방향 암호화(변환) 기술의 명칭을 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "해시",
+          "aliases": [
+            "Hash",
+            "해싱",
+            "Hashing"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@summer_today) 정리 글 2개 출처가 일치. 임의 길이 입력을 고정 길이 값으로 단방향 변환한다는 설명은 해시(Hash) 함수의 표준 정의와 정확히 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-17",
+      "number": 17,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "워터마킹, 핑거프린팅, 코드 난독화 등의 보안 요소를 삽입하여, 소프트웨어의 비정상적인 수정이 감지되면 오작동하게 만들어 악용을 방지하는 기술의 명칭을 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "템퍼 프루핑",
+          "aliases": [
+            "Tamper Proofing",
+            "템퍼 레지스턴스"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@summer_today) 정리 글 2개 출처가 거의 동일한 서술로 상호 확인됨. 소프트웨어 위변조 방지 기술인 템퍼 프루핑의 표준 정의와 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-18",
+      "number": 18,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 GoF 디자인 패턴을 각각 쓰시오.\n① 객체를 하나만 생성하고 그 객체를 모든 곳에서 참조할 수 있도록 하는 패턴\n② 연산을 수행해야 할 원소의 클래스를 수정하지 않고도 새로운 연산을 추가할 수 있게 하는 패턴",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "싱글톤",
+          "aliases": [
+            "Singleton"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "비지터",
+          "aliases": [
+            "Visitor",
+            "방문자"
+          ]
+        }
+      ],
+      "explanation": "gisafirst 가답안 기준(단일 출처이나 표준 정의로 직접 검증). ①은 싱글톤 패턴의 표준 정의(단일 인스턴스, 전역 참조)와 정확히 일치. ②는 GoF 비지터(Visitor) 패턴의 교과서적 정의('원소의 클래스를 변경하지 않고 새로운 연산 추가')와 문구가 그대로 일치. (응시자 댓글에서 중재자(Mediator)라는 이견이 있었으나, 설명이 Visitor의 정의에 정확히 부합해 Visitor가 타당함)",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-19",
+      "number": 19,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "HDLC 프레임에서 제어부의 시작 비트에 따라 구분되는 프레임 종류(①~③)와, 비번호 프레임에서 사용하는 동작 모드 중 보기에 제시된 두 가지(④~⑤)를 쓰시오.",
+      "passage": "보기: 정보, 감독, 비번호, 비동기 균형, 비동기 응답, 릴레이, 양방향 응답, 연결 제어, 동기 균형, 익명, 동기 응답",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "정보",
+          "aliases": []
+        },
+        {
+          "label": "②",
+          "answer": "감독",
+          "aliases": []
+        },
+        {
+          "label": "③",
+          "answer": "비번호",
+          "aliases": []
+        },
+        {
+          "label": "④",
+          "answer": "비동기 균형",
+          "aliases": []
+        },
+        {
+          "label": "⑤",
+          "answer": "비동기 응답",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@summer_today) 정리 글 2개 출처가 프레임 종류(정보/감독/비번호) 및 동작 모드 명칭(비동기 균형/비동기 응답)에서 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-2-20",
+      "number": 20,
+      "examRound": "2023년 2회",
+      "type": "short",
+      "question": "오류 검출/제어 관련 다음 설명에 해당하는 용어를 보기에서 각각 고르시오.\n① 데이터 단위에 패리티 비트를 추가해 1bit 오류를 교정할 수 있는 코드 방식\n② 오류 발생 시 재전송 요구 없이 스스로 수정하는 전진 오류 수정 방식\n③ 오류 발생 시 송신측에 재전송을 요구하는 후진 오류 수정 방식\n④ 1bit의 체크 비트를 추가해 오류를 검출하는 방식\n⑤ 다항식 코드를 사용해 오류를 검출하는 방식",
+      "passage": "보기: hamming, FEC, BEC, parity, CRC, NAK, BCD, MD5",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "hamming",
+          "aliases": [
+            "해밍 코드"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "FEC",
+          "aliases": [
+            "전진 오류 수정"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "BEC",
+          "aliases": [
+            "후진 오류 수정"
+          ]
+        },
+        {
+          "label": "④",
+          "answer": "parity",
+          "aliases": [
+            "패리티 검사"
+          ]
+        },
+        {
+          "label": "⑤",
+          "answer": "CRC",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst 가답안과 velog(@summer_today) 정리 글 2개 출처가 각 오류검출/제어 용어(해밍/FEC/BEC/패리티/CRC)와 그 정의 설명에서 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "http://www.gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=437"
+    },
+    {
+      "id": "past-2023-3-01",
+      "number": 1,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 C언어 코드를 실행했을 때 출력되는 결과를 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n\nint test(int n) {\n    int i, sum = 0;\n\n    for (i = 1; i <= n / 2; i++){\n        if (n % i == 0)\n        sum += i;\n    }\n\n    if (n == sum)\n        return 1;\n\n    return 0;\n}\n\nint main(){\n    int i, sum=0;\n\n    for (i = 2; i <= 100; i++){\n        if (test(i))\n        sum += i;\n    }\n\n    printf(\"%d \", sum);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "34",
+          "aliases": []
+        }
+      ],
+      "explanation": "test(n)은 1~n/2 범위의 약수 합이 n과 같으면 완전수로 판정한다. 2~100 범위의 완전수는 6(1+2+3)과 28(1+2+4+7+14)뿐이며 합은 34이다. 코드를 직접 트레이싱해 계산 검증했고, 김테드 개발 블로그(idkim97.github.io)와 gisafirst.com 가답안 두 출처의 정답(34)과 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://idkim97.github.io/2024-03-28-%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20C%EC%96%B8%EC%96%B4%20%EB%AA%A8%EC%9D%8C/"
+    },
+    {
+      "id": "past-2023-3-02",
+      "number": 2,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 C언어 코드를 실행했을 때 출력되는 결과를 작성하시오.",
+      "passage": null,
+      "code": "int f(int n) {\n    if(n<=1) return 1;\n    else return n*f(n-1);\n}\n\nint main() {\n    printf(\"%d\", f(7));\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "5040",
+          "aliases": []
+        }
+      ],
+      "explanation": "f(n)은 n! 을 계산하는 재귀함수이며 f(7)=7×6×5×4×3×2×1=5040이다. 직접 계산으로 검증했고, idkim97 블로그와 gisafirst.com 가답안 두 출처 모두 5040으로 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://idkim97.github.io/2024-03-28-%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20C%EC%96%B8%EC%96%B4%20%EB%AA%A8%EC%9D%8C/"
+    },
+    {
+      "id": "past-2023-3-03",
+      "number": 3,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음은 C언어의 포인터 문제이다. 알맞은 출력값을 순서대로 작성하시오.",
+      "passage": null,
+      "code": "int main() {\n    char* p = \"KOREA\";\n    printf(\"%s \", p);\n    printf(\"%s \", p+1);\n    printf(\"%c \", *p);\n    printf(\"%c \", *(p+3));\n    printf(\"%c \", *p+4);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "KOREA OREA K E O",
+          "aliases": []
+        }
+      ],
+      "explanation": "p는 \"KOREA\"(K=0,O=1,R=2,E=3,A=4). %s p→KOREA, %s p+1→OREA, %c *p→'K', %c *(p+3)→인덱스3='E', %c *p+4→'K'(아스키75)+4=79='O'. 직접 트레이싱으로 검증했고 idkim97 블로그와 gisafirst.com 가답안 두 출처가 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://idkim97.github.io/2024-03-28-%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20C%EC%96%B8%EC%96%B4%20%EB%AA%A8%EC%9D%8C/"
+    },
+    {
+      "id": "past-2023-3-04",
+      "number": 4,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 Java 코드를 실행했을 때 출력되는 결과를 작성하시오.",
+      "passage": null,
+      "code": "class Parent {\n    int compute(int num) {\n        if(num <= 1)\n            return num;\n        return compute(num-1) + compute(num-2);\n    }\n}\n\nclass Child extends Parent {\n    int compute(int num) {\n        if(num <= 1)\n            return num;\n        return compute(num-1) + compute(num-3);\n    }\n}\n\npublic class main {\n    public static void main(String args[]) {\n        Parent obj = new Child();\n        System.out.print(obj.compute(7));\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "2",
+          "aliases": []
+        }
+      ],
+      "explanation": "obj는 Parent형 참조지만 실제 객체가 Child이므로 동적 바인딩에 의해 모든 compute 호출은 Child.compute로 실행된다(compute(n)=compute(n-1)+compute(n-3), n<=1이면 n 반환). 직접 트레이싱하면 compute(-1)=-1, compute(0)=0, compute(1)=1, compute(2)=0, compute(3)=0, compute(4)=1, compute(5)=1, compute(6)=1, compute(7)=2가 된다. 직접 계산 검증했고, idkim97 블로그(23년 3회로 명시)와 gisafirst.com 가답안(재귀함수=2)이 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://idkim97.github.io/2024-03-28-%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20Java%20%EB%AC%B8%EC%A0%9C%20%EB%AA%A8%EC%9D%8C/"
+    },
+    {
+      "id": "past-2023-3-05",
+      "number": 5,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 Java 코드를 실행하면 컴파일 에러가 발생한다. 에러가 발생하는 줄(라인) 번호를 작성하시오.",
+      "passage": null,
+      "code": "class Person {\n    private String name;\n    public Person(String val) {\n        name = val;\n    }\n    public static String get() {\n        return name;\n    }\n    public void print() {\n        System.out.println(name);\n    }\n}\n\npublic class main {\n    public static void main(String[] args) {\n        Person obj = new Person(\"Kim\");\n        obj.print();\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "7",
+          "aliases": [
+            "7번",
+            "7번째 줄",
+            "line 7"
+          ]
+        }
+      ],
+      "explanation": "static 메서드 get()은 인스턴스(비static) 필드 name에 접근할 수 없으므로 'return name;'이 위치한 7번째 줄에서 컴파일 에러가 발생한다(코드를 라인 순서대로 세어 직접 확인). idkim97 블로그(23년 3회로 명시)와 gisafirst.com 가답안(오류 라인=7번) 두 출처가 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://idkim97.github.io/2024-03-28-%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0%20Java%20%EB%AC%B8%EC%A0%9C%20%EB%AA%A8%EC%9D%8C/"
+    },
+    {
+      "id": "past-2023-3-06",
+      "number": 6,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 리눅스 명령어(옵션 포함)를 작성하시오. 파일의 권한을 소유자는 읽기·쓰기·실행(rwx), 그룹은 읽기·실행(r-x), 기타 사용자는 실행(--x)만 가능하도록 설정하려 한다.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "chmod 751",
+          "aliases": [
+            "751",
+            "chmod 751 파일명"
+          ]
+        }
+      ],
+      "explanation": "rwx=4+2+1=7, r-x=4+0+1=5, --x=0+0+1=1이므로 권한값은 751이며 명령은 chmod 751이다(직접 계산 검증). newbt.kr 문제은행과 gisafirst.com 가답안이 '751'로 일치하며, 응시자 후기 블로그(velog @fromjjong)도 '2023년 3회에 chmod 751 문제가 나왔다'고 별도로 확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=440"
+    },
+    {
+      "id": "past-2023-3-07",
+      "number": 7,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "클라우드 컴퓨팅 서비스 제공 유형 중 다음 각 설명에 해당하는 용어를 쓰시오.\n① 서버·스토리지·네트워크 등 IT 인프라 자원을 가상화하여 제공하는 유형\n② OS·미들웨어·런타임 등 소프트웨어 개발/실행 플랫폼을 제공하는 유형\n③ 소프트웨어와 데이터까지 제공·관리하는 유형",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "IaaS",
+          "aliases": [
+            "Infrastructure as a Service"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "PaaS",
+          "aliases": [
+            "Platform as a Service"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "SaaS",
+          "aliases": [
+            "Software as a Service"
+          ]
+        }
+      ],
+      "explanation": "IaaS(인프라)·PaaS(플랫폼)·SaaS(소프트웨어)는 널리 알려진 클라우드 서비스 모델 정의로 직접 검증 가능하다. gisafirst.com 가답안(IaaS, PaaS, SaaS)과 응시자 후기 블로그(velog @jmjmjmz732002, 'chmod나 IaaS/PaaS/SaaS, OAuth 등의 이론 문제')가 2023년 3회 출제 사실을 일치되게 확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=440"
+    },
+    {
+      "id": "past-2023-3-08",
+      "number": 8,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 용어를 쓰시오. 사용자가 아이디·비밀번호 같은 자격 증명을 제3자 애플리케이션에 공유하지 않고도, 해당 애플리케이션이 사용자의 데이터나 리소스에 접근할 수 있도록 인증을 위임하는 개방형 표준 프로토콜이다.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "OAuth",
+          "aliases": []
+        }
+      ],
+      "explanation": "지문은 OAuth의 표준 정의(자격증명 비공유 위임 인증)와 일치한다. newbt.kr 문제은행의 지문·정답과 gisafirst.com 가답안(로그인 인증 API=OAuth) 두 출처가 정답에서 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=440"
+    },
+    {
+      "id": "past-2023-3-09",
+      "number": 9,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 각 설명에 해당하는 접근통제(Access Control) 모델을 쓰시오.\n① 주체와 객체의 등급(보안 레이블)을 비교하여 접근 권한을 부여하는 방식\n② 사용자의 역할(직무)에 따라 접근 권한을 부여하는 방식\n③ 접근을 요청하는 주체(소유자)의 신분에 따라 접근 권한을 부여하는 방식",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "MAC",
+          "aliases": [
+            "Mandatory Access Control",
+            "강제적 접근통제"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "RBAC",
+          "aliases": [
+            "Role-Based Access Control",
+            "역할기반 접근통제"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "DAC",
+          "aliases": [
+            "Discretionary Access Control",
+            "임의적 접근통제"
+          ]
+        }
+      ],
+      "explanation": "보안 분야의 표준 접근통제 3대 모델(MAC=등급기반, RBAC=역할기반, DAC=신분기반) 정의로 직접 검증 가능하다. newbt.kr 문제은행(①MAC ②RBAC ③DAC)과 gisafirst.com 가답안(MAC, RBAC, DAC)이 순서까지 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=440"
+    },
+    {
+      "id": "past-2023-3-10",
+      "number": 10,
+      "examRound": "2023년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 용어를 쓰시오. 고정된 길이(53바이트: 헤더 5바이트+페이로드 48바이트)의 셀 단위로 데이터를 나누어 전송하는 비동기 전송 방식으로, 셀 기반 스위칭을 통해 음성·영상·데이터를 통합 전송할 수 있는 프로토콜이다.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "ATM",
+          "aliases": [
+            "Asynchronous Transfer Mode",
+            "비동기 전송 모드"
+          ]
+        }
+      ],
+      "explanation": "ATM은 53바이트 고정 셀 기반 비동기 전송 프로토콜이라는 표준 정의로 직접 검증 가능하다. newbt.kr 문제은행(비동기 전송 모드=ATM)과 gisafirst.com 가답안(비동기 전송 프로토콜=ATM) 두 출처가 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&idx=440"
+    },
+    {
+      "id": "past-2024-1-01",
+      "number": 1,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 Java 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "class Connection {\n\tprivate static Connection _inst = null;\n\tprivate int count = 0;\n\tstatic public Connection get() {\n\t\tif(_inst == null) {\n\t\t\t_inst = new Connection();\n\t\t\treturn _inst;\n\t\t}\n\t\treturn _inst;\n\t}\n\tpublic void count() { count++; };\n\tpublic int getCount() { return count; }\n}\npublic class SingleTon {\n\tpublic static void main(String[] args) {\n\t\tConnection conn1 = Connection.get();\n\t\tconn1.count();\n\t\tConnection conn2 = Connection.get();\n\t\tconn2.count();\n\t\tConnection conn3 = Connection.get();\n\t\tconn3.count();\n\t\tconn1.count();\n\t\tSystem.out.print(conn1.getCount());\n\t}\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "4",
+          "aliases": []
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티(newbt.kr), 두목넷(dumok.net) 모범답안 3곳 모두 정답을 4로 제시했다. 싱글톤 패턴이라 conn1~conn3가 모두 동일 인스턴스를 참조하므로 count() 호출이 4회 누적된다. 코드를 직접 한 줄씩 트레이싱하여 재검증함.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-15"
+    },
+    {
+      "id": "past-2024-1-02",
+      "number": 2,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 C 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int v1 = 0 , v2 = 35, v3=29;\n    if ( v1 > v2 ? v2 : v1) {\n        v2 = v2 << 2;\n    }\n    else {\n        v3 = v3 << 2;\n    }\n    printf(\"%d\", v2+v3);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "151",
+          "aliases": []
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 151로 일치. v1>v2(0>35)가 거짓이므로 삼항연산자 결과는 v1(0)이 되어 else 실행: v3=29<<2=116, v2+v3=35+116=151. 직접 트레이싱하여 검증함.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-24"
+    },
+    {
+      "id": "past-2024-1-03",
+      "number": 3,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 응집도 유형을 강한 것부터 순서대로 나열하시오. (기능 응집도, 교환 응집도, 시간 응집도, 우연 응집도)",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "기능 응집도 > 교환 응집도 > 시간 응집도 > 우연 응집도",
+          "aliases": [
+            "ㄱ-ㄴ-ㄹ-ㄷ",
+            "기능-교환-시간-우연"
+          ]
+        }
+      ],
+      "explanation": "velog(@m_ngyeong)와 뉴비티/두목넷 모두 동일 순서(기능,교환,시간,우연)로 일치. 표준 응집도 강도 순서(기능>순차>교환>절차>시간>논리>우연)에서 주어진 4개 항목만 뽑아도 같은 순서가 되므로 교과서 지식으로도 직접 검증됨.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-24"
+    },
+    {
+      "id": "past-2024-1-04",
+      "number": 4,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 Python 코드의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "original_str = ['A','B','C','D','E','F','G','H']\noriginal_str.reverse()\nfor i in range(1, len(original_str), 2):\n     print(original_str[i], end='')",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "GECA",
+          "aliases": []
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 GECA로 일치. reverse() 후 ['H','G','F','E','D','C','B','A'], range(1,8,2)는 인덱스 1,3,5,7 → G,E,C,A. 직접 트레이싱하여 검증함.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-24"
+    },
+    {
+      "id": "past-2024-1-05",
+      "number": 7,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 라우팅 프로토콜을 쓰시오.\n- 링크 상태(Link State) 알고리즘 기반\n- 다익스트라(Dijkstra) 알고리즘으로 최단 경로 계산\n- 대규모 네트워크에서 사용되는 내부 라우팅 프로토콜(IGP)",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "OSPF",
+          "aliases": [
+            "Open Shortest Path First"
+          ]
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 OSPF로 일치. 링크 상태·다익스트라 알고리즘 특징은 OSPF의 표준 정의와도 부합.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-6"
+    },
+    {
+      "id": "past-2024-1-06",
+      "number": 8,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 조인(JOIN)의 종류를 각각 쓰시오.",
+      "passage": "| 구분 | 설명 |\n|---|---|\n| ① | 두 릴레이션의 속성 값을 비교연산자(<, >, <=, >=, <>, = 등)로 비교하여 조건을 만족하는 튜플을 반환하는 조인 |\n| ② | ①에서 비교연산자를 등호(=)로 한정한 조인 |\n| ③ | ②의 결과에서 중복되는 속성을 제거한 조인 |",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "세타 조인(Theta Join)",
+          "aliases": [
+            "세타조인"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "동등 조인(Equi Join)",
+          "aliases": [
+            "등가조인",
+            "동등조인"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "자연 조인(Natural Join)",
+          "aliases": [
+            "자연조인"
+          ]
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 세타조인·동등조인·자연조인 순서로 일치. 각 조인의 정의(비교연산자 사용/등호 한정/중복속성 제거)도 표준 DB 교과서 정의와 부합함을 직접 확인.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-6"
+    },
+    {
+      "id": "past-2024-1-07",
+      "number": 9,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "페이지 참조열이 1, 2, 3, 1, 2, 4, 1, 2, 5, 7 이고 페이지 프레임이 4개(초기 상태는 비어있음)일 때, (1) LRU 알고리즘과 (2) LFU 알고리즘을 각각 적용했을 때의 페이지 부재(Page Fault) 횟수를 구하시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "LRU",
+          "answer": "6",
+          "aliases": [
+            "6회"
+          ]
+        },
+        {
+          "label": "LFU",
+          "answer": "6",
+          "aliases": [
+            "6회"
+          ]
+        }
+      ],
+      "explanation": "LRU 스택 시뮬레이션과 LFU 빈도 카운트 시뮬레이션을 직접 한 단계씩 재현하여 계산한 결과 모두 6회로 나왔다(LRU: 1,2,3,4가 순차 적재 후 5,7 적재 시 각 1회씩 추가 부재; LFU도 동일하게 마지막 두 참조에서만 교체 발생). velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 6,6으로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-6"
+    },
+    {
+      "id": "past-2024-1-08",
+      "number": 10,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 Java 코드에서 ①~⑦로 표시된 부분이 실행되는 순서와 최종 출력 결과를 구하시오.",
+      "passage": null,
+      "code": "class Parent {\n\tint x, y;\n\tParent(int x, int y) { //①\n\t\tthis.x = x;\n\t\tthis.y = y;\n\t}\n\tint getArea() { //②\n\t\treturn x * y;\n\t}\n}\nclass Child extends Parent {\n\tint x;\n\tChild(int x) { //③\n\t\tsuper(x+1, x);\n\t}\n\tint getArea(int x) { //④\n\t\treturn x;\n\t}\n}\npublic class ProcessFlow {\n\tpublic static void main(String[] args) { //⑤\n\t\tParent parent = new Child(10); //⑥\n\t\tSystem.out.println(parent.getArea());//⑦\n\t}\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": "실행순서",
+          "answer": "⑤ → ⑥ → ③ → ① → ⑦ → ②",
+          "aliases": [
+            "5-6-3-1-7-2"
+          ]
+        },
+        {
+          "label": "출력값",
+          "answer": "110",
+          "aliases": []
+        }
+      ],
+      "explanation": "코드를 직접 트레이싱함: main(⑤)→new Child(10)(⑥)→Child생성자(③)→super(11,10) 호출로 Parent생성자(①)→parent.getArea() 호출(⑦, getArea(int)는 오버로딩이라 무시되고 인자 없는 Parent의 getArea가 호출됨)→Parent.getArea()(②) 실행되어 x*y=11*10=110 반환. velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 실행순서 5-6-3-1-7-2로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-6"
+    },
+    {
+      "id": "past-2024-1-09",
+      "number": 11,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 C 프로그램의 실행 결과를 구하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n\ntypedef struct{\n    int accNum;\n    double bal;\n}BankAcc;\n\ndouble sim_pow(double base, int year){\n    int i;\n    double r = 1.0;\n    for (i=0; i< year; i++){\n        r = r*base;\n    }\n    return r;\n}\n\nvoid initAcc(BankAcc* acc, int x, double y){\n    acc -> accNum = x;\n    acc -> bal = y;\n}\n\nvoid xxx(BankAcc* acc, double *en){\n    if (*en > 0 && *en < acc -> bal) {\n        acc -> bal = acc -> bal - *en;\n    }\n    else {\n        acc -> bal = acc -> bal + *en;\n    }\n}\n\nvoid yyy(BankAcc* acc){\n    acc -> bal = acc -> bal * sim_pow((1+0.1),3);\n}\n\nint main(){\n    double amount = 100.0;\n\n    BankAcc myAcc;\n    initAcc(&myAcc, 9981, 2200.0);\n    xxx(&myAcc, &amount);\n    yyy(&myAcc);\n    printf(\"%d and %.2f\", myAcc.accNum, myAcc.bal);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "9981 and 2795.10",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: initAcc로 accNum=9981, bal=2200.0. xxx에서 amount=100이 0보다 크고 bal(2200)보다 작으므로 차감: bal=2100.0. yyy에서 sim_pow(1.1,3)=1.331을 곱해 bal=2100*1.331=2795.1 → %.2f로 2795.10 출력. velog(@m_ngyeong)의 원문 코드와 뉴비티 요약 정답이 모두 '9981 and 2795.10'으로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1215"
+    },
+    {
+      "id": "past-2024-1-10",
+      "number": 12,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 Python 코드의 실행 결과를 구하시오.",
+      "passage": null,
+      "code": "a = [\"Seoul\", \"Kyeonggi\", \"Incheon\", \"Daejun\", \"Daegu\", \"Pusan\"]\nstr01 = \"S\"\nfor i in a:\n  str01 = str01 + i[1]\nprint(str01)",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Seynaau",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: 각 문자열의 인덱스 1(두 번째 글자)을 순서대로 더함 → Seoul[1]='e', Kyeonggi[1]='y', Incheon[1]='n', Daejun[1]='a', Daegu[1]='a', Pusan[1]='u' → \"S\"+\"e\"+\"y\"+\"n\"+\"a\"+\"a\"+\"u\"=\"Seynaau\". velog(@m_ngyeong) 원문 코드와 뉴비티/두목넷 정답 모두 Seynaau로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1215"
+    },
+    {
+      "id": "past-2024-1-11",
+      "number": 14,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 테스트 커버리지 기법을 쓰시오.\n- 각 개별 조건식이 다른 조건의 값과 관계없이 독립적으로 전체 조건식(결정)의 결과에 영향을 미치는지를 확인하는 화이트박스 테스트 기법",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "변경 조건/결정 커버리지(MC/DC, Modified Condition/Decision Coverage)",
+          "aliases": [
+            "MC/DC",
+            "변경조건결정커버리지"
+          ]
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 MC/DC(변경 조건/결정 커버리지)로 일치하며, 이는 소프트웨어 테스트 표준 교과서 정의와도 부합함.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1215"
+    },
+    {
+      "id": "past-2024-1-12",
+      "number": 15,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 C 프로그램의 실행 결과를 구하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n#include <string.h>\n\nvoid isUpper(char *str);\nvoid isLower(char *str);\nvoid isNum(char *str);\nchar str[] = \"It is 8\";\n\nint main() {\n    int i = 0;\n    while(i<strlen(str)){\n        char ch = str[i];\n        if(ch >= 'A' && ch <= 'Z'){\n            isUpper(&str[i]);\n        }\n        else if(ch >= 'a' && ch <= 'z'){\n            isLower(&str[i]);\n        }\n        else if(ch >= '0' && ch <= '9'){\n            isNum(&str[i]);\n        }\n        i++;\n    }\n    printf(\"%s\", str);\n    return 0;\n}\n\nvoid isUpper(char *str){\n    *str = (*str - 'A' + 5) % 26 + 'A';\n}\nvoid isLower(char *str){\n    *str = (*str - 'a' + 10) % 26 + 'a';\n}\nvoid isNum(char *str){\n    *str = (*str - '0' + 3) % 10 + '0';\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Nd sc 1",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 한 글자씩 트레이싱: 'I'→isUpper((8+5)%26+'A')='N', 't'→isLower((19+10)%26+'a')='d', ' '는 변경없음, 'i'→isLower((8+10)%26+'a')='s', 's'→isLower((18+10)%26+'a')='c', ' '는 변경없음, '8'→isNum((8+3)%10+'0')='1' → 최종 \"Nd sc 1\". velog(@m_ngyeong) 원문 코드와 뉴비티/두목넷 정답 모두 'Nd sc 1'로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1215"
+    },
+    {
+      "id": "past-2024-1-13",
+      "number": 16,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 Java 코드의 실행 결과를 구하시오.",
+      "passage": null,
+      "code": "class Parent {\n\tint a, b;\n\tParent(int a, int b) {\n\t\tthis.a = a;\n\t\tthis.b = b;\n\t}\n\tpublic void print() {\n\t\tSystem.out.println(a+b);\n\t}\n}\nclass Child extends Parent {\n\tint po = 3;\n\tChild(int i) {\n\t\tsuper(i+1, i);\n\t}\n\tpublic void print() {\n\t\tSystem.out.println(po * po);\n\t}\n}\npublic class ProcessFlow {\n\tpublic static void main(String[] args) {\n\t\tParent parent = new Child(10);\n\t\tparent.print();\n\t}\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "9",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: Child(10)→super(11,10)으로 Parent 필드 설정 후 Child 필드 po=3 초기화. print()는 오버라이딩되어 있어 동적바인딩으로 Child의 print()가 호출되어 po*po=3*3=9 출력. velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 9로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1720"
+    },
+    {
+      "id": "past-2024-1-14",
+      "number": 17,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 용어를 쓰시오.\n- 시스템에 침입한 후 침입 사실을 숨기고, 지속적으로 관리자 권한 등의 접근 권한을 유지하기 위해 백도어·트로이목마 등을 설치하고 사용 흔적을 삭제하는 악성 프로그램들의 모음",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Rootkit(루트킷)",
+          "aliases": [
+            "루트킷",
+            "Rootkit"
+          ]
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 Rootkit으로 일치. 뉴비티는 '펌웨어·시스템콜 해킹·안티바이러스 우회'라는 다른 표현을 썼지만 같은 Rootkit 개념을 가리켜 답이 일치함.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1720"
+    },
+    {
+      "id": "past-2024-1-15",
+      "number": 18,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 <TABLE1>을 대상으로 SQL문을 실행한 결과(COUNT 값)를 구하시오.",
+      "passage": "| EMPNO | SAL |\n|---|---|\n| 100 | 1000 |\n| 200 | 3000 |\n| 300 | 1500 |",
+      "code": "SELECT COUNT(*) \nFROM TABLE1 \nWHERE EMPNO > 100 AND SAL >= 3000 OR EMPNO = 200;",
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "1",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 계산: AND가 OR보다 우선순위가 높으므로 (EMPNO>100 AND SAL>=3000) OR (EMPNO=200)으로 해석됨. EMPNO=100행: 둘 다 거짓→제외. EMPNO=200행: EMPNO>100 참, SAL>=3000 참→포함. EMPNO=300행: SAL>=3000 거짓, EMPNO=200 거짓→제외. 결과적으로 1건만 만족하므로 COUNT(*)=1. velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 1로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1720"
+    },
+    {
+      "id": "past-2024-1-16",
+      "number": 19,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 공격 유형을 쓰시오.\n- 공격자가 특정 대상을 목표로 정하여 다양한 첨단 보안 위협 기법을 활용해 지속적이고 지능적으로 가하는 장기적이고 정교한 공격",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "APT(Advanced Persistent Threat)",
+          "aliases": [
+            "APT",
+            "지능형 지속 위협"
+          ]
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 APT로 일치하며 설명 내용도 APT의 표준 정의(지능적·지속적·특정 표적 공격)와 부합함.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1720"
+    },
+    {
+      "id": "past-2024-1-17",
+      "number": 20,
+      "examRound": "2024년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 디자인 패턴을 쓰시오.\n- 구체적인 클래스를 지정하지 않고, 서로 관련성 있는 객체들의 집합(군)을 일관되게 생성하기 위한 인터페이스를 제공하는 생성 패턴",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Abstract Factory(추상 팩토리 패턴)",
+          "aliases": [
+            "추상 팩토리",
+            "Abstract Factory Pattern"
+          ]
+        }
+      ],
+      "explanation": "velog(@m_ngyeong), 뉴비티, 두목넷 3곳 모두 Abstract Factory로 일치. 관련 객체 군을 생성하는 인터페이스라는 설명은 GoF 디자인 패턴 교과서의 Abstract Factory 정의와도 부합.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-1회차-기출-1720"
+    },
+    {
+      "id": "past-2024-2-01",
+      "number": 1,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "다음 Java 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "public class Main {\n    public static void check(int[] x, int[] y) {\n        if(x==y) System.out.print(\"O\");\n        else System.out.print(\"N\");\n    }\n    public static void main(String[] args) {\n        int a[] = new int[] {1, 2, 3, 4};\n        int b[] = new int[] {1, 2, 3, 4};\n        int c[] = new int[] {1, 2, 3};\n        check(a, b);\n        check(b, c);\n        check(a, c);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "NNN",
+          "aliases": []
+        }
+      ],
+      "explanation": "check()가 배열 내용이 아닌 참조(주소)를 '=='로 비교하므로 a, b, c는 서로 다른 객체라 항상 거짓이 되어 세 번의 호출 모두 'N'이 출력된다(NNN). 두목넷·뉴비티·velog(kk21) 세 출처가 모두 정답 NNN으로 일치했고, 코드를 직접 한 줄씩 트레이싱하여 실행결과를 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2024%EB%85%84%202%ED%9A%8C/%EB%91%A5%EB%91%A5"
+    },
+    {
+      "id": "past-2024-2-02",
+      "number": 2,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "데이터베이스 성능 향상을 위해 데이터 중복을 허용하고 조인(JOIN) 연산을 줄여 조회 속도를 향상시키지만, 그 대신 데이터 무결성이 저하될 수 있는 기법은 무엇인지 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "반정규화",
+          "aliases": [
+            "비정규화",
+            "역정규화",
+            "Denormalization"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티·velog(kk21) 세 출처 모두 반정규화(비정규화/역정규화)로 정답이 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-03",
+      "number": 3,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "IP 패킷에 암호화와 인증 기능을 추가하여 네트워크 계층(Network layer)에서 안전한 통신을 지원하는 보안 프로토콜은 무엇인지 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "IPSec",
+          "aliases": [
+            "IPsec",
+            "IP Security"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티·velog(kk21) 세 출처 모두 IPSec으로 정답이 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-04",
+      "number": 4,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "컬렉션 객체의 내부 구조(구현 방식)를 외부에 노출하지 않고, 그 요소들을 순차적으로 접근할 수 있게 해주는 디자인 패턴(개념)은 무엇인지 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Iterator",
+          "aliases": [
+            "이터레이터",
+            "반복자",
+            "Iterator 패턴"
+          ]
+        }
+      ],
+      "explanation": "두목넷(iterator)·뉴비티(Iterator)·velog·dcinside(kk21, 이터레이터 패턴) 모두 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-05",
+      "number": 5,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "패킷 교환 방식을 연결 설정 여부에 따라 두 가지로 분류하여 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "가상회선 방식, 데이터그램 방식",
+          "aliases": [
+            "가상회선/데이터그램",
+            "Virtual Circuit, Datagram"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티·velog(kk21) 세 출처 모두 가상회선 방식과 데이터그램 방식으로 정답이 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-06",
+      "number": 6,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "한 모듈이 실행되어 나온 결과(출력)를 다른 모듈이 순서대로 이어받아 입력으로 사용하는 형태의 응집도는 무엇인지 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "순차적 응집도",
+          "aliases": [
+            "Sequential Cohesion",
+            "순차 응집도"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티 두 출처가 순차적 응집도로 일치했고, velog(kk21) 후기에서도 본인이 '절차적'이라고 답했다가 오답 처리됐다고 밝혀 정답이 순차적임을 간접적으로 뒷받침한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-07",
+      "number": 7,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "기존 DES(Data Encryption Standard)의 한계로 인해 미국 NIST에서 새로 발표한 대칭키 블록 암호화 알고리즘은 무엇인지 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "AES",
+          "aliases": [
+            "Advanced Encryption Standard"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티·velog(kk21) 세 출처 모두 AES로 정답이 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-08",
+      "number": 8,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "한 모듈이 다른 모듈에게 제어 요소(플래그, 신호 등)를 전달하여 그 모듈의 내부 실행 흐름을 제어하도록 만드는 형태의 결합도는 무엇인지 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "제어 결합도",
+          "aliases": [
+            "Control Coupling"
+          ]
+        }
+      ],
+      "explanation": "뉴비티(제어 결합도)와 velog/dcinside(kk21 후기, '결합도: 제어') 두 출처가 일치했다. 두목넷 목록에는 이 문항이 잡히지 않았는데, 실기 CBT는 응시자별로 문제 배치·구성이 다소 다를 수 있어 나타난 차이로 보인다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://newbt.kr/%EC%8B%9C%ED%97%98/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC%20%EC%8B%A4%EA%B8%B0/2024%EB%85%84%202%ED%9A%8C/%EB%91%A5%EB%91%A5"
+    },
+    {
+      "id": "past-2024-2-09",
+      "number": 9,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "RIP 라우팅 프로토콜을 사용하는 네트워크에서 출발지부터 목적지까지의 최단(최소 비용) 경로를 구하시오. (원본 네트워크 토폴로지 다이어그램은 세 출처 모두 복원하지 못함)",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "A - D - C - F",
+          "aliases": [
+            "ADCF",
+            "A→D→C→F"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티·velog(kk21) 세 출처 모두 A→D→C→F 경로로 정답이 일치했다. 다만 원본 라우터 간 링크 비용 다이어그램은 세 출처 모두 복원하지 못해 계산 과정을 직접 트레이싱해 재검증하지는 못했다(교차 출처 일치로만 검증).",
+      "figure": true,
+      "figureDesc": "라우터(노드) 간 링크 비용이 표시된 RIP 네트워크 토폴로지 다이어그램 (원문 미복원)",
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-10",
+      "number": 10,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "SRT(Shortest Remaining Time) 스케줄링 알고리즘을 적용했을 때 프로세스들의 평균 대기시간을 계산하시오. (원본 프로세스 도착시간/실행시간 표는 세 출처 모두 복원하지 못함)",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "6.5",
+          "aliases": [
+            "6.5ms",
+            "6.5초"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티·velog(kk21) 세 출처 모두 평균 대기시간 6.5로 정답이 일치했다. 원본 프로세스 표는 복원되지 않아 직접 계산 재검증은 하지 못했다(교차 출처 일치로만 검증).",
+      "figure": true,
+      "figureDesc": "프로세스별 도착시간·실행시간(버스트타임)이 표시된 표 (원문 미복원)",
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-11",
+      "number": 11,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "주어진 릴레이션(테이블)의 디그리(Degree)와 카디널리티(Cardinality)를 구하시오. (원본 테이블 데이터는 세 출처 모두 복원하지 못함)",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "카디널리티: 5, 디그리: 4",
+          "aliases": [
+            "카디널리티 5, 차수(디그리) 4"
+          ]
+        }
+      ],
+      "explanation": "두목넷·뉴비티 두 출처에서 카디널리티 5, 디그리 4로 정답이 일치했다. 원본 테이블은 복원되지 않아 직접 검증은 불가했다(교차 출처 일치로만 검증).",
+      "figure": true,
+      "figureDesc": "행(카디널리티)·열(디그리) 개수를 세어야 하는 릴레이션 테이블 (원문 미복원)",
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-12",
+      "number": 12,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "다음은 SQL DML문(INSERT/SELECT/UPDATE 계열)의 빈칸을 채우는 문제로, ①~④에 들어갈 표준 SQL 키워드를 순서대로 쓰시오. (원본 SQL 지문의 테이블·컬럼명 등 세부 내용은 완전히 복원되지 않았으며, VALUES/SELECT/FROM/SET 키워드를 채우는 유형이라는 점만 확인됨)",
+      "passage": null,
+      "code": null,
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "VALUES",
+          "aliases": [
+            "values"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "SELECT",
+          "aliases": [
+            "select"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "FROM",
+          "aliases": [
+            "from"
+          ]
+        },
+        {
+          "label": "④",
+          "answer": "SET",
+          "aliases": [
+            "set"
+          ]
+        }
+      ],
+      "explanation": "두목넷과 뉴비티 두 출처 모두 ①values ②select ③from ④set 순서로 정답이 일치했다. 다만 원문 SQL 지문(구체적 테이블/컬럼명)은 두 출처 모두 완전한 형태로 복원하지 못해, 문항 지문 자체는 불완전한 상태로 정답 키워드만 신뢰도 있게 수록한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-2-13",
+      "number": 13,
+      "examRound": "2024년 2회",
+      "type": "short",
+      "question": "다음 C 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int arr[3][3] = {1, 2, 3, 4, 5, 6, 7, 8, 9};\n    int* parr[2] = {arr[1], arr[2]};\n    printf(\"%d\", parr[1][1] + *(parr[1]+2) + **parr);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "21",
+          "aliases": []
+        }
+      ],
+      "explanation": "두목넷·뉴비티 두 출처가 정답 21로 일치했다. 코드를 직접 트레이싱하여 검증: arr[1]={4,5,6}, arr[2]={7,8,9}이므로 parr[0]=arr[1], parr[1]=arr[2]. parr[1][1]=arr[2][1]=8, *(parr[1]+2)=arr[2][2]=9, **parr=*(parr[0])=arr[1][0]=4. 합계 8+9+4=21로 두 출처의 답과 정확히 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://dumok.net/center_notice/9291"
+    },
+    {
+      "id": "past-2024-3-01",
+      "number": 1,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 Java 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "public class Main {\n    static void func(String[] m, int n) {\n        for (int i = 1; i < n; i++) {\n            if (m[i-1].equals(m[i])) {\n                System.out.print(\"O\");\n            } else {\n                System.out.print(\"N\");\n            }\n        }\n        for (String mo : m) {\n            System.out.print(mo);\n        }\n    }\n    public static void main(String[] args) {\n        String[] m = new String[3];\n        m[0] = \"A\";\n        m[1] = \"A\";\n        m[2] = new String(\"A\");\n        func(m, 3);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "OOAAA",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: equals()는 내용 비교이므로 new String(\"A\")도 \"A\"와 같다고 판정된다. i=1: m[0].equals(m[1])=true→O, i=2: m[1].equals(m[2])=true→O → \"OO\", 이어서 m 배열 전체 출력 \"AAA\" → 최종 \"OOAAA\". dumok.net/newbt.kr/velog(@m_ngyeong)/chobopark.tistory.com 4개 출처 모두 답 일치(단, 변수명은 소스마다 m/s 등으로 다르게 기억됨 - 로직은 동일).",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-1"
+    },
+    {
+      "id": "past-2024-3-02",
+      "number": 2,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 Python 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "def func(lst):\n    for i in range(len(lst) // 2):\n        lst[i], lst[-i-1] = lst[-i-1], lst[i]\n\nlst = [1, 2, 3, 4, 5, 6]\nfunc(lst)\nprint(sum(lst[::2]) - sum(lst[1::2]))",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "3",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: len(lst)//2=3번 반복하며 양 끝을 맞바꿔 리스트를 뒤집는다. 결과 lst=[6,5,4,3,2,1]. lst[::2]=[6,4,2](합12), lst[1::2]=[5,3,1](합9) → 12-9=3. dumok.net/newbt.kr/velog/chobopark 4개 출처 모두 코드 로직과 답(3) 일치(변수명만 lst/ls 등으로 다름).",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-1"
+    },
+    {
+      "id": "past-2024-3-03",
+      "number": 3,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 employee 테이블과 project 테이블을 참고하여 SQL 명령어의 실행 결과(출력값)를 작성하시오.",
+      "passage": "**employee**\n\n| no | first_name | last_name | project_id |\n|---|---|---|---|\n| 1 | John | Doe | 10 |\n| 2 | Jim | Carray | 20 |\n| 3 | Rachel | Redmond | 10 |\n\n**project**\n\n| project_id | name |\n|---|---|\n| 10 | Alpha |\n| 20 | Beta |\n| 10 | Gamma |",
+      "code": "SELECT count(*)\nFROM employee e JOIN project p ON e.project_id = p.project_id\nWHERE p.name IN (\n    SELECT name FROM project p WHERE p.project_id IN (\n        SELECT project_id FROM employee GROUP BY project_id HAVING count(*) < 2\n    )\n);",
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "1",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: 최내부 서브쿼리는 employee를 project_id로 그룹핑해 count<2인 project_id=20만 반환. 다음 단계는 project_id=20인 project.name='Beta'만 반환. 외부 쿼리는 employee-project를 project_id로 JOIN한 뒤 name='Beta'인 행만 필터링하면 (employee no=2, project_id=20, Beta) 1건 → count(*)=1. 질의문은 velog(@m_ngyeong)와 chobopark.tistory.com 두 출처가 표현만 다르고(JOIN 별칭 차이) 동일하며, dumok.net/newbt.kr도 답 1로 일치. 테이블 데이터는 velog 재구성본을 사용했으며 이미지 원본과 완전히 동일한지는 불확실하나 질의 로직과 답은 교차검증됨.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-1"
+    },
+    {
+      "id": "past-2024-3-04",
+      "number": 4,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음은 운영체제 페이지 교체 기법에 대한 문제이다. 할당된 프레임의 수가 3개일 때, 아래 페이지 참조열에 대해 LRU(Least Recently Used) 알고리즘을 적용한 경우의 페이지 부재(page fault) 횟수를 작성하시오.",
+      "passage": "페이지 참조 순서: 7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1 7 0 1",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "12",
+          "aliases": [
+            "12회"
+          ]
+        }
+      ],
+      "explanation": "직접 트레이싱: 프레임 3개로 LRU 시뮬레이션(최근 사용 순서 유지, 없는 페이지 참조시 가장 오래 안 쓴 페이지 교체)을 순서대로 수행하면 부재가 7,0,1,2,3,4,2,3,0,1,0,7 총 12회 발생. dumok.net/newbt.kr/velog(@m_ngyeong)/chobopark.tistory.com 4개 출처 모두 참조열과 답(12) 완전히 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-05",
+      "number": 5,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 공격 기법을 작성하시오.",
+      "passage": "- IP나 ICMP의 특성을 악용하여 엄청난 양의 데이터를 한 사이트에 집중적으로 보냄으로써 네트워크의 일부를 불능 상태로 만드는 공격이다.\n- 여러 호스트가 특정 대상에게 다량의 ICMP Echo Reply를 보내게 하여 서비스거부(DoS)를 유발시키는 보안공격이다.\n- 공격 대상 호스트는 다량으로 유입되는 패킷으로 인해 서비스 불능 상태에 빠진다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "스머핑(Smurfing)",
+          "aliases": [
+            "스머프",
+            "Smurf",
+            "Smurf Attack",
+            "스머핑"
+          ]
+        }
+      ],
+      "explanation": "dumok.net(\"ICMP (Smurf attack)\"), newbt.kr(\"ICMP 관련 보안 공격 기법 - 스머핑\"), velog(@m_ngyeong), chobopark.tistory.com(\"스머프 또는 스머핑\") 4개 출처 모두 동일 답으로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-06",
+      "number": 6,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 C 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n\nint func() {\n    static int x = 0;\n    x += 2;\n    return x;\n}\n\nint main() {\n    int x = 1;\n    int sum = 0;\n    for (int i = 0; i < 4; i++) {\n        x++;\n        sum += func();\n    }\n    printf(\"%d\", sum);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "20",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: static int x는 함수 호출 간 값이 유지된다. func() 호출마다 x는 2,4,6,8로 증가해 반환되고 sum에 누적되어 2+4+6+8=20. main의 지역변수 x는 static x와 별개라 결과에 영향 없음. dumok.net/newbt.kr/velog(@m_ngyeong)/chobopark.tistory.com 4개 출처 모두 코드·답(20) 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-1"
+    },
+    {
+      "id": "past-2024-3-07",
+      "number": 7,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 용어를 작성하시오. (3글자로 작성)",
+      "passage": "- 공용 네트워크를 통해 사설 네트워크를 확장하는 기술이다.\n- 사용자의 IP 주소를 숨기고, 사용자가 어디에서 접속하는지를 추적하기 어렵게 만든다.\n- 종류로는 IPsec 또는 SSL, L2TP 등이 있다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "VPN",
+          "aliases": [
+            "Virtual Private Network",
+            "가상 사설망"
+          ]
+        }
+      ],
+      "explanation": "dumok.net, newbt.kr, velog(@m_ngyeong), chobopark.tistory.com 4개 출처 모두 답 VPN으로 일치. chobopark 쪽 지문이 더 구체적(3글자 조건 명시)이라 이를 채택.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-08",
+      "number": 8,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 설명에서 괄호 안에 공통으로 들어갈 GoF 디자인 패턴의 분류를 작성하시오.",
+      "passage": "( ) 패턴은 클래스나 객체들이 서로 상호작용하는 방법이나 책임 분배 방법을 정의하는 패턴이다.\n( ) 패턴은 객체들 간의 통신 방법을 정의하고 알고리즘을 캡슐화하여 객체 간의 결합도를 낮춘다.\n( ) 패턴은 Chain of Responsibility나 Command 또는 Observer 패턴이 있다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "행위",
+          "aliases": [
+            "행위 패턴",
+            "Behavioral Pattern",
+            "행동 패턴"
+          ]
+        }
+      ],
+      "explanation": "dumok.net, newbt.kr, velog(@m_ngyeong), chobopark.tistory.com 4개 출처 모두 답 '행위'로 일치. Command/Observer 등은 GoF 행위(Behavioral) 패턴의 대표 예시.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-09",
+      "number": 9,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 테스트 커버리지 종류를 보기에서 골라 작성하시오.",
+      "passage": "① 테스트를 통해 프로그램의 모든 문장을 최소한 한 번씩 실행했는지를 측정\n② 프로그램 내의 모든 분기(조건문)의 각 분기를 최소한 한 번씩 실행했는지를 측정\n③ 복합 조건 내의 각 개별 조건이 참과 거짓으로 평가되는 경우를 모두 테스트했는지를 측정\n\n보기: ㄱ.조건  ㄴ.경로  ㄷ.결정  ㄹ.분기  ㅁ.함수  ㅂ.문장  ㅅ.루프",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "문장 커버리지",
+          "aliases": [
+            "문장",
+            "Statement Coverage"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "분기 커버리지",
+          "aliases": [
+            "분기",
+            "Branch Coverage"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "조건 커버리지",
+          "aliases": [
+            "조건",
+            "Condition Coverage"
+          ]
+        }
+      ],
+      "explanation": "dumok.net(\"㉥문장/㉣분기/㉢조건\"), newbt.kr(동일), velog(@m_ngyeong, 동일 순서), chobopark.tistory.com(\"1.문장 2.분기 3.조건\") 4개 출처 모두 매칭 순서(문장→분기→조건)가 완전히 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-10",
+      "number": 10,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 데이터베이스 무결성 제약조건을 작성하시오.",
+      "passage": "데이터베이스의 테이블에서 기본 키(Primary Key)를 구성하는 모든 속성은 널(NULL) 값을 가지면 안 된다는 무결성 제약조건이다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "개체 무결성",
+          "aliases": [
+            "개체",
+            "Entity Integrity"
+          ]
+        }
+      ],
+      "explanation": "dumok.net, velog(@m_ngyeong), chobopark.tistory.com 3개 출처 모두 답 '개체(무결성)'로 일치. 다만 chobopark은 표(이미지) 기반 위반 사례 문제, velog는 정의 서술형 문제로 지문 형태가 다르게 기억되어 있어 이 항목은 velog의 서술형 지문을 사용.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-2"
+    },
+    {
+      "id": "past-2024-3-11",
+      "number": 11,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음은 URL 구조에 관한 문제이다. 각 설명에 해당하는 URL 구성요소를 보기에서 골라 작성하시오.",
+      "passage": "① 추가적인 질의를 제공하는 부분으로, 웹 서버에 전달할 추가 데이터를 나타낸다.\n② 자원 경로를 나타내며, 서버 상에서 해당 리소스의 위치를 지정한다.\n③ 웹 프로토콜을 정의하는 부분으로, 예를 들어 HTTP, FTP 등의 방식을 나타낸다.\n④ 호스트와 포트 번호를 나타내는 부분으로, 서버 주소와 함께 포트번호를 나타낸다.\n⑤ 특정 페이지 내의 위치를 가리키며, 문서 내 특정 섹션으로 이동하는 데 사용된다.\n\n보기: scheme(통신 방식), authority(사용자 정보·호스트·포트), path(리소스 경로), query(파라미터), fragment(문서 내부 위치)",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "query",
+          "aliases": [
+            "Query String",
+            "질의"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "path",
+          "aliases": [
+            "경로"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "scheme",
+          "aliases": [
+            "스킴"
+          ]
+        },
+        {
+          "label": "④",
+          "answer": "authority",
+          "aliases": [
+            "어소리티"
+          ]
+        },
+        {
+          "label": "⑤",
+          "answer": "fragment",
+          "aliases": [
+            "프래그먼트"
+          ]
+        }
+      ],
+      "explanation": "dumok.net(답 \"43125\"), velog(@m_ngyeong, 답 \"④③①②⑤\"), chobopark.tistory.com(답 \"43125\")가 표기 방식만 다를 뿐 실질적으로 동일한 매칭 순서(①→query, ②→path, ③→scheme, ④→authority, ⑤→fragment)로 완전히 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-2"
+    },
+    {
+      "id": "past-2024-3-12",
+      "number": 12,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 데이터베이스 키(Key)의 종류를 보기에서 골라 작성하시오.",
+      "passage": "(1) 다른 테이블(릴레이션)의 기본 키를 참조하는 속성 또는 속성들의 집합\n(2) 테이블에서 각 행을 유일하게 식별할 수 있는 최소한의 속성들의 집합\n(3) 후보 키 중에서 선정된 기본 키를 제외한 나머지 후보 키\n(4) 테이블에서 각 행을 유일하게 식별할 수 있는 속성들의 집합(최소성은 만족하지 않아도 됨)\n\n보기: ㄱ.슈퍼키  ㄴ.외래키  ㄷ.대체키  ㄹ.후보키",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "(1)",
+          "answer": "외래키",
+          "aliases": [
+            "Foreign Key",
+            "FK"
+          ]
+        },
+        {
+          "label": "(2)",
+          "answer": "후보키",
+          "aliases": [
+            "Candidate Key"
+          ]
+        },
+        {
+          "label": "(3)",
+          "answer": "대체키",
+          "aliases": [
+            "Alternate Key"
+          ]
+        },
+        {
+          "label": "(4)",
+          "answer": "슈퍼키",
+          "aliases": [
+            "Super Key"
+          ]
+        }
+      ],
+      "explanation": "dumok.net/newbt.kr(\"외래키/후보키/대체키/슈퍼키\"), velog(@m_ngyeong)와 chobopark.tistory.com이 각 항목의 서술 문장까지 거의 동일하게 기억하고 있으며 4개 항목의 매칭 순서가 4개 출처 모두 완전히 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-13",
+      "number": 13,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 C 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n\nstruct Node {\n    int value;\n    struct Node* next;\n};\n\nvoid func(struct Node* node) {\n    while (node != NULL && node->next != NULL) {\n        int t = node->value;\n        node->value = node->next->value;\n        node->next->value = t;\n        node = node->next->next;\n    }\n}\n\nint main() {\n    struct Node n1 = {1, NULL};\n    struct Node n2 = {2, NULL};\n    struct Node n3 = {3, NULL};\n    n1.next = &n3;\n    n3.next = &n2;\n    func(&n1);\n    struct Node* current = &n1;\n    while (current != NULL) {\n        printf(\"%d\", current->value);\n        current = current->next;\n    }\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "312",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: 연결 순서는 n1(1)→n3(3)→n2(2). func는 node와 node->next의 value를 맞바꾸므로 n1.value↔n3.value 교환(n1=3, n3=1), 이후 node=n3->next=n2인데 n2->next가 NULL이라 반복 종료. 최종 값 순서대로 출력하면 n1(3),n3(1),n2(2) → \"312\". velog(@m_ngyeong)와 chobopark.tistory.com이 코드까지 한 글자도 다르지 않게 완전히 동일하며, dumok.net/newbt.kr도 답 312로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-14",
+      "number": 14,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 Python 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "def test(v):\n    if type(v) == type(\"\"):\n        return len(v)\n    elif type(v) == type(100):\n        return 101\n    else:\n        return 20\n\na = \"100.0\"\nb = 100.0\nc = (100.0, 200.0)\nprint(test(a) + test(b) + test(c))",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "45",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: test(a)는 a가 문자열이므로 len(\"100.0\")=5. test(b)는 b가 float이라 str도 int도 아니므로 else→20. test(c)는 tuple이라 else→20. 합계 5+20+20=45. velog(@m_ngyeong)와 chobopark.tistory.com은 값/조건 순서 등 코드 세부는 다르게 기억하고 있으나(예: c 값이 (100.0,200.0) vs (100,200), if/elif 순서 등) 두 버전 모두 최종 답이 45로 일치, dumok.net/newbt.kr도 45로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-1"
+    },
+    {
+      "id": "past-2024-3-15",
+      "number": 15,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 Java 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "public class Main {\n    public static void main(String[] args) {\n        int sum = 0;\n        try {\n            func();\n        } catch (NullPointerException e) {\n            sum = sum + 1;\n        } catch (Exception e) {\n            sum = sum + 10;\n        } finally {\n            sum = sum + 100;\n        }\n        System.out.print(sum);\n    }\n    static void func() throws Exception {\n        throw new NullPointerException();\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "101",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: func()가 NullPointerException을 던지므로 첫 catch(NullPointerException)가 실행되어 sum=1, 이어서 finally가 무조건 실행되어 sum=1+100=101. velog(@m_ngyeong)와 chobopark.tistory.com이 클래스명만 다를 뿐(Main vs ExceptionHandling) 코드가 완전히 동일하며, dumok.net/newbt.kr도 답 101로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2024-3-16",
+      "number": 16,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 Java 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "public class Main {\n    public static void main(String[] args) {\n        B b1 = new A();\n        A b2 = new A();\n        System.out.print(b1.getX() + b1.x + b2.getX() + b2.x);\n    }\n}\nclass B {\n    int x = 3;\n    int getX() {\n        return x * 2;\n    }\n}\nclass A extends B {\n    int x = 7;\n    @Override\n    int getX() {\n        return x * 3;\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "52",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: 메서드는 동적 바인딩(오버라이딩)되므로 b1.getX(), b2.getX() 모두 실제 객체 A의 getX() 실행 → this.x(=A.x=7)*3=21씩. 필드는 정적 바인딩(선언 타입 기준)이므로 b1.x는 선언타입 B의 x=3, b2.x는 선언타입 A의 x=7. 합계 21+3+21+7=52. velog(@m_ngyeong, 클래스명 A/B)와 chobopark.tistory.com(클래스명 Base/Derivate)이 변수명만 다를 뿐 동일한 로직/값이며 답 52로 일치. dumok.net/newbt.kr도 52로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-2"
+    },
+    {
+      "id": "past-2024-3-17",
+      "number": 17,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 Java 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "class Printer {\n    void print(Integer a) { System.out.print(\"A\" + a); }\n    void print(Object a) { System.out.print(\"B\" + a); }\n    void print(Number a) { System.out.print(\"C\" + a); }\n}\npublic class Generic {\n    public static void main(String[] args) {\n        new Container<>(0).print();\n    }\n    public static class Container<T> {\n        T value;\n        public Container(T t) { value = t; }\n        public void print() { new Printer().print(value); }\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "B0",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: Container<T>의 필드 value는 컴파일 시 타입 소거(type erasure)로 인해 컴파일 타임 타입이 Object가 된다. print(value) 호출 시 오버로드 결정은 런타임 값이 아닌 컴파일 타임(선언) 타입을 기준으로 하므로 print(Object a) 버전이 선택되어 \"B\"+0 = \"B0\" 출력. velog(@m_ngyeong, 클래스명 Container/Printer 분리)와 chobopark.tistory.com(Printer를 Collection의 내부 클래스로 구성)이 클래스 구조만 다를 뿐 동일한 제네릭 타입 소거 로직/답(B0)이며, dumok.net/newbt.kr도 B0으로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-2"
+    },
+    {
+      "id": "past-2024-3-18",
+      "number": 18,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음 C 코드를 확인하여 알맞은 출력값을 작성하시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n\nvoid func1(int** arr, int size) {\n    for (int i = 0; i <= sizeof(arr); i++) {\n        *(*arr + i) = (*(*arr + i) + i) % size;\n    }\n}\nvoid func2(int* num, int* arr) {\n    *num = arr[*num % 4];\n}\n\nint main() {\n    int arr[] = {3, 1, 4, 1, 5};\n    int* p = arr;\n    int** pp = &p;\n    int num = 6;\n    func1(pp, 5);\n    func2(&num, arr);\n    printf(\"%d\", num);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "1",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱(정처기 C 문제의 전통적 관례대로 포인터 크기를 4바이트로 가정, sizeof(arr)=4이므로 반복문은 i=0~4로 5회 실행): *(*arr+i)는 arr[i]와 같다. i=0..4에 대해 arr[i]=(arr[i]+i)%5를 적용하면 arr={3,2,1,4,4}. func2에서 num=arr[6%4]=arr[2]=1. 최종 출력 1. velog(@m_ngyeong, func2로 이중포인터 활용)와 chobopark.tistory.com(단순히 arr[2] 대입하는 더 간단한 변형)이 세부 구현은 다르나 동일한 arr 배열 변형과 최종 출력값(1)이 일치, dumok.net/newbt.kr도 1로 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@m_ngyeong/정처기-실기-2024년-3회차-기출-2"
+    },
+    {
+      "id": "past-2024-3-19",
+      "number": 19,
+      "examRound": "2024년 3회",
+      "type": "short",
+      "question": "다음은 네트워크에 대한 문제이다. 아래 내용을 보고 알맞은 용어를 보기에서 골라 작성하시오.",
+      "passage": "- 중앙 관리나 고정된 인프라 없이 임시로 구성되는 네트워크이다.\n- 일반적으로 무선 통신을 통해 노드들이 직접 연결되어 데이터를 주고받는다.\n- 긴급 구조, 긴급 회의, 군사적인 상황 등에서 유용하게 활용될 수 있다.\n\n보기: ㄱ.Infrastructure Network  ㄴ.Firmware Network  ㄷ.Peer-to-Peer Network  ㄹ.Ad-hoc Network  ㅁ.Mesh Network  ㅂ.Sensor Network  ㅅ.Virtual Private Network",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Ad-hoc Network",
+          "aliases": [
+            "애드혹 네트워크",
+            "Ad hoc network",
+            "애드혹"
+          ]
+        }
+      ],
+      "explanation": "dumok.net(\"군사용어 - Ad-hoc network\"), velog(@m_ngyeong), chobopark.tistory.com(\"ㄹ. Ad-hoc Network\") 3개 출처 모두 답이 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://chobopark.tistory.com/495"
+    },
+    {
+      "id": "past-2025-1-01",
+      "number": 1,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 보안 공격 기법의 명칭을 쓰시오.",
+      "passage": "\"세션을 가로채다\"라는 의미로, 정당한 사용자의 세션 상태를 훔치거나 도용하여 액세스하는 보안 공격 기법. 클라이언트/서버 간 TCP 세션 중 RST 패킷을 보내어 희생자의 세션을 끊고 공격자에게 재설정하는 방식으로도 이루어진다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "세션 하이재킹",
+          "aliases": [
+            "Session Hijacking"
+          ]
+        }
+      ],
+      "explanation": "gisafirst.com의 25년 1회 가답안과 velog(@sukyung01)의 독립 후기 게시글이 동일한 지문·정답(세션 하이재킹)을 제시해 2개 이상 독립 출처가 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-02",
+      "number": 2,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "관계형 데이터베이스의 무결성 제약조건 종류를 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "도메인 무결성, 개체 무결성, 참조 무결성",
+          "aliases": [
+            "도메인, 개체, 참조 무결성"
+          ]
+        }
+      ],
+      "explanation": "gisafirst.com과 velog(@sukyung01) 두 독립 출처 모두 \"도메인·개체·참조\" 무결성 3종을 정답으로 제시해 일치를 확인했다. 원문 지문 전체는 복원하지 못했으나 묻는 요지(무결성 제약조건 종류)는 명확하다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-03",
+      "number": 3,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음이 설명하는 오류 검출 기법의 명칭(약어)을 쓰시오.",
+      "passage": "다항식을 이용해 데이터 전송 중 발생한 오류를 검출하는 오류 검출 코드 기법.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "CRC",
+          "aliases": [
+            "순환 중복 검사",
+            "Cyclic Redundancy Check"
+          ]
+        }
+      ],
+      "explanation": "gisafirst.com과 velog(@sukyung01) 두 독립 출처가 동일하게 CRC를 정답으로 제시했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-04",
+      "number": 4,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 악성 프로그램의 명칭을 쓰시오.",
+      "passage": "\"쇼크, 불안 또는 위협의 인식을 유발\"하여 사용자를 속이는 악성 프로그램. \"겁을 주다\"라는 의미에서 명칭이 유래했다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "스캐어웨어",
+          "aliases": [
+            "Scareware"
+          ]
+        }
+      ],
+      "explanation": "gisafirst.com과 velog(@sukyung01) 두 독립 출처가 동일한 정의 문구(\"겁을 주다\"에서 유래)와 정답(스캐어웨어)을 제시해 일치를 확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-05",
+      "number": 5,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 JAVA 코드의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "public class Gisafirst {\n  public static void main(String[] args) {\n    int a=5, b=0;\n    try{\n      System.out.print(a/b);\n    }\n    catch(ArithmeticException e){\n      System.out.print(\"출력1\");\n    }\n    catch (ArrayIndexOutOfBoundsException e) {\n      System.out.print(\"출력2\");\n    }\n    catch (NumberFormatException e) {\n      System.out.print(\"출력3\");\n    }\n    catch(Exception e){\n      System.out.print(\"출력4\");\n    }\n    finally{\n      System.out.print(\"출력5\");\n    }\n  }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "출력1출력5",
+          "aliases": [
+            "출력1 출력5"
+          ]
+        }
+      ],
+      "explanation": "직접 트레이싱: a/b는 정수 나눗셈으로 0으로 나누면 ArithmeticException 발생 → 첫 catch(\"출력1\") 실행 → finally 블록(\"출력5\") 항상 실행. 따라서 \"출력1출력5\"가 출력된다. gisafirst.com·velog(@sukyung01) 2개 출처가 동일 정답을 제시했고 코드 트레이싱으로도 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-06",
+      "number": 6,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 ①, ②에 해당하는 프로토콜 명칭을 쓰시오.",
+      "passage": "① IP주소를 통해 물리(MAC) 주소를 찾는 프로토콜\n② 물리(MAC) 주소를 통해 IP 주소를 찾는 프로토콜",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "ARP",
+          "aliases": []
+        },
+        {
+          "label": "②",
+          "answer": "RARP",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst.com과 velog(@sukyung01) 두 독립 출처가 동일하게 ①ARP, ②RARP를 정답으로 제시했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-07",
+      "number": 10,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 C 코드의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "char Data[5] = {'B', 'A', 'D', 'E'};\nchar c;\n\nint main(){\n    int i, temp, temp2;\n    c = 'C';\n    printf(\"%d \", Data[3]-Data[1]);\n    for(i=0;i<5;++i){\n        if(Data[i]>c)\n            break;\n    }\n    temp = Data[i];\n    Data[i] = c;\n    i++;\n    for(;i<5;++i){\n        temp2 = Data[i];\n        Data[i] = temp;\n        temp = temp2;\n    }\n    for(i=0;i<5;i++){\n        printf(\"%c\", Data[i]);\n    }\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "4 BACDE",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: Data={'B','A','D','E','\\0'}. Data[3]-Data[1]='E'-'A'=4를 먼저 출력. c='C'(67)보다 큰 첫 원소는 Data[2]='D'(i=2)이므로 그 위치에 'C'를 넣고 이후 원소들을 한 칸씩 뒤로 밀어 최종 배열은 B,A,C,D,E가 되어 \"BACDE\"가 출력된다. gisafirst.com·velog(@sukyung01) 2개 출처의 정답(\"4\", \"BACDE\")과 일치하며 트레이싱으로 재확인했다. 원문 코드의 \"c = 'C'\" 뒤 세미콜론 누락은 명백한 전산·복원 오류로 판단해 보정했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-08",
+      "number": 12,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 ①~③에 해당하는 결합도(Coupling) 종류를 보기에서 골라 쓰시오.",
+      "passage": "① 다른 모듈 내부의 변수나 기능을 직접 사용하는 경우\n② 배열, 오브젝트, 자료구조 등을 통째로 전달하는 경우\n③ 모듈 밖에서 선언된 전역 변수를 참조하고 갱신하는 경우\n\n[보기] ㄱ.데이터 결합도 ㄴ.스탬프 결합도 ㄷ.제어 결합도 ㄹ.공통 결합도 ㅁ.내용 결합도 ㅂ.외부 결합도",
+      "code": null,
+      "language": null,
+      "choices": [
+        "ㄱ.데이터 결합도",
+        "ㄴ.스탬프 결합도",
+        "ㄷ.제어 결합도",
+        "ㄹ.공통 결합도",
+        "ㅁ.내용 결합도",
+        "ㅂ.외부 결합도"
+      ],
+      "answers": [
+        {
+          "label": "①",
+          "answer": "ㅁ",
+          "aliases": []
+        },
+        {
+          "label": "②",
+          "answer": "ㄴ",
+          "aliases": []
+        },
+        {
+          "label": "③",
+          "answer": "ㄹ",
+          "aliases": []
+        }
+      ],
+      "explanation": "표준 소프트웨어공학 결합도 정의로 직접 검증: 다른 모듈의 내부 변수/기능을 직접 사용=내용 결합도(가장 강한 결합), 배열/오브젝트/자료구조 전체를 전달=스탬프 결합도, 전역 변수 참조·갱신=공통 결합도. gisafirst.com 단일 출처이나 교과서적 정의와 정확히 일치해 자체 검증했다. 보기 ㄱ~ㅂ의 정확한 원문 표기·순서는 재구성한 것일 수 있다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-09",
+      "number": 13,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 JAVA 코드의 실행 결과(Parent.total 출력값)를 쓰시오.",
+      "passage": null,
+      "code": "class Parent {\n    static int total = 0;\n    int v = 1;\n    public Parent() {\n        total += (++v);\n        show();\n    }\n    public void show() {\n        total += total;\n    }\n}\n\nclass Child extends Parent {\n    int v = 10;\n    public Child() {\n        v += 2;\n        total += v++;\n        show();\n    }\n    @Override\n    public void show() {\n        total += total * 2;\n    }\n}\n\npublic class Gisafirst {\n    public static void main(String[] args) {\n        new Child();\n        System.out.println(Parent.total);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "54",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: new Child()가 실행되면 먼저 Parent() 생성자가 호출되어 Parent.v(1)을 ++하여 total+=2(total=2), 이어서 가상 호출된 show()는 런타임 타입인 Child의 오버라이딩 메서드가 실행돼 total+=total*2 → total=6. 이후 Child 필드 v=10 초기화, Child() 본문에서 v+=2(v=12), total+=v++(12) → total=18, v=13. 다시 show() 호출(Child 버전) → total+=total*2 → total=18+36=54. 최종 출력은 54로, gisafirst.com의 정답과도 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-10",
+      "number": 14,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 디자인 패턴의 명칭을 쓰시오.",
+      "passage": "래퍼(Wrapper) 패턴이라고도 하며, 서로 다른 인터페이스를 가진 클래스들을 호환되도록 연결해주는 디자인 패턴.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "adapter",
+          "aliases": [
+            "어댑터 패턴",
+            "Adapter",
+            "어댑터"
+          ]
+        }
+      ],
+      "explanation": "gisafirst.com 단일 출처이나, \"래퍼 패턴/서로 다른 인터페이스 연결\"이라는 설명은 소프트웨어공학 교과서의 어댑터(Adapter) 패턴 정의와 정확히 일치해 자체 검증 가능하다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-11",
+      "number": 16,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 JAVA 코드의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "public class Gisafirst {\n\n    public static void main(String[] args) {\n        int[] data = {3, 5, 8, 12, 17};\n        System.out.println(func(data, 0, data.length - 1));\n    }\n\n    static int func(int[] a, int st, int end) {\n        if (st >= end) return 0;\n        int mid = (st + end) / 2;\n        return a[mid] + Math.max(func(a, st, mid), func(a, mid + 1, end));\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "20",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: func(0,4)→mid=2→a[2](8)+max(func(0,2), func(3,4)). func(0,2)→mid=1→a[1](5)+max(func(0,1)=3, func(2,2)=0)=8. func(3,4)→mid=3→a[3](12)+max(func(3,3)=0,func(4,4)=0)=12. 따라서 func(0,4)=8+max(8,12)=8+12=20. gisafirst.com의 정답(20)과 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-12",
+      "number": 17,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 Python 코드의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "class Node:\n    def __init__(self, value):\n        self.value = value\n        self.children = []\n\ndef tree(li):\n    nodes = [Node(i) for i in li]\n    for i in range(1, len(li)):\n        nodes[(i - 1) // 2].children.append(nodes[i])\n    return nodes[0]\n\ndef calc(node, level=0):\n    if node is None:\n        return 0\n    return (node.value if level % 2 == 1 else 0) + sum(calc(n, level + 1) for n in node.children)\n\nli = [3, 5, 8, 12, 15, 18, 21]\nroot = tree(li)\nprint(calc(root))",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "13",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: li의 인덱스로 완전이진트리를 구성하면 root=3(children 5,8), 5의 children=12,15, 8의 children=18,21. calc는 짝수 레벨(level%2==1, 즉 레벨1)의 노드 값만 합산한다. 레벨1 노드는 5,8뿐이므로 calc(root)=5+8=13. gisafirst.com의 정답(13)과 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-13",
+      "number": 18,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 C 코드의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Data {\n    int value;\n    struct Data *next;\n} Data;\n\nData* insert(Data* head, int value) {\n    Data* new_node = (Data*)malloc(sizeof(Data));\n    new_node->value = value;\n    new_node->next = head;\n    return new_node;\n}\n\nData* reconnect(Data* head, int value) {\n    if (head == NULL || head->value == value) return head;\n    Data *prev = NULL, *curr = head;\n    while (curr != NULL && curr->value != value) {\n        prev = curr;\n        curr = curr->next;\n    }\n\n    if (curr != NULL && prev != NULL) {\n        prev->next = curr->next;\n        curr->next = head;\n        head = curr;\n    }\n    return head;\n}\n\nint main() {\n    Data *head = NULL, *curr;\n    for (int i = 1; i <= 5; i++)\n        head = insert(head, i);\n    head = reconnect(head, 3);\n    for (curr = head; curr != NULL; curr = curr->next)\n        printf(\"%d\", curr->value);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "35421",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: insert가 매번 리스트 맨 앞에 삽입하므로 1~5 삽입 후 리스트는 5→4→3→2→1. reconnect(head,3)은 값 3인 노드를 찾아 그 앞뒤를 연결하고(4→2로 연결) 3을 리스트 맨 앞으로 이동시켜 3→5→4→2→1이 된다. 따라서 출력은 \"35421\". gisafirst.com의 정답 및 velog(@dev_alchemist)의 독립적인 코드 풀이 게시글(동일 코드·동일 정답)과 일치하며 직접 트레이싱으로도 재확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-1-14",
+      "number": 20,
+      "examRound": "2025년 1회",
+      "type": "short",
+      "question": "다음 JAVA 코드의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "public class Gisafirst {\n  public static void main(String[] args) {\n    System.out.println(calc(\"5\"));\n  }\n\n  static int calc(int value) {\n    if (value <= 1) return value;\n    return calc(value - 1) + calc(value - 2);\n  }\n\n  static int calc(String str) {\n    int value = Integer.valueOf(str);\n    if (value <= 1) return value;\n    return calc(value - 1) + calc(value - 3);\n  }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "4",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: calc(\"5\")는 String 오버로드가 호출되어 value=5, calc(4)+calc(2)를 반환하는데 이때 calc(4), calc(2)의 인자는 int이므로 int 오버로드(피보나치형: calc(n)=calc(n-1)+calc(n-2))가 호출된다. calc(4)=calc(3)+calc(2)=(calc(2)+calc(1))+calc(2)=(1+1)+1=3, calc(2)=calc(1)+calc(0)=1+0=1. 따라서 calc(\"5\")=calc(4)+calc(2)=3+1=4. gisafirst.com의 정답(4)과 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?idx=465"
+    },
+    {
+      "id": "past-2025-2-01",
+      "number": 1,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "괄호에 들어갈 레코드 접근 방법을 쓰시오.",
+      "passage": "데이터베이스의 물리 설계 시, 레코드에 접근하는 방법은 순차 접근 방법, [ ] 방법, 해싱 방법 등이 있다. 이 중 [ ] 방법은 레코드의 키 값과 포인터를 쌍으로 묶어 저장하며 검색 시 키 값을 기준으로 빠르게 탐색할 수 있도록 설계되어 있다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "인덱스(색인)",
+          "aliases": [
+            "색인",
+            "인덱스",
+            "index"
+          ]
+        }
+      ],
+      "explanation": "레코드 접근 방법은 순차·색인(인덱스)·해싱 3가지가 표준적으로 분류된다. gisafirst(idx=469), dumok(9316), velog(@27marchsa) 3개 독립 출처의 지문과 답안이 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-02",
+      "number": 2,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 데이터베이스 용어를 쓰시오.",
+      "passage": "릴레이션(Relation)에서 열(Column)을 의미하며 데이터 항목의 속성(Attribute) 또는 특성을 나타낸다. 각 열은 고유한 이름을 가지며 특정 도메인(Domain)에서 정의된 값을 갖는다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "attribute",
+          "aliases": [
+            "속성",
+            "애트리뷰트",
+            "Attribute"
+          ]
+        }
+      ],
+      "explanation": "릴레이션의 열=속성(attribute)이라는 기본 용어 문제. gisafirst·dumok·velog 3개 출처의 지문과 답이 모두 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-03",
+      "number": 3,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 프로토콜을 쓰시오.",
+      "passage": "원격 접속과 관련된 보안 프로토콜이며 암호화된 통신을 제공하는 보안 접속용 프로토콜이다. 주로 원격 서버에 안전하게 접속할 때 사용되며 기본 포트 번호는 22번이다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "SSH",
+          "aliases": [
+            "Secure Shell"
+          ]
+        }
+      ],
+      "explanation": "포트 22번 암호화 원격접속 프로토콜=SSH. gisafirst·dumok·velog 3개 출처 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-04",
+      "number": 4,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "①, ②에 해당하는 CPU 스케줄링 기법의 명칭을 쓰시오.",
+      "passage": "(1) CPU burst 시간이 짧은 프로세스를 우선적으로 처리하는 스케줄링 방식이다. (2) 위의 스케줄링 방식을 선점형으로 구현한 형태로, 실행 중인 프로세스보다 더 짧은 burst 시간을 가진 프로세스가 도착하면 현재 CPU를 선점한다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "SJF",
+          "aliases": [
+            "Shortest Job First",
+            "최단 작업 우선"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "SRT",
+          "aliases": [
+            "SRTF",
+            "Shortest Remaining Time",
+            "선점형 SJF"
+          ]
+        }
+      ],
+      "explanation": "비선점 최단작업우선=SJF, 이를 선점형으로 만든 것=SRT(SRTF). gisafirst·dumok·velog 3개 출처의 지문·답안이 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-05",
+      "number": 5,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 Java 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "public class Main {\n    public static void change(String[] data, String s){\n        data[0] = s;\n        s = \"Z\";\n    }\n    public static void main(String[] args) {\n        String data[] = { \"A\" };\n        String s = \"B\";\n        change(data, s);\n        System.out.print(data[0] + s);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "BB",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: change(data,s) 호출 시 배열 data는 참조가 전달되어 data[0]=s 대입이 main의 배열에도 반영되어 data[0]=\"B\"가 됨. 반면 s는 값 전달이라 메서드 내부의 s=\"Z\"는 main의 s에 영향 없이 \"B\"로 유지. 따라서 System.out.print(data[0]+s) = \"B\"+\"B\" = \"BB\". gisafirst·dumok·newbt 3개 출처의 답안과도 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-06",
+      "number": 6,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "①, ②에 들어갈 값을 구하시오.",
+      "passage": "호스트 IP: 223.13.234.132, 서브넷 마스크: 255.255.255.192. 이 호스트가 속한 네트워크 주소는 223.13.234.( ① )이다. 이 네트워크에서 사용 가능한 호스트 수는 ( ② )개이다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "128",
+          "aliases": []
+        },
+        {
+          "label": "②",
+          "answer": "62",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 계산: 마스크 255.255.255.192(=/26)의 마지막 옥텟은 11000000. 132=10000100을 마스크와 AND 연산하면 10000000=128이 되어 네트워크 주소는 223.13.234.128. 호스트 비트 6개이므로 2^6-2=62개 사용 가능. velog(@27marchsa)의 원문 수치와 계산이 일치하며, gisafirst·dumok의 답안 \"128, 62\"와도 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-07",
+      "number": 7,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 디자인 패턴을 쓰시오.",
+      "passage": "어떤 객체에 대한 접근을 제어하거나 추가적인 기능을 부여하기 위해 해당 객체의 대리 객체를 사용하는 방식의 디자인 패턴이다. (가상 Proxy, 보호 Proxy, 원격 Proxy 등의 변형이 있음)",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Proxy",
+          "aliases": [
+            "프록시",
+            "프록시 패턴",
+            "Proxy 패턴"
+          ]
+        }
+      ],
+      "explanation": "대리 객체를 통해 접근을 제어하는 구조 패턴=Proxy 패턴. gisafirst·dumok·velog 3개 출처의 지문·답안 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-08",
+      "number": 8,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 웹 기술을 쓰시오.",
+      "passage": "웹 페이지 전체를 다시 불러오지 않고 JavaScript와 XML(또는 JSON)을 이용하여 일부 콘텐츠만 비동기적으로 갱신할 수 있는 기술이다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "AJAX",
+          "aliases": [
+            "Asynchronous JavaScript and XML"
+          ]
+        }
+      ],
+      "explanation": "비동기 부분 갱신 웹 기술=AJAX. gisafirst·dumok·velog 3개 출처 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-09",
+      "number": 9,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 Java 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "public class Main {\n    static interface F {\n        int apply(int x) throws Exception;\n    }\n    public static int run(F f) {\n        try {\n            return f.apply(3);\n        } catch (Exception e) {\n            return 7;\n        }\n    }\n    public static void main(String[] args) {\n        F f = (x) -> {\n            if (x > 2) {\n                throw new Exception();\n            }\n            return x * 2;\n        };\n        System.out.print(run(f) + run((int n) -> n + 9));\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "19",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: run(f)는 f.apply(3) 실행 시 x=3>2 조건이 참이 되어 예외가 발생하고 catch에서 7을 반환. run((int n)->n+9)는 예외 없이 3+9=12를 반환. 합계 7+12=19. gisafirst·dumok·velog(@dev_alchemist) 3개 출처의 코드·답안이 모두 일치하며 직접 계산으로도 재확인.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-10",
+      "number": 10,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 Java 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "class P {\n    static String print() {\n        return \"P\";\n    }\n    int sum(int a) {\n        return a + 1;\n    }\n}\nclass C extends P {\n    static String print() {\n        return \"C\";\n    }\n    int sum(int a) {\n        return a + 2;\n    }\n}\npublic class Main {\n    public static void main(String[] args) {\n        P tmp = new C();\n        System.out.println(tmp.sum(3) + tmp.print());\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "5P",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: 인스턴스 메서드 sum()은 오버라이딩되므로 실제 객체 타입인 C의 sum(3)=3+2=5가 동적 바인딩으로 호출됨. 반면 static 메서드 print()는 오버라이딩이 아닌 은닉(hiding)이라 참조변수의 선언 타입인 P의 print()=\"P\"가 정적 바인딩으로 호출됨. 따라서 5+\"P\"는 문자열 연결로 \"5P\"가 출력. gisafirst·dumok·newbt 3개 출처의 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-11",
+      "number": 12,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 C 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "#define SIZE 3\ntypedef struct {\n    int a[SIZE];\n    int front;\n    int rear;\n} Queue;\nvoid enq(Queue* q, int val) {\n    q->a[q->rear] = val;\n    q->rear = (q->rear + 1) % SIZE;\n}\nint deq(Queue* q) {\n    int val = q->a[q->front];\n    q->front = (q->front + 1) % SIZE;\n    return val;\n}\nint main() {\n    Queue q = {{0}, 0, 0};\n    enq(&q, 1);\n    enq(&q, 2);\n    deq(&q);\n    enq(&q, 3);\n    printf(\"%d 그리고 %d\", deq(&q), deq(&q));\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "2 그리고 3",
+          "aliases": [
+            "2, 3"
+          ]
+        }
+      ],
+      "explanation": "직접 트레이싱(SIZE=3 원형큐): enq(1),enq(2)로 a=[1,2,0], rear=2; deq()로 1을 꺼내고 front=1; enq(3)으로 a=[1,2,3], rear=0. 이후 두 번의 deq() 호출이 왼쪽부터 평가된다고 보면 첫 deq=a[1]=2(front=2), 둘째 deq=a[2]=3(front=0). 출력 \"2 그리고 3\". gisafirst·dumok·newbt 3개 출처의 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-12",
+      "number": 13,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "라운드 로빈(Round Robin) 스케줄링(타임 퀀텀=4ms)으로 처리할 때 평균 대기시간을 구하시오.",
+      "passage": "프로세스별 도착시간과 실행시간(버스트타임)을 나타낸 표가 주어졌으나, 표의 구체적인 수치는 원문 복원 자료에서 확인하지 못함.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "11.75",
+          "aliases": [
+            "11.75ms",
+            "11.75초"
+          ]
+        }
+      ],
+      "explanation": "gisafirst, dumok(9316), newbt(문제 92339) 3개 독립 출처가 모두 평균 대기시간 답을 11.75(ms)로 명시하여 정답 자체는 일치·신뢰할 수 있으나, 프로세스별 도착시간/실행시간 표 원문은 이미지 형태로만 존재해 텍스트로 복원되지 않아 직접 재계산 검증은 하지 못했음. 이 점을 감안해 참고용으로만 활용 권장.",
+      "figure": true,
+      "figureDesc": "프로세스별 도착시간·실행시간(버스트타임)을 나타낸 표 (원문 이미지, 텍스트 복원 실패)",
+      "sourceUrl": "https://dumok.net/center_notice/9316"
+    },
+    {
+      "id": "past-2025-2-13",
+      "number": 14,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 C 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "struct dat {\n    int x;\n    int y;\n};\nint main() {\n    struct dat a[] = {{1, 2}, {3, 4}, {5, 6}};\n    struct dat* ptr = a;\n    struct dat** pptr = &ptr;\n    (*pptr)[1] = (*pptr)[2];\n    printf(\"%d 그리고 %d\", a[1].x, a[1].y);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "5 그리고 6",
+          "aliases": [
+            "5, 6"
+          ]
+        }
+      ],
+      "explanation": "직접 트레이싱: ptr은 배열 a를 가리키고 pptr은 ptr의 주소를 가리키는 이중포인터. (*pptr)는 ptr과 동일하므로 (*pptr)[1]=(*pptr)[2]는 a[1]=a[2] 대입과 같음. a[2]={5,6}이므로 a[1]도 {5,6}이 되어 printf 결과는 \"5 그리고 6\". gisafirst·dumok·newbt 3개 출처의 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-14",
+      "number": 15,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 Java 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "public class Main {\n    public static class BO {\n        public int v;\n        public BO(int v) {\n            this.v = v;\n        }\n    }\n    public static void main(String[] args) {\n        BO a = new BO(1);\n        BO b = new BO(2);\n        BO c = new BO(3);\n        BO[] arr = {a, b, c};\n        BO t = a;\n        arr[0] = c;\n        arr[2] = t;\n        arr[1].v = arr[0].v;\n        System.out.println(a.v + \"a\" + b.v + \"b\" + c.v);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "1a3b3",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: 초기 arr=[a,b,c], t=a. arr[0]=c → arr=[c,b,c]. arr[2]=t(=a) → arr=[c,b,a]. arr[1].v=arr[0].v → b.v=c.v=3. 최종 a.v=1(불변), b.v=3, c.v=3(불변). 출력 \"1a3b3\". gisafirst·dumok·newbt 3개 출처의 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-15",
+      "number": 16,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 C 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "struct node {\n    int p;\n    struct node* n;\n};\nint main() {\n    struct node a = {1, NULL};\n    struct node b = {2, NULL};\n    struct node c = {3, NULL};\n    c.n = &a;\n    a.n = &b;\n    b.n = NULL;\n    struct node* head = &c;\n    printf(\"%d %d %d\", head->p, head->n->p, head->n->n->p);\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "3 1 2",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: head=&c이므로 head->p=3(c.p). head->n=c.n=&a이므로 head->n->p=1(a.p). head->n->n=a.n=&b이므로 head->n->n->p=2(b.p). 출력 \"3 1 2\". gisafirst·dumok·newbt 3개 출처의 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-16",
+      "number": 17,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 Python 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "def func():\n    lst = [1,2,3]\n    dic = {x:x * 2 for x in lst}\n    s = set(dic.values())\n    lst[0] = 99\n    dic[2] = 7\n    s.add(99)\n    return len(s & set(dic.values()))\n\nprint(func())",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "2",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: dic은 lst=[1,2,3]으로 딕셔너리 컴프리헨션 시점에 {1:2,2:4,3:6}으로 이미 확정되어 이후 lst[0]=99는 영향 없음. s=set(dic.values())={2,4,6}. dic[2]=7로 dic={1:2,2:7,3:6}이 되어 dic.values()={2,7,6}. s.add(99)로 s={2,4,6,99}. 교집합 s & {2,7,6} = {2,6} → len=2. gisafirst·dumok의 답안 \"2\"와 일치(newbt 자동추출 과정에서 다른 값이 잘못 표시된 것은 사이드바 콘텐츠 혼입으로 판단, 직접 계산 결과로 대체 확인).",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-17",
+      "number": 18,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 C 코드를 실행했을 때의 출력 결과를 쓰시오.",
+      "passage": null,
+      "code": "struct node {\n    char c;\n    struct node* p;\n};\nstruct node* func(char* s) {\n    struct node* h = NULL, *n;\n    while(*s) {\n        n = malloc(sizeof(struct node));\n        n->c = *s++;\n        n->p = h;\n        h = n;\n    }\n    return h;\n}\nint main() {\n    struct node* n = func(\"BEST\");\n    while(n) {\n        putchar(n->c);\n        struct node* t = n;\n        n = n->p;\n        free(t);\n    }\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "TSEB",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: func()는 \"BEST\"의 각 문자를 앞에서부터 처리하며 매번 리스트 맨 앞에 삽입(전단 삽입)하므로 최종 리스트는 역순인 T→S→E→B가 된다. main에서 head부터 순회 출력하면 \"TSEB\". gisafirst·dumok·newbt 3개 출처의 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=469&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-2-18",
+      "number": 19,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 네트워크 보안 공격을 쓰시오.",
+      "passage": "공격자는 클라이언트 역할로 수많은 SYN 패킷을 서버에 전송한 뒤 마지막 ACK를 고의로 보내지 않아 서버가 연결 대기 상태를 계속 유지하게 만든다.",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "SYN 플러딩",
+          "aliases": [
+            "SYN Flooding",
+            "SYN Flood"
+          ]
+        }
+      ],
+      "explanation": "TCP 3-way handshake의 마지막 ACK를 보내지 않아 서버 자원을 고갈시키는 공격=SYN 플러딩. gisafirst·dumok·velog 3개 출처의 지문·답안이 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-2-19",
+      "number": 20,
+      "examRound": "2025년 2회",
+      "type": "short",
+      "question": "employee 릴레이션에 대해 πTTL(employee) 연산의 결과값을 작성하시오.",
+      "passage": "employee 릴레이션\n\n| INDEX | AGE | TTL |\n|-------|-----|-----|\n| 1 | 55 | 부장 |\n| 2 | 35 | 대리 |\n| 3 | 42 | 과장 |\n| 4 | 45 | 차장 |",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "부장, 대리, 과장, 차장",
+          "aliases": [
+            "TTL(부장, 대리, 과장, 차장)"
+          ]
+        }
+      ],
+      "explanation": "직접 계산: 프로젝션(π) 연산 πTTL(employee)은 TTL 열의 값만 추출하므로 결과는 {부장, 대리, 과장, 차장} 4개 값. velog(@27marchsa)의 원문 표로 직접 계산했으며, gisafirst·dumok의 답안 \"TTL, 부장, 대리, 과장, 차장\"과도 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://velog.io/@27marchsa/%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EA%B8%B0%EC%82%AC-%EC%8B%A4%EA%B8%B0-2025%EB%85%84-2%ED%9A%8C-%ED%92%80%EC%9D%B4"
+    },
+    {
+      "id": "past-2025-3-01",
+      "number": 2,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 C언어 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "struct Test {\n  int i;\n  char* x;\n};\nint main() {\n  struct Test test[3] = { {1, \"AB\"}, {2, \"DC\"}, {3, \"ED\"} };\n  struct Test* p = test + 1;\n  printf(\"%s\", p->x + (p->i - 1));\n  return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "C",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: p = test+1 → test[1] = {2, \"DC\"}를 가리킴. p->x는 문자열 \"DC\"의 시작 포인터, p->i-1 = 2-1 = 1. \"DC\"+1은 두 번째 문자 'C'부터 시작하는 포인터이므로 %s 출력 결과는 \"C\". gisafirst.com 원 게시물의 답안(C)과 일치하며, 같은 글의 댓글(작성자 이승헌)이 실제로 코드를 실행해 \"C\"가 나옴을 별도로 확인해 재검증했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-02",
+      "number": 5,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 Java 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "enum Tri {\n  A(\"A\"), B(\"AB\"), C(\"ABC\");\n  private String code;\n  Tri(String code) {\n    this.code = code;\n  }\n  public String code() {\n    return code;\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Tri t = Tri.values()[Tri.A.name().length()];\n    System.out.print(t.code());\n  }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "AB",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: Tri.A.name()은 \"A\"이고 length()는 1. Tri.values()[1]은 선언 순서상 B. B.code()는 \"AB\"이므로 출력은 \"AB\". gisafirst.com 원 게시물 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-03",
+      "number": 7,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 C언어 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "char str[] = \"REPUBLICOFKOREA\";\nint a = 0;\nwhile (str[a] != '\\0') ++a;\nputchar(str[a - 2]);\nreturn 0;",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "E",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: \"REPUBLICOFKOREA\"는 길이 15(인덱스 0~14), 널문자는 인덱스 15에 위치하므로 반복문 종료 시 a=15. str[a-2]=str[13]. 문자열을 0부터 인덱싱하면 13번째 문자는 'E'(R-E-P-U-B-L-I-C-O-F-K-O-R-E-A). 따라서 출력은 \"E\"이며 gisafirst.com 원 게시물 답안과 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-04",
+      "number": 10,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 설명(또는 그림)에 해당하는 접근 통제(Access Control) 모델을 모두 쓰시오. (지문 원문은 이미지 첨부로만 존재해 텍스트 복원이 불완전하나, 묻는 대상은 명확함)",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "MAC",
+          "aliases": [
+            "강제적 접근 통제",
+            "Mandatory Access Control"
+          ]
+        },
+        {
+          "label": null,
+          "answer": "RBAC",
+          "aliases": [
+            "역할 기반 접근 통제",
+            "Role-Based Access Control"
+          ]
+        },
+        {
+          "label": null,
+          "answer": "DAC",
+          "aliases": [
+            "임의적 접근 통제",
+            "Discretionary Access Control"
+          ]
+        }
+      ],
+      "explanation": "gisafirst.com 원 게시물은 이 회차에 접근통제(MAC, RBAC, DAC) 문제가 출제되었다고 복원했고, 독립적으로 작성된 velog 응시 후기(@gogogi313, '정보처리기사 2025년 3회 실기 후기')에서도 본인이 틀린 문제로 'MAC와 DAC' 주제를 명시적으로 언급해 같은 회차에 이 주제가 출제되었음을 서로 다른 두 출처에서 교차확인했다.",
+      "figure": true,
+      "figureDesc": "접근 통제 모델 관련 그림/표 첨부 (원문 미복원)",
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-05",
+      "number": 14,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 Java 코드에서 빈칸 ①에 들어갈 코드(키워드)를 쓰시오. (부모 클래스 생성자를 호출하는 방법)",
+      "passage": null,
+      "code": "class Rectangle {\n  int width, height;\n  Rectangle(int width, int height) {\n    this.width = width;\n    this.height = height;\n  }\n  int getArea() {\n    return width * height;\n  }\n}\nclass Sqare extends Rectangle {\n  Sqare(int a) {\n    __①__(a, a);\n  }\n  int getSqareArea() {\n    return width * height;\n  }\n}\npublic class Main {\n  public static void main(String[] args) {\n    Sqare sq = new Sqare(10);\n    sq.getArea();\n  }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "super",
+          "aliases": []
+        }
+      ],
+      "explanation": "Sqare는 Rectangle을 상속하지만 자체 필드가 없고, 2개 인자를 받는 부모 생성자를 호출해야 width/height를 초기화할 수 있다. 자바에서 부모(상위) 클래스의 생성자를 명시적으로 호출하는 유일한 방법은 super(...)이므로 논리적으로 답은 super로 확정된다. gisafirst.com 원 게시물 답안과도 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-06",
+      "number": 15,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 C언어 프로그램의 실행 결과를 쓰시오.",
+      "passage": null,
+      "code": "int main()\n{\n  int x = 7, y = 4, z;\n  z = y % 3 < 3 ? 2 : 1;\n  z = z & z >> 1;\n  z = x > 5 && z <= 3 ? z * x : z / x;\n  printf(\"%d\", z);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "0",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 트레이싱: y%3=1, 1<3이 참이므로 z=2. z>>1은 1(비트 연산자보다 시프트 연산자 우선순위가 높음), z & 1 = 2&1 = 0(이진수 10 & 01 = 00). x>5(참) && z<=3(참)이 참이므로 z = z*x = 0*7 = 0. 출력은 \"0\"이며 gisafirst.com 원 게시물 답안과 일치. 같은 회차 응시 후기(velog @gogogi313)에서도 '비트연산 코딩문제'를 틀렸다고 언급해 이 유형의 문제가 실제 출제되었음을 교차확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-07",
+      "number": 16,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 R, S 테이블에 대해 관계대수 연산 R ÷ S(DIVISION)의 결과를 테이블 형태로 쓰시오.",
+      "passage": "**R 테이블**\n\n| A | B |\n|---|---|\n| a1 | b1 |\n| a2 | b2 |\n| a1 | b3 |\n\n**S 테이블**\n\n| B |\n|---|\n| b1 |\n| b3 |",
+      "code": null,
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "A\na1",
+          "aliases": [
+            "a1"
+          ]
+        }
+      ],
+      "explanation": "직접 계산: R÷S는 S의 모든 B값(b1, b3)을 가지는 A값만 남긴다. a1은 (a1,b1), (a1,b3)로 b1과 b3를 모두 가지므로 포함. a2는 b2만 가져 제외. 결과는 A=a1 하나뿐이며 gisafirst.com 원 게시물 답안과 일치. velog 응시 후기(@gogogi313)도 '릴레이션 나누기 연산' 문제를 틀렸다고 언급해 같은 회차 출제를 교차확인했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-08",
+      "number": 18,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 관계형 데이터베이스 설명에 해당하는 용어를 <보기>에서 골라 쓰시오.\n① 릴레이션의 행에 해당되는 요소\n② 릴레이션에 들어 있는 튜플의 집합(릴레이션 외연/Extension)\n③ 릴레이션에서 튜플의 개수",
+      "passage": "<보기>\n㉠ 릴레이션 인스턴스  ㉡ 도메인  ㉢ 튜플  ㉣ 차수  ㉤ 릴레이션 스키마  ㉥ 카디널리티",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "튜플",
+          "aliases": []
+        },
+        {
+          "label": "②",
+          "answer": "릴레이션 인스턴스",
+          "aliases": []
+        },
+        {
+          "label": "③",
+          "answer": "카디널리티",
+          "aliases": []
+        }
+      ],
+      "explanation": "gisafirst.com 원 게시물 답안(① 튜플 ② 릴레이션 인스턴스 ③ 카디널리티)과, 같은 게시물의 별도 댓글 작성자('끠끠')가 독립적으로 복원해 올린 동일 문제·동일 답안('1.튜플 / 2.릴레이션 인스턴스 / 3.카디널리티')이 정확히 일치해 서로 다른 두 응시자의 기억이 교차확인되었다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2025-3-09",
+      "number": 20,
+      "examRound": "2025년 3회",
+      "type": "short",
+      "question": "다음 Python 프로그램을 실행했을 때 출력되는 result 딕셔너리의 빈칸(①~⑧)에 들어갈 값을 쓰시오.",
+      "passage": "출력 형식: {0: (①, ②), 1: (③, ④), 2: (⑤, ⑥), 3: (⑦, ⑧)}",
+      "code": "data = [\n    [3, 5, 2, 4, 1],\n    [4, 5, 1],\n    [4, 4, 1, 5, 4],\n    [4, 5]\n]\nresult = {}\nfor index, lis in enumerate(data):\n    list_sum = sum(lis)\n    list_len = len(lis)\n    result[index] = (list_sum, list_len)\nprint(result)",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": "①~⑧",
+          "answer": "{0: (15, 5), 1: (10, 3), 2: (18, 5), 3: (9, 2)}",
+          "aliases": []
+        }
+      ],
+      "explanation": "직접 계산: data[0]=[3,5,2,4,1]→합15,개수5. data[1]=[4,5,1]→합10,개수3. data[2]=[4,4,1,5,4]→합18,개수5. data[3]=[4,5]→합9,개수2. 따라서 {0:(15,5),1:(10,3),2:(18,5),3:(9,2)}이며 gisafirst.com 원 게시물 답안과 정확히 일치.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://gisafirst.com/board/n1/view.php?offset=0&tq=1393907668&reqCategory=&idx=475&word=&s_type=&s_content=&s_terms="
+    },
+    {
+      "id": "past-2026-1-01",
+      "number": 1,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 Java 코드를 실행했을 때 콘솔에 출력되는 결과를 쓰시오.",
+      "passage": null,
+      "code": "class A {\n    String f(Object x) {\n        return \"1\";\n    }\n    String g() {\n        return f(\"a\");\n    }\n}\n\nclass B extends A {\n    String f(Object x) {\n        return \"2\";\n    }\n    String f(String x) {\n        return \"3\";\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        A x = new B();\n        System.out.println(x.g());\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "2",
+          "aliases": []
+        }
+      ],
+      "explanation": "g()는 A에만 선언되어 오버라이딩되지 않으므로 x.g() 호출 시 A.g()가 실행된다. A.g() 내부의 f(\"a\") 호출은 g()가 정의된 클래스 A를 기준으로 컴파일타임에 오버로드가 결정되어 f(Object x)가 선택되고(B의 f(String x)는 A 시점에서 보이지 않음), 런타임에는 실제 객체 B의 오버라이딩된 f(Object x)(반환값 \"2\")가 동적 바인딩되어 호출된다. 직접 코드 트레이싱으로 확인했고, 구글시트 복원문서와 브런치 블로그가 서로 독립적으로 이 문제를 언급하며 다수 응시자가 정답 \"2\"에 동의했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-02",
+      "number": 2,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 C 코드를 실행했을 때 출력되는 값을 쓰시오.",
+      "passage": null,
+      "code": "double arrav(int p[], int len) {\n  double av = 0;  int i;\n  for(i = 0; i < len; i++) {\n    av += (double)p[i];\n  }\n  return av / len;\n}\ndouble arrp(int *p, int len) {\n  double av = 0;  int i;\n  for (i = 0; i < len; i++) {\n    av += (double)(*(p + i));\n  }\n  return av / len;\n}\nint main() {\n  int arr[10] = {80, 20, 50, 55, 45, 95, 55, 10, 40, 80};\n  int len = 10;\n  printf(\"%.2f\", arrav(arr, 10) + arrp(arr, 10));\n  return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "106.00",
+          "aliases": []
+        }
+      ],
+      "explanation": "arr 배열(80,20,50,55,45,95,55,10,40,80)의 합은 530, len=10이므로 평균은 53.00이다. arrav는 p[i], arrp는 *(p+i) 방식으로 동일한 배열에 대해 동일한 평균을 계산하므로 둘 다 53.00을 반환하고 합은 106.00이며, %.2f로 소수 둘째자리까지 출력된다. 직접 계산으로 검증했고, 구글시트 복원문서의 다수 의견 및 브런치 블로그(별개 작성자)가 동일한 배열 평균/%.2f 문제를 독립적으로 언급했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-03",
+      "number": 3,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음은 데이터베이스 설계 절차를 나타낸 순서도이다. ①~⑤에 들어갈 단계를 보기에서 골라 쓰시오.",
+      "passage": "[보기] ㉠ 구현 / ㉡ 물리적 설계 / ㉢ 논리적 설계 / ㉣ 개념적 설계 / ㉤ 요구사항 분석\n\n[ ① ]\n  ↓\n[ ② ]\n[ ③ ]\n[ ④ ]\n  ↓\n[ ⑤ ]",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "요구사항 분석",
+          "aliases": []
+        },
+        {
+          "label": "②",
+          "answer": "개념적 설계",
+          "aliases": []
+        },
+        {
+          "label": "③",
+          "answer": "논리적 설계",
+          "aliases": []
+        },
+        {
+          "label": "④",
+          "answer": "물리적 설계",
+          "aliases": []
+        },
+        {
+          "label": "⑤",
+          "answer": "구현",
+          "aliases": []
+        }
+      ],
+      "explanation": "데이터베이스 설계는 요구사항 분석 → 개념적 설계 → 논리적 설계 → 물리적 설계 → 구현 순으로 진행되는 것이 정보처리기사 교재의 표준 절차이며, 이는 회차와 무관하게 고정된 지식이므로 직접 검증 가능하다. 출처는 구글시트 복원문서 1건이지만 표준 교과 지식으로 자체 검증했다.",
+      "figure": true,
+      "figureDesc": "위에서 아래로 이어지는 5개의 상자와 화살표로 구성된 순서도(대괄호는 상자를 의미). ①~④는 세로로 나열, ④에서 ⑤로 화살표 연결.",
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-04",
+      "number": 4,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음은 HDLC 프로토콜에 관한 설명이다. ③~⑤에 들어갈 용어를 쓰시오.",
+      "passage": "( ③ ) 프레임은 순서 번호가 없는 프레임을 의미한다.\n( ④ )은/는 두 호스트 모두 혼합국(종국 겸 주국)으로 동작한다. 양쪽에서 명령과 응답을 전송할 수 있다.\n( ⑤ )은/는 불균형이며 주국의 허락 없이 종국에서 데이터를 전송할 수 있다.\n(①, ②는 각각 정보 프레임, 감독 프레임)",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "①",
+          "answer": "정보(프레임)",
+          "aliases": [
+            "Information",
+            "I-프레임"
+          ]
+        },
+        {
+          "label": "②",
+          "answer": "감독(프레임)",
+          "aliases": [
+            "Supervisory",
+            "S-프레임"
+          ]
+        },
+        {
+          "label": "③",
+          "answer": "비번호(프레임)",
+          "aliases": [
+            "Unnumbered",
+            "U-프레임"
+          ]
+        },
+        {
+          "label": "④",
+          "answer": "비동기 균형 모드",
+          "aliases": [
+            "ABM"
+          ]
+        },
+        {
+          "label": "⑤",
+          "answer": "비동기 응답 모드",
+          "aliases": [
+            "ARM"
+          ]
+        }
+      ],
+      "explanation": "HDLC 표준상 프레임은 정보(I)/감독(S)/비번호(U) 3종이며, ③의 '순서번호 없음' 설명은 비번호(U) 프레임과 일치한다. ④의 '양쪽 모두 혼합국, 허락 없이 송수신'은 비동기 균형 모드(ABM)의 정의와 정확히 일치하고, ⑤의 '불균형+허락 없이 종국이 전송'은 주국의 폴링 허가가 필요 없다는 점에서 NRM이 아니라 비동기 응답 모드(ARM)와 일치한다. 구글시트 원문 표기 중 일부(요약표의 'NRM')는 지문 설명과 모순되어 폐기하고, HDLC 표준 정의로 직접 검증한 'ARM' 표기를 채택했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-05",
+      "number": 5,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 용어(약자)를 쓰시오.",
+      "passage": "정부에서 정한 인증기관에서 기업이 주요 정보자산을 보호하기 위해 수립·관리·운영하는 정보보호 관리체계가 인증 기준에 적합한지를 심사하여 인증을 부여하는 제도",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "ISMS",
+          "aliases": [
+            "정보보호 관리체계",
+            "정보보호관리체계 인증"
+          ]
+        }
+      ],
+      "explanation": "정부(과학기술정보통신부/KISA) 인증기관이 기업의 정보보호 관리체계 수립·운영 적합성을 심사해 인증을 부여하는 제도는 ISMS(정보보호 관리체계 인증)로, 표준 정의와 정확히 일치해 자체 검증 가능하다. 구글시트 복원문서에서 확인, 검색 결과에서도 '4년 만에 재등장한 주제'로 다수 언급되었다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-06",
+      "number": 6,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 C 코드를 실행했을 때 출력되는 값을 쓰시오.",
+      "passage": null,
+      "code": "struct fnc {\n    int *(*fn)(int*);\n};\n\nint *dummy(int *d) {\n    return d + 1;\n}\n\nint main() {\n    int n[] = {16, 32};\n    struct fnc mine;\n    mine.fn = dummy;\n    printf(\"%x\", *mine.fn(n));\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "20",
+          "aliases": []
+        }
+      ],
+      "explanation": "dummy(n)은 n+1, 즉 n[1]을 가리키는 포인터를 반환하므로 *mine.fn(n)은 n[1]=32를 의미한다. printf(\"%x\", 32)는 32를 16진수로 출력하므로 결과는 \"20\"이다. 직접 트레이싱으로 검증했으며, 구글시트 복원문서와 브런치 블로그(별개 작성자, '함수 포인터+구조체+%x 16진수' 문제로 동일 설명)가 독립적으로 같은 문제를 언급했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-07",
+      "number": 7,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "STUDENT 테이블에서 다음 3개의 SQL문을 실행했을 때 각각의 결과값을 순서대로 쓰시오.",
+      "passage": "STUDENT 테이블: 컴퓨터학과 50명, 전산과 100명, 전기과 50명 (DEPT 컬럼, 총 200개 튜플, NULL 없음)",
+      "code": "1. SELECT COUNT(DEPT) FROM STUDENT;\n2. SELECT COUNT(DISTINCT DEPT) FROM STUDENT;\n3. SELECT COUNT(DISTINCT DEPT) FROM STUDENT WHERE DEPT = '전기과';",
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": "1",
+          "answer": "200",
+          "aliases": []
+        },
+        {
+          "label": "2",
+          "answer": "3",
+          "aliases": []
+        },
+        {
+          "label": "3",
+          "answer": "1",
+          "aliases": []
+        }
+      ],
+      "explanation": "전체 튜플 수는 50+100+50=200이며 COUNT(DEPT)는 NULL이 없으므로 200. COUNT(DISTINCT DEPT)는 학과 종류(컴퓨터/전산/전기) 3개. WHERE DEPT='전기과'로 필터한 뒤 DISTINCT를 적용하면 값이 '전기과' 하나뿐이므로 1이다. SQL 의미를 직접 계산해 검증했고, 구글시트 복원문서 내 2개의 독립 restoration 항목이 모두 동일하게 200,3,1로 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-08",
+      "number": 8,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 SQL문의 실행 결과(COUNT)를 구하시오.",
+      "passage": "Employee(e)\n\n| name | dept_id |\n|---|---|\n| ? | 10 |\n| ? | 20 |\n| ? | 20 |\n\nDepartment(d)\n\n| dept_id | budget |\n|---|---|\n| 10 | 100 |\n| 20 | 300 |\n| 30 | 200 |",
+      "code": "SELECT COUNT(*) FROM employee e JOIN dept d\nON e.dep_id = d.dep_id\nWHERE d.budget > (SELECT AVG(budget) FROM dept);",
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "2",
+          "aliases": []
+        }
+      ],
+      "explanation": "dept의 평균 budget은 (100+300+200)/3=200이며, 200보다 큰 부서는 dept_id=20(budget 300) 하나뿐이다. Employee에서 dept_id=20인 행은 2건이므로 JOIN 후 COUNT(*)=2이다. 직접 계산으로 검증했고, 구글시트 내 여러 독립 응시자 댓글('부서 내 인원이 둘이라 답 2')과 요약표 항목도 2로 일치했다. 단, 일부 댓글에서 원 시험 지문에 테이블명 오타(employee vs employees)가 있어 전원 정답 처리되었을 가능성도 제기되었으나 이는 채점 방식에 대한 소문이며 쿼리 자체의 논리적 정답은 2로 확인된다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-09",
+      "number": 9,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 Python 코드를 실행하고 입력값으로 HumanDev를 주었을 때 출력되는 결과를 쓰시오.",
+      "passage": null,
+      "code": "s = input(\"입력 : \")  # 입력: HumanDev\n\nx = []\nfor i in s.split():\n    x.append(i[::-1])\ny = ' '.join(x)\nz = ''.join([c for c in y if c not in 'ong'])\nprint(z)",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "veDamuH",
+          "aliases": []
+        }
+      ],
+      "explanation": "s.split()은 공백이 없어 [\"HumanDev\"] 한 요소, 이를 뒤집으면 \"veDnamuH\"가 되고 join으로도 값은 그대로다. 마지막 줄에서 'o','n','g'에 해당하는 문자를 제거하면 \"veDnamuH\"에서 'n'이 빠져 \"veDamuH\"가 된다. 직접 트레이싱으로 검증했으며 구글시트 복원문서와 브런치 블로그(별개 작성자)가 동일 문제(join+슬라이스[::-1]+not in 'ong')를 독립적으로 언급했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-10",
+      "number": 10,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 Python 코드를 실행했을 때 출력되는 결과를 쓰시오.",
+      "passage": null,
+      "code": "a = list(range(10))\nfor i in a[::-2]:\n    print(i, end='A')\nprint()",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "9A7A5A3A1A",
+          "aliases": []
+        }
+      ],
+      "explanation": "a=[0..9]에서 a[::-2]는 마지막 요소부터 2씩 감소하며 [9,7,5,3,1]을 순회하고, 각 값 뒤에 'A'를 붙여 출력하므로 \"9A7A5A3A1A\"가 된다. 직접 트레이싱으로 검증했고, 구글시트 복원문서 및 브런치 블로그(별개 작성자, '9부터 2씩 감소, 각 문자에 A 붙여 출력')가 독립적으로 동일 문제를 언급했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-11",
+      "number": 11,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 Python 코드를 실행했을 때 출력되는 결과를 쓰시오.",
+      "passage": null,
+      "code": "def f(a):\n    m = [[x] for x in a]\n    b = m[:]\n    for i in range(len(b)-1):\n        b[1+i] += b[i]\n    result = sum([len(x) for x in m])\n    return result\nprint(f([1,2,3,4]))",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "10",
+          "aliases": []
+        }
+      ],
+      "explanation": "m=[[1],[2],[3],[4]]이고 b=m[:]는 얕은 복사라 내부 리스트 객체를 m과 공유한다. b[1]+=b[0]은 리스트를 in-place로 확장하며 m[1]도 함께 [2,1]로 바뀌고, 이어서 b[2]+=b[1]로 m[2]가 [3,2,1], b[3]+=b[2]로 m[3]이 [4,3,2,1]이 된다. 결국 m의 각 원소 길이는 1,2,3,4이고 합은 10이다. 얕은 복사로 인한 별칭(aliasing) 효과를 직접 단계별로 트레이싱해 검증했으며, 구글시트 복원문서의 명시된 정답과 일치한다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-12",
+      "number": 12,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 CREATE TABLE 구문에서 이름이 TEAM_TF인 외래키 제약조건을 정의하는 (1)~(5) 빈칸에 들어갈 키워드/식별자를 순서대로 쓰시오. (TF는 제약조건임)",
+      "passage": "학생-팀 관계 테이블 정의 중 제약조건 이름(TEAM_TF)을 가진 외래키(TEAM_ID)가 참조 테이블의 TEAM_ID2 컬럼을 참조하도록 하는 구문. (원문 지문이 심하게 훼손되어 표준 SQL DDL 문법과 복원문서 내 2개의 독립 응답이 일치하는 답안 순서를 근거로 재구성한 근사 지문)",
+      "code": "( (1) ) TEAM_TF ( (2) ) KEY ( (3) ) ( (4) ) 참조테이블( (5) )",
+      "language": "sql",
+      "choices": null,
+      "answers": [
+        {
+          "label": "(1)",
+          "answer": "CONSTRAINT",
+          "aliases": []
+        },
+        {
+          "label": "(2)",
+          "answer": "FOREIGN",
+          "aliases": []
+        },
+        {
+          "label": "(3)",
+          "answer": "TEAM_ID",
+          "aliases": []
+        },
+        {
+          "label": "(4)",
+          "answer": "REFERENCES",
+          "aliases": []
+        },
+        {
+          "label": "(5)",
+          "answer": "TEAM_ID2",
+          "aliases": []
+        }
+      ],
+      "explanation": "표준 SQL DDL의 외래키 제약조건 문법은 'CONSTRAINT 제약조건명 FOREIGN KEY (컬럼) REFERENCES 참조테이블(참조컬럼)'이며, 이 구조로 빈칸을 채우면 지문의 배치와 정확히 맞는다. 구글시트 복원문서 내에서 서로 다른 응시자가 작성한 2개의 독립 항목이 모두 'CONSTRAINT, FOREIGN, TEAM_ID, REFERENCES, TEAM_ID2' 순서로 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-13",
+      "number": 13,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 [보기] 중에서 설명에 맞는 공격기법을 고르시오.",
+      "passage": "1. Zero-day 공격과 같이 알려지지 않은 취약점을 이용\n2. 특정 웹사이트를 감염시켜 불특정 다수를 공격\n3. 잠복해 있다가 특정 IP로 접속 시 공격\n\n[보기](순서무관): Killchain / Ransomware / Watering hole / Spyware / (이로운 도구) / Pharming / 기타",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Watering Hole",
+          "aliases": [
+            "워터링홀",
+            "Watering hole"
+          ]
+        }
+      ],
+      "explanation": "특정 웹사이트를 감염시켜 그 사이트에 접속하는 특정 대상을 공격하는 기법은 워터링홀(Watering Hole) 공격이다. 구글시트 복원문서 내에서 동일 문제가 두 곳(상세 문항과 요약표 14번)에 독립적으로 기록되었고 모두 동일하게 'Watering Hole'로 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-14",
+      "number": 14,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 공격/취약점 기법을 [보기]에서 고르시오.",
+      "passage": "원본 데이터 파일은 따로 있고, 하나는 그 파일을 가리키기만 한다. 임시 파일이 원본 파일이 아닐 때 이를 삭제하는 등의 취약점이 발생한다.\n\n[보기]: 하이퍼링크 / 가상패스링크 / 스태커 링크 / 심볼릭 링크 / 하드 링크",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "심볼릭링크",
+          "aliases": [
+            "심볼릭 링크"
+          ]
+        }
+      ],
+      "explanation": "원본 파일을 가리키는 링크 파일을 검사(check) 시점과 사용(use) 시점 사이에 바꿔치기하는 레이스 컨디션(TOCTOU) 취약점은 심볼릭 링크(Symbolic Link) 공격의 전형적 설명이며, KISA 시큐어코딩 가이드의 표준 항목과 일치한다. 구글시트 복원문서 내 2곳(상세 문항, 요약표 3~4번)에서 독립적으로 동일하게 '심볼릭링크'로 답이 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-15",
+      "number": 15,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "서브넷 마스크가 255.255.254.0일 때, 다음 IP가 속한 네트워크 주소를 CIDR 표기법으로 구하시오.",
+      "passage": "1. 192.168.11.20\n2. 192.168.12.200",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "1",
+          "answer": "192.168.10.0/23",
+          "aliases": []
+        },
+        {
+          "label": "2",
+          "answer": "192.168.12.0/23",
+          "aliases": []
+        }
+      ],
+      "explanation": "255.255.254.0은 /23이며 세 번째 옥텟은 2 단위(0,2,4,...)로 서브넷이 나뉜다. 192.168.11.20은 11이 10과 12 사이이므로 네트워크 주소는 192.168.10.0/23이고, 192.168.12.200은 12가 정확히 경계값이므로 192.168.12.0/23이다. 서브넷 계산을 직접 수행해 검증했으며, 구글시트 복원문서 내 2개의 독립 응답이 동일한 두 값으로 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-16",
+      "number": 16,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "하향식 통합 테스트와 상향식 통합 테스트에서 각각 미완성 모듈을 대체하기 위해 사용하는 모듈을 순서대로 쓰시오.",
+      "passage": null,
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "1",
+          "answer": "테스트 스텁",
+          "aliases": [
+            "스텁",
+            "Stub"
+          ]
+        },
+        {
+          "label": "2",
+          "answer": "테스트 드라이버",
+          "aliases": [
+            "드라이버",
+            "Driver"
+          ]
+        }
+      ],
+      "explanation": "하향식 통합 테스트는 아직 개발되지 않은 하위 모듈을 대체하는 테스트 스텁(Stub)을, 상향식 통합 테스트는 상위 모듈을 대체하는 테스트 드라이버(Driver)를 사용하는 것이 표준 교과 지식이다. 구글시트 복원문서 내 2개의 독립 항목(상세 문항, 요약표 2번)이 동일하게 스텁/드라이버로 일치했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    },
+    {
+      "id": "past-2026-1-17",
+      "number": 17,
+      "examRound": "2026년 1회",
+      "type": "short",
+      "question": "다음 설명에 해당하는 디자인 패턴 2가지를 쓰시오.",
+      "passage": "1. 추상부와 구현부를 분리하는 패턴\n2. 상태(객체) 변경 시 관찰자들에게 자동으로 통지하는 패턴",
+      "code": null,
+      "language": null,
+      "choices": null,
+      "answers": [
+        {
+          "label": "1",
+          "answer": "Bridge",
+          "aliases": [
+            "브리지 패턴"
+          ]
+        },
+        {
+          "label": "2",
+          "answer": "Observer",
+          "aliases": [
+            "옵서버 패턴",
+            "관찰자 패턴"
+          ]
+        }
+      ],
+      "explanation": "GoF 디자인 패턴에서 추상화와 구현을 분리하는 패턴은 Bridge, 객체 상태 변화 시 관찰자들에게 자동으로 통지하는 패턴은 Observer로, 표준 정의와 정확히 일치해 자체 검증 가능하다. 구글시트 복원문서 1개 출처지만 확립된 GoF 패턴 정의로 검증했다.",
+      "figure": false,
+      "figureDesc": null,
+      "sourceUrl": "https://docs.google.com/spreadsheets/d/1BRWr-6JLwuW3LQs35ZTemBdd23oYx6T4lhapYACcVbA/htmlview"
+    }
+  ]
+}

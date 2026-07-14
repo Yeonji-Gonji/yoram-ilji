@@ -1,0 +1,87 @@
+{
+  "category": "pointer",
+  "categoryLabel": "코드: 포인터",
+  "sourcePdf": "/정보처리기사실기_04_코드-포인터5문제.pdf",
+  "questions": [
+    {
+      "id": "pointer-001",
+      "number": 1,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nint len(char* p);\n\nint main( ) {\n    char* p1 = \"2022\";\n    char* p2 = \"202207\";\n    int a = len(p1);\n    int b = len(p2);\n    printf(\"%d\", a + b);\n}\n\nint len(char* p) {\n    int r = 0;\n    while (*p != '\\0') {\n        p++;\n        r++;\n    }\n    return r;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "10", "aliases": [] }
+      ],
+      "explanation": "len(char* p)는 p가 가리키는 문자가 널 문자('\\0')가 아닌 동안 포인터를 한 칸씩 이동시키며(p++) 카운터 r을 증가시켜 문자열의 길이를 구하는 함수이다. p1은 \"2022\"를 가리키므로 len(p1)은 4를 반환하여 a에 저장된다. p2는 \"202207\"을 가리키므로 len(p2)는 6을 반환하여 b에 저장된다. main에서는 a와 b를 더한 값을 정수로 출력하므로 4+6=10이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "pointer-002",
+      "number": 2,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main( ) {\n    int a[4] = { 0, 2, 4, 8 };\n    int b[3];\n    int* p;\n    int sum = 0;\n    for (int i = 1; i < 4; i++) {\n        p = a + i;\n        b[i - 1] = *p - a[i - 1];\n        sum = sum + b[i - 1] + a[i];\n    }\n    printf(\"%d\", sum);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "22", "aliases": [] }
+      ],
+      "explanation": "배열 a={0,2,4,8}이고 for문은 i=1부터 3까지 반복한다. 매 반복에서 p=a+i는 a[i]의 주소를 가리키므로 *p는 a[i]와 같은 값이고, b[i-1]에는 a[i]-a[i-1]이 저장된다. i=1일 때 b[0]=2-0=2, sum=2+a[1]=2+2=4. i=2일 때 b[1]=4-2=2, sum=4+2+a[2]=4+2+4=10. i=3일 때 b[2]=8-4=4, sum=10+4+a[3]=10+4+8=22. 따라서 최종 sum은 22이다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "pointer-003",
+      "number": 3,
+      "type": "short",
+      "question": "다음 C 언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int* array[3];\n    int a = 12, b = 24, c = 36;\n    array[0] = &a;\n    array[1] = &b;\n    array[2] = &c;\n    printf(\"%d\", *array[1] + **array + 1);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "37", "aliases": [] }
+      ],
+      "explanation": "array는 포인터 3개를 담는 배열로, array[0]에는 a의 주소, array[1]에는 b의 주소, array[2]에는 c의 주소가 저장된다. *array[1]은 array[1]이 가리키는 곳의 값이므로 b의 값인 24이다. array는 배열 이름만 쓰면 &array[0]과 같으므로 *array는 array[0]과 같은 값, 즉 a의 주소이고, **array는 그 주소가 가리키는 값인 a=12이다. 따라서 *array[1] + **array + 1 = 24 + 12 + 1 = 37이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "pointer-004",
+      "number": 4,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int ary[3];\n    int s = 0;\n    *(ary + 0) = 1;\n    ary[1] = *(ary + 0) + 2;\n    ary[2] = *ary + 3;\n    for (int i = 0; i < 3; i++)\n        s = s + ary[i];\n    printf(\"%d\", s);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "8", "aliases": [] }
+      ],
+      "explanation": "*(ary+0)은 ary[0]과 동일하므로 ary[0]=1이 저장된다. ary[1]=*(ary+0)+2는 ary[0]의 값 1에 2를 더한 3이 저장된다. ary[2]=*ary+3에서 *ary는 배열 이름만 쓰면 ary[0]과 같으므로 1+3=4가 저장된다. 결과적으로 ary={1,3,4}이며, for문에서 s에 ary[0]+ary[1]+ary[2]를 누적하면 1+3+4=8이 되어 8이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "pointer-005",
+      "number": 5,
+      "type": "short",
+      "question": "다음 C 언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nmain() {\n    char* p = \"KOREA\";\n    printf(\"%s\\n\", p);\n    printf(\"%s\\n\", p + 3);\n    printf(\"%c\\n\", *p);\n    printf(\"%c\\n\", *(p + 3));\n    printf(\"%c\\n\", *p + 2);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "KOREA\nEA\nK\nE\nM", "aliases": [] }
+      ],
+      "explanation": "p는 문자열 \"KOREA\"가 저장된 주소를 가리키는 포인터이다(K=p+0, O=p+1, R=p+2, E=p+3, A=p+4, 끝에 널 문자 추가). %s로 p를 출력하면 p 위치부터 널 문자 전까지 전체 문자열 \"KOREA\"가 출력된다. %s로 p+3을 출력하면 p+3(=E) 위치부터 널 문자 전까지인 \"EA\"가 출력된다. %c로 *p를 출력하면 p가 가리키는 첫 문자 'K'가 출력되고, *(p+3)은 'E'가 출력된다. 마지막으로 *p+2는 문자가 아니라 'K'의 아스키 코드 값(75)에 2를 더한 77을 문자로 해석하는 것이므로, 아스키 코드 77에 해당하는 문자 'M'이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    }
+  ]
+}

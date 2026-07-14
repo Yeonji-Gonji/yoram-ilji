@@ -1,6 +1,6 @@
 # PROJECT: yoram-ilji 현황판
 
-> 갱신일: 2026-07-09
+> 갱신일: 2026-07-14
 > 히스토리 정본: obsidian vault `projects/yoram-ilji.md` (private)
 > 사이트 구조·콘텐츠 설계: vault `portfolio/site-structure-plan.md` + `detail-design-and-content-architecture.md`
 
@@ -16,6 +16,7 @@
 
 ## 최근 완료
 
+- 2026-07-14 정보처리기사 실기 CBT 기능(/quiz) 추가: 340문제(시나공 PDF 7종 190 + 웹수집 기출복원 2023~2026 150, 회차별 분류), 모의고사·유형별 연습·오답노트 3모드, 자동 채점+자가 채점, localStorage 기록, noindex. 전수 검증 워크플로우(PDF 대조+코드 재트레이스) 통과 → 상세: `docs/archive/report-quiz-cbt-2026-07-14.md`
 - 2026-07-09 GTM(GTM-5FGH28HC)+GA4+GSC·네이버 소유확인, 사이트맵 제출
 - 2026-07-09 오늘수영 인프라 글 긱뉴스 등록: 첫 유입 활동 (당일 7P)
 - 2026-07-05 홈 개편: Development 부채꼴 갤러리, Design 쇼케이스 배너, Blog 그리드, 연지곤지 거북이 히어로 SVG

@@ -1,0 +1,187 @@
+{
+  "category": "java",
+  "categoryLabel": "코드: JAVA 활용",
+  "sourcePdf": "/정보처리기사실기_07_코드-JAVA활용9문제.pdf",
+  "questions": [
+    {
+      "id": "java-001",
+      "number": 1,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "class Test {\n    public static void main(String args[]) {\n        cond obj = new cond(3);\n        obj.a = 5;\n        int b = obj.func( );\n        System.out.print(obj.a + b);\n    }\n}\n\nclass cond {\n    int a;\n    public cond(int a) {\n        this.a = a;\n    }\n    public int func( ) {\n        int b = 1;\n        for (int i = 1; i < a; i++)\n            b += a * i;\n        return a + b;\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "61",
+          "aliases": []
+        }
+      ],
+      "explanation": "생성자 cond(3)으로 obj.a가 3으로 초기화된 후 obj.a = 5로 필드 값이 덮어써진다. func()에는 지역변수 a가 없으므로 클래스 필드 a(현재 값 5)를 그대로 사용한다. for문은 i=1부터 a(5) 미만까지 반복하며 b += a*i를 누적한다: b는 1→6→16→31→51로 변하고 i=5에서 조건을 만족하지 못해 종료된다. func()은 a+b = 5+51 = 56을 반환하고, main에서 obj.a + b = 5 + 56 = 61이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-002",
+      "number": 2,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "class A {\n    int a;\n    int b;\n}\n\npublic class Test {\n    static void func1(A m) {\n        m.a *= 10;\n    }\n    static void func2(A m) {\n        m.a += m.b;\n    }\n    public static void main(String args[]) {\n        A m = new A();\n        m.a = 100;\n        func1(m);\n        m.b = m.a;\n        func2(m);\n        System.out.printf(\"%d\", m.a);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "2000",
+          "aliases": []
+        }
+      ],
+      "explanation": "객체 변수는 시작 주소(참조)로 전달되므로 func1, func2 안에서 m을 통해 변경한 값은 호출한 곳의 원본 객체에도 그대로 반영된다. m.a = 100 상태에서 func1(m)이 호출되어 m.a *= 10 → 1000이 된다. 이어서 m.b = m.a로 b도 1000이 되고, func2(m)이 호출되어 m.a += m.b → 2000이 된다. 최종적으로 m.a인 2000이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-003",
+      "number": 3,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class ovr1 {\n    public static void main(String[] args) {\n        ovr1 a1 = new ovr1();\n        ovr2 a2 = new ovr2();\n        System.out.println(a1.sun(3,2) + a2.sun(3,2));\n    }\n    int sun(int x, int y) {\n        return x + y;\n    }\n}\nclass ovr2 extends ovr1 {\n    int sun(int x, int y) {\n        return x - y + super.sun(x, y);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "11",
+          "aliases": []
+        }
+      ],
+      "explanation": "ovr2는 ovr1을 상속하며 sun() 메소드를 오버라이딩한다. a1.sun(3,2)는 부모 클래스 ovr1의 원본 메소드가 호출되어 x+y = 5를 반환한다. a2.sun(3,2)는 자식 클래스 ovr2의 재정의된 메소드가 호출되어 x-y+super.sun(x,y)를 계산하는데, super.sun(3,2)는 부모의 원본 sun을 호출해 5를 반환하므로 (3-2)+5 = 6이 된다. 두 결과를 더한 5+6 = 11이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-004",
+      "number": 4,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "class A {\n    int a;\n    public A(int a) { this.a = a; }\n    void display() { System.out.println(\"a=\" + a); }\n}\nclass B extends A {\n    public B(int a) {\n        super(a);\n        super.display();\n    }\n}\npublic class Test {\n    public static void main(String[] args) {\n        B obj = new B(10);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "a=10",
+          "aliases": []
+        }
+      ],
+      "explanation": "B는 A를 상속하며, 생성자 B(int a)에서 super(a)로 부모 생성자를 호출해 클래스 A에 속한 필드 a에 10을 저장한다. 이어서 super.display()로 부모 클래스 A의 display() 메소드를 명시적으로 호출한다. display()가 출력하는 a는 생성자 매개변수가 아니라 클래스 A에 속한 필드이므로 앞서 저장된 값 10이 그대로 사용된다. 결과는 \"a=10\"이다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-005",
+      "number": 5,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 괄호에 들어갈 알맞은 답을 쓰시오.",
+      "passage": null,
+      "code": "class Car implements Runnable {\n    int a;\n    public void run() {\n        try {\n            while(++a < 100) {\n                System.out.println(\"miles traveled : \" + a);\n                Thread.sleep(100);\n            }\n        } catch(Exception E) { }\n    }\n}\n\npublic class Test {\n    public static void main(String args[]) {\n        Thread t1 = new Thread(new (        )());\n        t1.start();\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Car",
+          "aliases": []
+        }
+      ],
+      "explanation": "Car 클래스는 Runnable 인터페이스를 implements하여 스레드가 수행할 작업을 run() 메소드에 정의하고 있다. Thread 클래스의 생성자는 Runnable을 구현한 객체를 인수로 받으므로, 빈칸에는 Runnable 구현 클래스인 Car의 생성자 호출이 들어가야 한다. 즉 new Car()로 Thread 객체를 생성한다. t1.start()를 호출하면 main() 메소드와 별개로 시스템 자원을 새로 할당받아 Car의 run() 메소드가 실행되어 0.1초마다 miles traveled 값이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-006",
+      "number": 6,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "class Connection {\n    private static Connection _inst = null;\n    private int count = 0;\n    static public Connection get() {\n        if(_inst == null) {\n            _inst = new Connection();\n            return _inst;\n        }\n        return _inst;\n    }\n    public void count() { count++; }\n    public int getCount() { return count; }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        Connection conn1 = Connection.get();\n        conn1.count();\n        Connection conn2 = Connection.get();\n        conn2.count();\n        Connection conn3 = Connection.get();\n        conn3.count();\n        System.out.print(conn1.getCount());\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "3",
+          "aliases": []
+        }
+      ],
+      "explanation": "static 필드 _inst를 클래스 내부에서 한 번만 생성해 공유하는 싱글톤(Singleton) 패턴 구현이다. get() 메소드는 _inst가 null일 때만 새 객체를 heap에 생성하고, 이후 호출부터는 이미 생성된 동일한 주소를 그대로 반환한다. 따라서 conn1, conn2, conn3은 모두 같은 Connection 객체(같은 heap 주소)를 참조하며 count 필드도 공유된다. count()가 conn1, conn2, conn3 각각에서 한 번씩 총 3번 호출되므로 conn1.getCount()는 3을 반환한다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-007",
+      "number": 7,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 괄호에 들어갈 알맞은 답을 쓰시오.",
+      "passage": null,
+      "code": "class Parent {\n    void show() { System.out.println(\"parent\"); }\n}\nclass Child extends Parent {\n    void show() { System.out.println(\"child\"); }\n}\npublic class Test {\n    public static void main(String[] args) {\n        Parent pa = (    ) Child();\n        pa.show();\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "new",
+          "aliases": []
+        }
+      ],
+      "explanation": "부모 클래스형 변수를 선언하면서 자식 클래스의 생성자를 사용하면 형 변환이 발생하는데, 이때 문법은 [부모클래스명] [객체변수명] = new [자식클래스생성자()] 형태여야 한다. 따라서 빈칸에는 객체 생성 예약어 new가 들어간다. 이렇게 형 변환이 발생했을 때 부모와 자식 클래스에 동일한 메소드(show())가 있으면 자식 클래스의 메소드로 재정의(오버라이딩)되어 실행된다. 따라서 pa.show()는 Child의 show()가 호출되어 \"child\"가 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-008",
+      "number": 8,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "class Parent {\n    int compute(int num) {\n        if(num <= 1) return num;\n        return compute(num - 1) + compute(num - 2);\n    }\n}\n\nclass Child extends Parent {\n    int compute(int num) {\n        if(num <= 1) return num;\n        return compute(num - 1) + compute(num - 3);\n    }\n}\n\npublic class Test {\n    public static void main(String[] args) {\n        Parent obj = new Child();\n        System.out.print(obj.compute(4));\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "1",
+          "aliases": []
+        }
+      ],
+      "explanation": "Child가 Parent를 상속하며 compute() 메소드를 오버라이딩하므로, Parent obj = new Child() 형 변환 후 obj.compute(4)를 호출하면 Child의 compute()가 재귀적으로 수행된다(내부의 compute() 호출도 모두 Child의 것). compute(1)은 num<=1 조건에 의해 즉시 1을 반환한다. compute(2)는 compute(1)+compute(-1) = 1 + (-1) = 0을 반환한다. compute(3)은 compute(2)+compute(0) = 0 + 0 = 0을 반환한다. 최종적으로 compute(4) = compute(3) + compute(1) = 0 + 1 = 1이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "java-009",
+      "number": 9,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "abstract class Vehicle {\n    String name;\n    abstract public String getName(String val);\n    public String getName() {\n        return \"Vehicle name : \" + name;\n    }\n}\nclass Car extends Vehicle {\n    private String name;\n    public Car(String val) {\n        name = super.name = val;\n    }\n    public String getName(String val) {\n        return \"Car name : \" + val;\n    }\n    public String getName(byte[] val) {\n        return \"Car name : \" + val;\n    }\n}\npublic class Test {\n    public static void main(String[] args) {\n        Vehicle obj = new Car(\"Spark\");\n        System.out.print(obj.getName());\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        {
+          "label": null,
+          "answer": "Vehicle name : Spark",
+          "aliases": []
+        }
+      ],
+      "explanation": "Car는 추상 클래스 Vehicle을 상속하며 자신만의 private name 필드를 별도로 선언한다. 생성자에서 name = super.name = val로 Car의 필드와 Vehicle의 필드 양쪽에 동시에 \"Spark\"를 저장한다. obj.getName()은 인수가 없는 호출인데, Car에는 인수 없는 getName()이 오버라이딩되어 있지 않고 getName(String val)과 getName(byte[] val)만 있으므로(오버로딩은 인수의 자료형·개수가 달라야 별도 메소드) 인수 없는 시그니처를 가진 Vehicle의 getName()이 그대로 호출된다. 이때 사용되는 name은 Vehicle 클래스의 필드이며 값은 \"Spark\"이므로 \"Vehicle name : Spark\"가 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    }
+  ]
+}

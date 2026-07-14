@@ -1,0 +1,235 @@
+{
+  "category": "control",
+  "categoryLabel": "코드: 제어문",
+  "sourcePdf": "/정보처리기사실기_03_코드-제어문14문제.pdf",
+  "questions": [
+    {
+      "id": "control-001",
+      "number": 1,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nmain() {\n    int s, el = 0;\n    for (int i = 6; i <= 30; i++) {\n        s = 0;\n        for (int j = 1; j <= i / 2; j++)\n            if (i % j == 0)\n                s = s + j;\n        if (s == i)\n            el++;\n    }\n    printf(\"%d\", el);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "2", "aliases": [] }
+      ],
+      "explanation": "6부터 30까지 i를 증가시키며, i의 절반 이하 범위에서 i를 나눠 나머지가 0인 j(즉 자신을 제외한 약수)를 s에 누적한다. 반복이 끝난 뒤 s가 i와 같으면(완전수) el을 1 증가시킨다. 6은 1+2+3=6이라 완전수이고, 28은 1+2+4+7+14=28이라 완전수이다. 6~30 범위에서 완전수는 6과 28 두 개뿐이므로 el은 최종 2가 된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-002",
+      "number": 2,
+      "type": "short",
+      "question": "다음 JAVA로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        int r = 0;\n        for (int i = 1; i < 999; i++) {\n            if (i % 3 == 0 && i % 2 == 0)\n                r = i;\n        }\n        System.out.print(r);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "996", "aliases": [] }
+      ],
+      "explanation": "i를 1부터 998까지 증가시키며 3과 2로 모두 나누어지는(즉 6의 배수인) 값을 만날 때마다 r에 그 값을 갱신 저장한다. 반복문이 끝날 때 r에는 가장 마지막(가장 큰)으로 조건을 만족한 값이 남는다. 999보다 작은 6의 배수 중 가장 큰 값은 996이므로 r은 996이 되어 그대로 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-003",
+      "number": 3,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        int i = 3, k = 1;\n        switch(i) {\n        case 1: k++;\n        case 2: k -= 3;\n        case 3: k = 0;\n        case 4: k += 3;\n        case 5: k -= 10;\n        default: k--;\n        }\n        System.out.print(k);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "-8", "aliases": [] }
+      ],
+      "explanation": "i가 3이므로 switch는 'case 3:'으로 바로 진입한다. 이 switch문에는 break가 없으므로 이후의 모든 case와 default 문장이 순서대로 계속 실행된다. case 3에서 k=0, case 4에서 k+=3 → k=3, case 5에서 k-=10 → k=-7, default에서 k-- → k=-8이 되어 최종 출력은 -8이다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-004",
+      "number": 4,
+      "type": "short",
+      "question": "다음은 정수를 역순으로 출력하는 C언어 프로그램이다. 예를 들어 1234의 역순은 4321이다. 단, 1230처럼 0으로 끝나는 정수는 고려하지 않는다. 프로그램을 분석하여 괄호(①~③)에 들어갈 알맞은 연산자를 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nint main() {\n    int number = 1234;\n    int div = 10, result = 0;\n\n    while (number (  ①  ) 0) {\n        result = result * div;\n        result = result + number (  ②  ) div;\n        number = number (  ③  ) div;\n    }\n    printf(\"%d\", result);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": "①", "answer": "!=", "aliases": [">"] },
+        { "label": "②", "answer": "%", "aliases": [] },
+        { "label": "③", "answer": "/", "aliases": [] }
+      ],
+      "explanation": "number가 0이 될 때까지 반복해야 하므로 ①은 '!=' (또는 '>')가 들어간다. 매 반복에서 result에 10을 곱해 자리를 한 칸 올린 뒤, number를 10으로 나눈 나머지(가장 낮은 자리 숫자)를 더해야 역순이 만들어지므로 ②는 '%'이다. 다음 자리 숫자를 구하기 위해 number를 10으로 나눠 마지막 자리를 제거해야 하므로 ③은 '/'이다. 이 과정을 1234에 적용하면 4, 43, 432, 4321 순으로 result가 만들어진다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-005",
+      "number": 5,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        int w = 3, x = 4, y = 3, z = 5;\n        if((w == 2 | w == y) & !(y > z) & (1 == x ^ y != z)) {\n            w = x + y;\n            if(7 == x ^ y != w)\n                System.out.println(w);\n            else\n                System.out.println(x);\n        }\n        else {\n            w = y + z;\n            if(7 == y ^ z != w)\n                System.out.println(w);\n            else\n                System.out.println(z);\n        }\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "7", "aliases": [] }
+      ],
+      "explanation": "바깥 if 조건은 비트 연산 |, &, ^로 계산된다: (w==2 | w==y)=0|1=1, !(y>z)=!(0)=1, (1==x ^ y!=z)=0^1=1. 1 & 1 & 1 = 1(참)이므로 첫 블록이 실행되어 w = x+y = 7이 된다. 안쪽 if의 조건 7==x ^ y!=w는 0^1=1(참)이므로 System.out.println(w)가 실행되어 7이 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-006",
+      "number": 6,
+      "type": "short",
+      "question": "다음 Python으로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "a = 100\nresult = 0\nfor i in range(1,3):\n    result = a >> i\n    result = result + 1\nprint(result)",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "26", "aliases": [] }
+      ],
+      "explanation": "result는 반복마다 누적되지 않고 매번 새 값으로 치환된다. i=1일 때 result = 100 >> 1 = 50, 이후 +1을 하면 51이 되지만 이 값은 다음 반복에서 그대로 덮어써진다. i=2일 때 result = 100 >> 2 = 25(오른쪽으로 2비트 시프트, 100을 4로 나눈 값과 동일)이고 여기에 +1을 하면 최종 result는 26이 된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-007",
+      "number": 7,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        int j, i;\n        for (j = 0, i = 0; i <= 5; i++) {\n            j += i;\n            System.out.print(i);\n            if (i == 5) {\n                System.out.print(\"=\");\n                System.out.print(j);\n            }\n            else\n                System.out.print(\"+\");\n        }\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "0+1+2+3+4+5=15", "aliases": [] }
+      ],
+      "explanation": "i가 0부터 5까지 증가하며 매번 j에 i를 누적하고 i 값을 출력한다. i가 5가 아니면 '+'를 출력하고, i가 5가 되면 '='와 함께 j(0~5의 합인 15)를 출력한다. 따라서 0, 1, 2, 3, 4, 5가 '+'로 이어지고 마지막에 '=15'가 붙어 0+1+2+3+4+5=15가 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-008",
+      "number": 8,
+      "type": "short",
+      "question": "다음 Python으로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "lol = [[1, 2, 3], [4, 5], [6, 7, 8, 9]]\nprint(lol[0])\nprint(lol[2][1])\nfor sub in lol:\n    for item in sub:\n        print(item, end=' ')\n    print()",
+      "language": "python",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "[1, 2, 3]\n7\n1 2 3\n4 5\n6 7 8 9", "aliases": [] }
+      ],
+      "explanation": "lol은 길이가 각각 3, 2, 4인 리스트를 담은 2차원 리스트이다. print(lol[0])은 0번째 행 전체를 리스트 형태로 [1, 2, 3]과 같이 출력한다. print(lol[2][1])은 2번째 행의 1번째 요소인 7을 출력한다. 이후 이중 for문은 각 행(sub)의 요소를 한 줄에 공백으로 구분해 출력하므로 '1 2 3', '4 5', '6 7 8 9'가 차례로 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-009",
+      "number": 9,
+      "type": "short",
+      "question": "다음은 변수 n에 저장된 10진수를 2진수로 변환하여 출력하는 Java 프로그램이다. 프로그램을 분석하여 괄호(①, ②)에 들어갈 알맞은 답을 쓰시오.",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[]args) {\n        int a[] = new int[8];\n        int i = 0;\n        int n = 10;\n        while(  (  ①  )  ) {\n            a[i++] = (  ②  );\n            n /= 2;\n        }\n        for(i = 7; i >= 0; i--)\n            System.out.print(a[i]);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": "①", "answer": "n > 0", "aliases": [] },
+        { "label": "②", "answer": "n % 2", "aliases": [] }
+      ],
+      "explanation": "10진수를 2진수로 변환하려면 몫이 0이 될 때까지 2로 나누어 나머지를 차례로 배열에 저장해야 하므로, 반복 조건 ①은 'n > 0'이다. 각 단계에서 저장해야 할 값은 2로 나눈 나머지이므로 ②는 'n % 2'이다. n=10을 예로 들면 나머지가 0,1,0,1 순으로 a[0]~a[3]에 저장되고, 이후 배열을 7부터 0까지 역순으로 출력하면 2진수 00001010이 만들어진다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-010",
+      "number": 10,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 괄호(①, ②)에 들어갈 알맞은 답을 쓰시오.",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String []args) {\n        int ary[][] = new int[(  ①  )][(  ②  )];\n        int n = 1;\n        for(int i = 0; i < 3; i++) {\n            for(int j = 0; j < 5; j++) {\n                ary[i][j] = j * 3 + i + 1;\n                System.out.print(ary[i][j] + \" \");\n            }\n            System.out.println();\n        }\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": "①", "answer": "3", "aliases": [] },
+        { "label": "②", "answer": "5", "aliases": [] }
+      ],
+      "explanation": "이후 코드에서 i는 0~2(3번), j는 0~4(5번) 범위로 ary[i][j]에 접근하므로 배열은 3행 5열로 선언되어야 한다. 따라서 ①은 행 개수 3, ②는 열 개수 5이다. 이 크기에 맞춰 ary[i][j] = j*3+i+1을 채우면 각 행은 1 4 7 10 13 / 2 5 8 11 14 / 3 6 9 12 15로 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-011",
+      "number": 11,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        int i = 0, c = 0;\n        while (i < 10) {\n            i++;\n            c *= i;\n        }\n        System.out.println(c);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "0", "aliases": [] }
+      ],
+      "explanation": "c는 0으로 초기화된 채 시작하며, 반복문 안에서 매번 c에 i를 곱하는 c *= i만 수행된다. 0에 어떤 값을 곱해도 계속 0이므로, i가 1부터 10까지 증가하는 동안 c는 항상 0으로 유지된다. 따라서 반복이 끝난 뒤 출력되는 c의 값은 0이다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-012",
+      "number": 12,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test{\n    public static void main(String[] args){\n        int a = 0, sum = 0;\n        while (a < 10) {\n            a++;\n            if (a%2 == 1)\n                continue;\n            sum +=a;\n        }\n        System.out.println(sum);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "30", "aliases": [] }
+      ],
+      "explanation": "a가 1부터 10까지 증가하는 동안, a를 2로 나눈 나머지가 1(홀수)이면 continue로 sum 누적을 건너뛰고 반복문 처음으로 되돌아간다. 따라서 짝수인 a(2,4,6,8,10)만 sum에 누적된다. 2+4+6+8+10을 계산하면 30이 되어 최종 출력은 30이다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-013",
+      "number": 13,
+      "type": "short",
+      "question": "다음 JAVA로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        int result[] = new int[5];\n        int arr[] = { 77, 32, 10, 99, 50 };\n        for(int i = 0; i < 5; i++) {\n            result[i] = 1;\n            for(int j = 0; j < 5; j++)\n                if(arr[i] < arr[j])\n                    result[i]++;\n        }\n        for(int k = 0; k < 5; k++)\n            System.out.print(result[k]);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "24513", "aliases": [] }
+      ],
+      "explanation": "arr에 저장된 값들의 등수(석차)를 구해 result에 저장하는 알고리즘이다. result[i]는 1로 시작하며, arr[i]보다 큰 값을 arr에서 하나 찾을 때마다 1씩 증가시켜 등수를 계산한다. arr = {77, 32, 10, 99, 50}에서 77은 2등, 32는 4등, 10은 5등, 99는 1등, 50은 3등이 되어 result = {2, 4, 5, 1, 3}이 되고, 이를 순서대로 출력하면 24513이다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "control-014",
+      "number": 14,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        int aa[][] = { {45, 50, 75},\n                        {89} };\n        System.out.println(aa[0].length);\n        System.out.println(aa[1].length);\n        System.out.println(aa[0][0]);\n        System.out.println(aa[0][1]);\n        System.out.println(aa[1][0]);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "3\n1\n45\n50\n89", "aliases": [] }
+      ],
+      "explanation": "aa는 각 행의 길이가 다를 수 있는(가변 배열) 2차원 배열로, 0번째 행은 {45, 50, 75}(길이 3), 1번째 행은 {89}(길이 1)이다. aa[0].length는 3, aa[1].length는 1이 출력된다. 이어서 aa[0][0]=45, aa[0][1]=50, aa[1][0]=89가 차례로 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    }
+  ]
+}
