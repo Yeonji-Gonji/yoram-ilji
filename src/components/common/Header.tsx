@@ -6,7 +6,6 @@ import {
   useMotionValueEvent,
   useScroll,
 } from 'framer-motion';
-import { Switch } from '@heroui/react';
 import {
   MenuIcon,
   MoonIcon,
@@ -21,10 +20,10 @@ import { useCursorTrail } from '../effects/CursorTrailContext';
 import { Logo } from './SvgIcons';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/blog', label: 'Blog' },
-  { href: '/portfolio', label: 'Portfolio' },
-  { href: '/profile', label: 'Profile' },
+  { href: '/profile', label: '프로필' },
+  { href: '/blog', label: '블로그' },
+  { href: '/portfolio', label: '포트폴리오' },
+  { href: '/quiz', label: '정처기 퀴즈' },
 ];
 
 export default function Header() {
@@ -83,21 +82,14 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <div className="items-center hidden gap-6 md:flex hover:cursor-pointer">
-              <Link
-                href="/blog"
-                className="transition-all duration-300 hover:text-dark-300">
-                <p>블로그</p>
-              </Link>
-              <Link
-                href="/portfolio"
-                className="transition-all duration-300 hover:text-dark-300">
-                <p>포트폴리오</p>
-              </Link>
-              <Link
-                href="/profile"
-                className="transition-all duration-300 hover:text-dark-300">
-                <p>프로필</p>
-              </Link>
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="transition-all duration-300 hover:text-dark-300">
+                  <p>{link.label}</p>
+                </Link>
+              ))}
               <div className="h-4 border border-r border-gray-200" />
               {cursorMounted && (
                 <div className="flex items-center gap-2">

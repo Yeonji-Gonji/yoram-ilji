@@ -1,0 +1,151 @@
+{
+  "category": "func",
+  "categoryLabel": "코드: 사용자 정의 함수",
+  "sourcePdf": "/정보처리기사실기_06_코드-사용자정의함수9문제.pdf",
+  "questions": [
+    {
+      "id": "func-001",
+      "number": 1,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 배열 <mines>의 각 칸에 들어갈 값을 쓰시오.",
+      "passage": null,
+      "code": "#include <stdio.h>\nmain( ) {\n    int field[4][4] = { {0,1,0,1}, {0,0,0,1}, {1,1,1,0}, {0,1,1,1} };\n    int mines[4][4] = { {0,0,0,0}, {0,0,0,0}, {0,0,0,0}, {0,0,0,0} };\n    int w = 4, h = 4;\n    for (int y = 0; y < h; y++) {\n        for (int x = 0; x < w; x++) {\n            if (field[y][x] == 0) continue;\n            for (int j = y - 1; j <= y + 1; j++) {\n                for (int i = x - 1; i <= x + 1; i++) {\n                    if (chkover(w, h, j, i) == 1)\n                        mines[j][i] += 1;\n                }\n            }\n        }\n    }\n}\n\nint chkover(int w, int h, int j, int i) {\n    if (i >= 0 && i < w && j >= 0 && j < h) return 1;\n    return 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "1 1 3 2\n3 4 5 3\n3 5 6 4\n3 5 5 3", "aliases": [] }
+      ],
+      "explanation": "field[y][x]가 1인 위치(지뢰)를 찾을 때마다 그 위치를 중심으로 3행 3열(상하좌우 및 대각선 포함) 범위의 mines 배열 값에 1씩 더한다. chkover 함수는 j, i가 배열 범위(0~3)를 벗어나면 0을 반환해 배열 밖 접근을 막는다. field의 1의 위치는 (0,1),(0,3),(1,3),(2,0),(2,1),(2,2),(3,1),(3,2),(3,3) 총 9곳이며, 각 위치마다 인접 9칸에 1을 누적한 결과가 최종 mines 값이다. 즉 mines[j][i]는 (j,i)에 인접한 지뢰의 개수를 의미하는 지뢰찾기 게임의 힌트 숫자판을 만드는 로직이다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-002",
+      "number": 2,
+      "type": "short",
+      "question": "다음 JAVA로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    static int[] mkarr( ) {\n        int[] tmpArr = new int[4];\n        for (int i = 0; i < tmpArr.length; i++)\n            tmpArr[i] = i;\n        return tmpArr;\n    }\n    public static void main(String[] args) {\n        int[] arr;\n        arr = mkarr( );\n        for (int i = 0; i < arr.length; i++)\n            System.out.print(arr[i]);\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "0123", "aliases": [] }
+      ],
+      "explanation": "arr은 요소 없이 선언되어 처음에는 메모리를 가지지 않고, mkarr() 호출 결과로 반환된 배열의 시작 주소를 저장받는다. mkarr()은 길이 4인 tmpArr을 생성해 인덱스 값(0,1,2,3)을 그대로 저장한 뒤 그 배열을 반환한다. 반환된 배열 주소를 arr이 그대로 받으므로 arr은 tmpArr과 동일한 메모리를 가리키게 된다. main의 for문은 arr[0]~arr[3]을 개행 없이 print하므로 0, 1, 2, 3이 이어져 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-003",
+      "number": 3,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nint isPrime(int number) {\n    for (int i = 2; i < number; i++)\n        if (number % i == 0) return 0;\n    return 1;\n}\n\nint main() {\n    int number = 13195;\n    int max_div = 0;\n    for (int i = 2; i < number; i++)\n        if (isPrime(i) == 1 && number % i == 0) max_div = i;\n    printf(\"%d\", max_div);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "29", "aliases": [] }
+      ],
+      "explanation": "isPrime(number)는 2부터 number-1까지 나누어보아 나머지가 0인 경우가 있으면 0(소수 아님), 없으면 1(소수)을 반환하는 소수 판별 함수다. main의 for문은 i를 2부터 13194까지 증가시키며, i가 소수이면서(isPrime(i)==1) 동시에 13195의 약수인 경우(number % i == 0) max_div에 i를 갱신 저장한다. 13195의 소수인 약수는 5, 7, 13, 29이며, i가 커질수록 max_div가 계속 갱신되므로 반복이 끝날 때 남는 값은 가장 큰 소수 약수인 29다. 따라서 printf는 29를 출력한다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-004",
+      "number": 4,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nmain() {\n    int res = mp(2, 10);\n    printf(\"%d\", res);\n}\nint mp(int base, int exp) {\n    int res = 1;\n    for (int i = 0; i < exp; i++)\n        res *= base;\n    return res;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "1024", "aliases": [] }
+      ],
+      "explanation": "mp(base, exp)는 res를 1로 초기화한 뒤 exp번 반복하며 res에 base를 계속 곱해 base의 exp제곱을 계산하는 거듭제곱 함수다. main에서 mp(2, 10)을 호출하면 res는 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024로 10번 곱해져 최종 2의 10제곱인 1024가 된다. 이 값이 main의 res에 저장되어 printf로 1024가 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-005",
+      "number": 5,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 괄호에 들어갈 알맞은 예약어를 쓰시오.",
+      "passage": null,
+      "code": "public class Test {\n    public static void main(String[] args) {\n        System.out.print(Test.check(1));\n    }\n    (      ) String check(int num){\n        return (num >= 0) ? \"positive\" : \"negative\";\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "static", "aliases": [] }
+      ],
+      "explanation": "main에서 check() 메소드를 Test.check(1)과 같이 [클래스 이름].[메소드] 형식으로 객체 생성 없이 직접 호출하고 있다. 이렇게 객체 변수 없이 클래스 이름으로 메소드에 접근하려면 해당 메소드가 static으로 선언되어 있어야 한다. 따라서 괄호에는 static이 들어가야 하며, check(1) 호출 시 num에 1이 전달되어 1 >= 0이 참이므로 \"positive\"가 반환되고 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-006",
+      "number": 6,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nint r1() {\n\treturn 4;\n}\nint r10() {\n\treturn (30 + r1());\n}\nint r100() {\n\treturn (200 + r10());\n}\nint main() {\n\tprintf(\"%d\\n\", r100());\n\treturn 0;\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "234", "aliases": [] }
+      ],
+      "explanation": "main에서 r100()을 호출하면 r100은 다시 r10()을 호출하고, r10은 다시 r1()을 호출하는 연쇄 호출 구조다. 가장 안쪽 r1()이 먼저 4를 반환하면 r10은 30 + 4 = 34를 반환하고, 이 값을 받은 r100은 200 + 34 = 234를 반환한다. 최종적으로 main의 printf는 234를 출력하고 개행한다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-007",
+      "number": 7,
+      "type": "short",
+      "question": "다음 Java로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "public class Test {\n    static int[ ] arr( ) {\n        int a[ ] = new int[4];\n        int b = a.length;\n        for(int i = 0; i < b; i++)\n            a[i] = i;\n        return a;\n    }\n\n    public static void main(String[ ] args) {\n        int a[ ] = arr( );\n        for(int i = 0; i < a.length; i++)\n            System.out.print(a[i] + \" \");\n    }\n}",
+      "language": "java",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "0 1 2 3 ", "aliases": ["0 1 2 3"] }
+      ],
+      "explanation": "main에서 인수 없이 arr()을 호출해 반환값을 배열 a에 저장한다. arr() 내부에서는 길이 4인 배열 a를 새로 만들고, b에 길이 4를 저장한 뒤 반복문으로 a[0]~a[3]에 인덱스 값 0,1,2,3을 순서대로 저장하고 이 배열을 반환한다. main은 반환받은 배열의 각 요소를 a[i] + \" \" 형태로 출력하므로 0, 1, 2, 3 뒤에 공백이 하나씩 붙어 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-008",
+      "number": 8,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nvoid align(int a[ ]) {\n    int temp;\n    for (int i = 0; i < 4; i++)\n        for (int j = 0; j < 4 - i; j++)\n            if (a[j] > a[j+1]) {\n                temp = a[j];\n                a[j] = a[j+1];\n                a[j+1] = temp;\n            }\n}\n\nmain( ) {\n    int a[ ] = { 85, 75, 50, 100, 95 };\n    align(a);\n    for (int i = 0; i < 5; i++)\n        printf(\"%d \", a[i]);\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "50 75 85 95 100 ", "aliases": ["50 75 85 95 100"] }
+      ],
+      "explanation": "align(a[ ]) 함수는 배열 이름을 인수로 받아 배열의 시작 주소를 전달받으므로, 함수 내부에서 배열 값을 바꾸면 main의 원본 배열 a에도 그대로 반영된다(반환값이 없어도 정렬 결과가 유지됨). 버블 정렬 알고리즘으로 인접한 두 값을 비교해 a[j] > a[j+1]이면 교환하며, 1회전마다 가장 큰 값이 뒤로 이동해 정렬 대상에서 하나씩 제외된다. { 85, 75, 50, 100, 95 }를 4회전에 걸쳐 정렬하면 오름차순 50, 75, 85, 95, 100이 완성된다. main의 출력문은 이 정렬된 배열을 각 값 뒤에 공백을 붙여 출력한다.",
+      "figure": false,
+      "figureDesc": null
+    },
+    {
+      "id": "func-009",
+      "number": 9,
+      "type": "short",
+      "question": "다음 C언어로 구현된 프로그램을 분석하여 5를 입력했을 때 그 실행 결과를 쓰시오. (단, 출력문의 출력 서식을 준수하시오.)",
+      "passage": null,
+      "code": "#include <stdio.h>\nint func(int a) {\n    if (a <= 1) return 1;\n    return a * func(a - 1);\n}\nint main() {\n    int a;\n    scanf(\"%d\", &a);\n    printf(\"%d\", func(a));\n}",
+      "language": "c",
+      "choices": null,
+      "answers": [
+        { "label": null, "answer": "120", "aliases": [] }
+      ],
+      "explanation": "func(a)는 a가 1보다 작거나 같으면 1을 반환하고, 그렇지 않으면 a * func(a-1)을 반환하는 재귀 함수로, 계승(팩토리얼)을 계산한다. scanf로 5가 입력되면 func(5)가 호출되어 func(4), func(3), func(2), func(1)까지 연쇄적으로 자신을 호출하며 내려간다. func(1)이 1을 반환하면 func(2)는 2*1=2, func(3)은 3*2=6, func(4)는 4*6=24, func(5)는 5*24=120을 차례로 반환하며 호출 스택을 거슬러 올라간다. 최종적으로 func(5)의 반환값 120이 main의 printf로 출력된다.",
+      "figure": false,
+      "figureDesc": null
+    }
+  ]
+}
