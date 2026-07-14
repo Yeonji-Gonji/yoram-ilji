@@ -51,6 +51,21 @@ export function PracticeRunner({ initialCategory }: PracticeRunnerProps) {
     setStats({ done: 0, correct: 0 });
   }, [category, skipSolved]);
 
+  // 정답 공개 상태에서는 입력창이 비활성화되므로 전역 Enter로 다음 문제 이동
+  useEffect(() => {
+    if (!revealed) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && !e.isComposing) {
+        setIndex((prev) => prev + 1);
+        setInputs([]);
+        setRevealed(false);
+        setOverride(null);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [revealed]);
+
   /* ===== 카테고리 선택 화면 ===== */
   if (!category) {
     return (
@@ -192,6 +207,7 @@ export function PracticeRunner({ initialCategory }: PracticeRunnerProps) {
             revealed={revealed}
             overrideValue={override}
             onOverride={revealed ? handleOverride : undefined}
+            onEnter={revealed ? nextQuestion : checkAnswer}
           />
 
           <div className="sticky bottom-4">
