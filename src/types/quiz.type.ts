@@ -22,9 +22,11 @@ export type QuizQuestionDTO = {
   choices?: string[] | null;
   answers: QuizAnswerDTO[];
   explanation?: string | null;
-  /** 그림 없이 풀 수 없는 문제 (원본 PDF 참조 필요) */
+  /** 그림 없이 풀 수 없는 문제 */
   figure?: boolean;
   figureDesc?: string | null;
+  /** 그림을 재현한 인라인 SVG (원본 PDF 삭제 대비, currentColor 기반 테마 대응) */
+  figureSvg?: string | null;
   /** 기출복원 전용: 출제 회차 (예: "2025년 2회") */
   examRound?: string;
   /** 기출복원 전용: 수집 출처 */

@@ -146,6 +146,15 @@ export function ReviewClient() {
                         }
                       : undefined
                   }
+                  onEnter={
+                    revealed
+                      ? undefined
+                      : () => {
+                          setRevealed(true);
+                          const correct = resolveCorrect(question, inputs, null);
+                          if (correct === true) handleResolve(question, true);
+                        }
+                  }
                 />
                 {!revealed ? (
                   <button

@@ -102,12 +102,12 @@ export function ExamRunner() {
     const unanswered = questions.filter((q) =>
       (inputs[q.id] ?? []).every((v) => !v?.trim()),
     ).length;
-    if (
-      unanswered > 0 &&
-      !window.confirm(`안 푼 문제가 ${unanswered}개 있습니다. 제출할까요?`)
-    ) {
-      return;
-    }
+    // Enter 제출 실수 방지를 위해 항상 확인 후 제출
+    const message =
+      unanswered > 0
+        ? `안 푼 문제가 ${unanswered}개 있습니다. 제출할까요?`
+        : '시험을 제출할까요?';
+    if (!window.confirm(message)) return;
     setPhase('result');
   };
 
@@ -236,6 +236,7 @@ export function ExamRunner() {
             })
           }
           revealed={false}
+          onEnter={submitExam}
         />
 
         {/* 이전/다음 */}

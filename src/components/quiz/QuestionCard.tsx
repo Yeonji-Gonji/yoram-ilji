@@ -19,6 +19,8 @@ interface QuestionCardProps {
   onOverride?: (correct: boolean) => void;
   overrideValue?: boolean | null;
   disabled?: boolean;
+  /** 한 줄 입력에서 Enter 입력 시 호출 (제출·정답 확인 등, IME 조합 중은 무시) */
+  onEnter?: () => void;
 }
 
 /** 문제 1개 표시 + 답 입력 + (공개 시) 채점·해설. 모든 모드 공용 카드 */
@@ -31,6 +33,7 @@ export function QuestionCard({
   onOverride,
   overrideValue = null,
   disabled = false,
+  onEnter,
 }: QuestionCardProps) {
   const autoGradable = isAutoGradable(question);
   const finalCorrect = revealed
@@ -107,25 +110,23 @@ export function QuestionCard({
         </div>
       )}
 
-      {/* 그림 문제 안내 */}
-      {question.figure && (
-        <div className="p-4 mb-4 text-sm border rounded-xl border-amber-400/40 bg-amber-500/10">
-          <p className="font-semibold text-amber-600 dark:text-amber-400">
-            그림 포함 문제
-          </p>
-          {question.figureDesc && (
-            <p className="mt-1 whitespace-pre-wrap">{question.figureDesc}</p>
-          )}
-          {question.sourcePdf && (
-            <a
-              href={encodeURI(question.sourcePdf)}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-block mt-2 text-xs underline text-sky-600 dark:text-sky-500">
-              원본 PDF에서 그림 보기 (문제 {question.number}번)
-            </a>
-          )}
-        </div>
+      {/* 그림 문제: SVG 재현본이 있으면 그림으로, 없으면 텍스트 설명으로 표시 */}
+      {question.figureSvg ? (
+        <div
+          className="p-4 mb-4 overflow-x-auto border rounded-xl border-light-400 bg-light-100 dark:border-dark-600 dark:bg-dark-900 [&_svg]:mx-auto [&_svg]:h-auto [&_svg]:max-w-full"
+          dangerouslySetInnerHTML={{ __html: question.figureSvg }}
+        />
+      ) : (
+        question.figure && (
+          <div className="p-4 mb-4 text-sm border rounded-xl border-amber-400/40 bg-amber-500/10">
+            <p className="font-semibold text-amber-600 dark:text-amber-400">
+              그림 포함 문제 (원문 그림 미복원: 아래 설명 참고)
+            </p>
+            {question.figureDesc && (
+              <p className="mt-1 whitespace-pre-wrap">{question.figureDesc}</p>
+            )}
+          </div>
+        )
       )}
 
       {/* <보기> */}
@@ -180,6 +181,13 @@ export function QuestionCard({
                     type="text"
                     value={value}
                     onChange={(e) => onInputChange(idx, e.target.value)}
+                    onKeyDown={(e) => {
+                      // 한글 IME 조합 확정 Enter는 무시하고, 실제 Enter만 처리
+                      if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+                        e.preventDefault();
+                        onEnter?.();
+                      }
+                    }}
                     disabled={disabled || revealed}
                     placeholder="답안 입력"
                     autoComplete="off"
