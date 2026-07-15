@@ -185,6 +185,9 @@ export function QuestionCard({
                       // 한글 IME 조합 확정 Enter는 무시하고, 실제 Enter만 처리
                       if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
                         e.preventDefault();
+                        // 이 Enter가 window까지 버블링돼 "다음 문제" 전역
+                        // 리스너까지 실행되는 것을 막는다(정답 확인만 수행)
+                        e.stopPropagation();
                         onEnter?.();
                       }
                     }}
