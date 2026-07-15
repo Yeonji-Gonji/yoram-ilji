@@ -55,7 +55,9 @@ export function PracticeRunner({ initialCategory }: PracticeRunnerProps) {
   useEffect(() => {
     if (!revealed) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Enter' && !e.isComposing) {
+      // 정답 확인 Enter를 길게 눌러 발생하는 오토리핏은 무시(공개 직후
+      // 같은 키 눌림으로 곧바로 다음 문제로 넘어가는 것 방지)
+      if (e.key === 'Enter' && !e.isComposing && !e.repeat) {
         setIndex((prev) => prev + 1);
         setInputs([]);
         setRevealed(false);
