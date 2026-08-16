@@ -1,8 +1,5 @@
-import ProfileExperience from '@/components/profile/ProfileExperience';
 import { ProfileHero } from '@/components/profile/ProfileHero';
-import ProfileSkills from '@/components/profile/ProfileSkills';
 import ProfileTimeline from '@/components/profile/ProfileTimeline';
-import FloatingResumeCTA from '@/components/resume/FloatingResumeCTA';
 import { generateProfilePageJsonLd, siteConfig } from '@/lib/seo';
 import { Metadata } from 'next';
 
@@ -42,10 +39,7 @@ export default function ProfilePage() {
       <div className="w-full max-w-6xl px-6 py-16 mx-auto">
         <ProfileHero />
         <ProfileTimeline />
-        <ProfileExperience />
-        <ProfileSkills />
       </div>
-      <FloatingResumeCTA />
     </>
   );
 }
