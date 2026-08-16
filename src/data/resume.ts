@@ -9,7 +9,7 @@ import { appConfig } from '@/lib/config';
 export interface ResumeBullet {
   md: string; // **강조** 지원. 경력 항목에서는 프로젝트 개요 1문장(서술형)
   metric?: string; // 회색 정량 지표 (항목 끝)
-  subs?: string[]; // 실적 항목. 개조식(체언 종결) 20~50자. 근거: career-kit/references/tone-guide.md 실측
+  subs?: string[]; // 실적 항목. 개조식(체언 종결) 20~50자. 근거: .claude/rules/tone-guide.md 실측
 }
 
 export interface ResumeExperience {

@@ -1,7 +1,7 @@
 // 포트폴리오 PDF 렌더 소스 (파생물)
 // 정본 = docs/portfolio/case-01~08.md. 여기서 새 사실을 만들지 않는다.
 // 외부 제출용이라 고객사명·동료 실명·계약 조건·내부 식별자를 넣지 않는다(케이스 정본의 ⚠️ 표기 준수).
-// 톤: career-kit/references/tone-guide.md. 개요 1문장은 서술형, 실적 항목은 개조식 20~50자.
+// 톤: .claude/rules/tone-guide.md. 개요 1문장은 서술형, 실적 항목은 개조식 20~50자.
 // 산출: pnpm gen:portfolio-pdf → docs/portfolio/_out/김준희_포트폴리오.pdf
 
 /** 여정 단계. state = ok(정상) · warn(구현됐으나 잔여 검증) · gap(끊긴 곳) */
