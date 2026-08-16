@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "pnpm run lint && next dev",
     "gen:resume-pdf": "tsx scripts/gen-resume-pdf.tsx",
+    "gen:portfolio-pdf": "tsx scripts/gen-portfolio-pdf.tsx",
     "build": "PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium && PLAYWRIGHT_BROWSERS_PATH=0 pnpm gen:resume-pdf && next build",
     "start": "next start",
     "lint": "eslint"
