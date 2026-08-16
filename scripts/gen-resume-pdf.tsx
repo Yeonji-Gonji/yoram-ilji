@@ -14,12 +14,21 @@ import { createElement } from 'react';
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import ResumeDocument from '@/components/resume/ResumeDocument';
+import type { ResumeData } from '@/data/resume';
 
-const OUT = path.resolve(process.cwd(), 'public/junhei-kim-resume.pdf');
+// 선택 인자: [데이터 모듈 경로] [출력 PDF 경로] — 공고 맞춤본을 같은 양식으로 뽑을 때 사용.
+// 인자가 없으면 기존과 동일하게 정본(resume.ts) → public/junhei-kim-resume.pdf
+const [, , dataArg, outArg] = process.argv;
+const OUT = outArg
+  ? path.resolve(process.cwd(), outArg)
+  : path.resolve(process.cwd(), 'public/junhei-kim-resume.pdf');
+const data: ResumeData | undefined = dataArg
+  ? (await import(path.resolve(process.cwd(), dataArg))).resume
+  : undefined;
 
 // ResumeDocument는 인라인 <style>(RESUME_CSS)를 함께 렌더하므로 디자인이 그대로 따라온다.
 // 화면 폰트(--font-pretendard)는 Next 폰트 설정 대신 Pretendard 웹폰트로 공급해 동일한 서체를 재현한다.
-const body = renderToStaticMarkup(createElement(ResumeDocument));
+const body = renderToStaticMarkup(createElement(ResumeDocument, { data }));
 const html = `<!doctype html>
 <html lang="ko">
 <head>
