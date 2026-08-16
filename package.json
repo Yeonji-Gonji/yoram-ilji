@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "pnpm run lint && next dev",
-    "gen:resume-pdf": "tsx scripts/gen-resume-pdf.tsx",
-    "gen:portfolio-pdf": "tsx scripts/gen-portfolio-pdf.tsx",
-    "build": "PLAYWRIGHT_BROWSERS_PATH=0 playwright install chromium && PLAYWRIGHT_BROWSERS_PATH=0 pnpm gen:resume-pdf && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -60,9 +58,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.26",
-    "playwright": "^1.62.0",
     "raw-loader": "^4.0.2",
-    "tsx": "^4.23.1",
     "typescript": "^5.9.3"
   },
   "main": "index.js",
