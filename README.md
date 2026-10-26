@@ -1,32 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# yoram-ilji
 
-## Getting Started
+개인 포트폴리오 + 기술 블로그. https://yoramilji.kr
 
-First, run the development server:
+- **스택**: Next.js 16 (App Router) · React 19 · TypeScript · HeroUI · Tailwind 4 · react-three-fiber
+- **콘텐츠**: Notion API (블로그·포트폴리오), 리포 내 JSON(정보처리기사 CBT)
+- **배포**: Vercel (main 머지 = 운영 배포)
+- **온보딩 시트**: [docs/PROJECT.md](docs/PROJECT.md)
+
+## 개발
 
 ```bash
-npm run dev
-# or
-yarn dev
+pnpm install
+pnpm dev          # lint 후 http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`.env.local` 에 서버 전용 키를 둔다(값은 커밋하지 않는다).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+NOTION_API_KEY=<Notion 통합 시크릿>
+GMAIL_APP_PASSWORD=<연락 폼 발신용 Gmail 앱 비밀번호>
+GOOGLE_PRIVATE_KEY=<GA4 Data API 서비스 계정 private_key>
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+공개 상수(사이트 URL·연락 메일·Notion 데이터소스 ID·GTM/GA ID)는 `src/lib/config.ts` 에서 관리한다.
 
-## Learn More
+## 스크립트
 
-To learn more about Next.js, take a look at the following resources:
+| 명령 | 설명 |
+|---|---|
+| `pnpm dev` | lint 후 개발 서버 |
+| `pnpm lint` | ESLint |
+| `pnpm exec tsc --noEmit` | 타입 검사 |
+| `pnpm build` | 프로덕션 빌드(Notion API 호출, 연속 실행 시 429 주의) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## CI/CD
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **CI**: `.github/workflows/ci.yml`. PR·main 푸시마다 lint → typecheck (문서 전용 변경 제외). 빌드는 Notion 키가 필요해 Vercel 이 최종 게이트다.
+- **배포**: Vercel Git 연동. main 직접 push 대신 브랜치 → PR → CI 통과 → 머지.
 
-## Deploy on Vercel
+## 주의
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+공개 리포다. 이력서·지원서·개인 연락처 같은 자료를 넣지 않는다. 한 번 push 된 파일은 삭제 커밋으로 히스토리에서 사라지지 않는다.

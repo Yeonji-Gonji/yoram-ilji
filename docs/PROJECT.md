@@ -1,34 +1,65 @@
-# PROJECT: yoram-ilji 현황판
+---
+project: yoram-ilji
+type: project-status
+status: 운영
+updated: 2026-10-26
+---
 
-> 갱신일: 2026-07-14
-> 히스토리 정본: obsidian vault `projects/yoram-ilji.md` (private)
-> 사이트 구조·콘텐츠 설계: vault `portfolio/site-structure-plan.md` + `detail-design-and-content-architecture.md`
+# PROJECT: yoram-ilji 온보딩 시트
 
-## 현재 상태
+> **이 문서는 리포 온보딩·아키텍처·고정 함정 시트다.**
+> - **현재 라이브 배포 기준**: Vercel 대시보드(Production = main 최신 커밋) · `git log`
+> - **남은 일·결정 필요**: GitHub Issues ("허브 기준 점검 2026-10-26" 이슈가 보강 체크리스트)
+> - **변경 이력**: `git log`·PR. 2026-07-14 이전 현황판은 [archive/status-2026-07-14.md](archive/status-2026-07-14.md)(작성 시점 값으로 고정)
+> - 이력서·지원서·회사별 맞춤 자료는 이 리포에 두지 않는다(공개 리포). 사이트에 띄우는 공개 프로필만 둔다.
 
-- 개인 포트폴리오 + 기술 블로그. `https://yoramilji.kr`, Vercel 배포.
-- Next.js 16 + React 19 + HeroUI + Tailwind 4 + react-three-fiber. 콘텐츠는 Notion API가 데이터소스.
-- SEO/GEO 정비 완료(sitemap·robots·JSON-LD 6종·동적 OG·llms.txt·feed.xml), GTM+GA4+GSC 측정 인프라 가동(2026-07-09).
+## 요약
 
-## 진행 중
+개인 포트폴리오 + 기술 블로그 사이트 `https://yoramilji.kr`. 블로그·포트폴리오 콘텐츠는 Notion 데이터베이스가 데이터소스이고,
+정보처리기사 실기 CBT(`/quiz`)는 리포 안 JSON 문제은행으로 동작한다.
 
-- 콘텐츠 발행 (최대 미해결, 정처기 7/18 이후 집중)
+## 핵심 사양
 
-## 최근 완료
+- **스택**: Next.js 16 (App Router) · React 19 · TypeScript · HeroUI · Tailwind 4 · react-three-fiber(홈 히어로)
+- **패키지 매니저 / dev 포트**: pnpm / `pnpm dev` → http://localhost:3000 (`dev` 스크립트가 lint 를 먼저 돌린다)
+- **도메인 / 배포 타겟**: `https://yoramilji.kr` (Vercel, main push 자동 배포)
+- **콘텐츠 소스**: Notion API (블로그·포트폴리오 데이터소스 ID 는 `src/lib/config.ts`)
+- **계측**: GTM + GA4 + Search Console (식별자는 `src/lib/config.ts`, 서비스 계정 키만 env)
 
-- 2026-07-17 기출복원 전 회차 20문제 충족: 웹수집 50문제 추가(2023-1 8, 2023-3 10, 2024-1 3, 2024-2 7, 2024-3 1, 2025-1 6, 2025-2 1, 2025-3 11, 2026-1 3)로 기출 150→200, 총 340→390문제. 검증 기준은 기존과 동일(2개 이상 독립 출처 교차 일치 또는 코드 직접 실행/트레이스), 2026-1 신유형 2문제만 단일 출처 복원이라 해설에 주의 표기. 수집 로그는 세션 스크래치패드에만 존재
-- 2026-07-14 정보처리기사 실기 CBT 기능(/quiz) 추가: 340문제(시나공 PDF 7종 190 + 웹수집 기출복원 2023~2026 150, 회차별 분류), 모의고사·유형별 연습·오답노트 3모드, 자동 채점+자가 채점, localStorage 기록, noindex. 전수 검증 워크플로우(PDF 대조+코드 재트레이스) 통과 → 상세: `docs/archive/report-quiz-cbt-2026-07-14.md`
-- 2026-07-09 GTM(GTM-5FGH28HC)+GA4+GSC·네이버 소유확인, 사이트맵 제출
-- 2026-07-09 오늘수영 인프라 글 긱뉴스 등록: 첫 유입 활동 (당일 7P)
-- 2026-07-05 홈 개편: Development 부채꼴 갤러리, Design 쇼케이스 배너, Blog 그리드, 연지곤지 거북이 히어로 SVG
+## 배포 · 환경 구조 (고정 규칙 및 함정)
 
-## 알려진 이슈 / 남은 일
+- **배포 방식**: Vercel Git 연동. main 머지가 곧 운영 배포이므로 브랜치 → PR → CI(lint·typecheck) → 머지. Preview 는 PR 마다 자동.
+- **빌드 게이트**: 빌드 시 Notion API 를 호출하므로 CI 에서는 `build` 를 돌리지 않고 Vercel 빌드가 최종 게이트다.
+- **런타임 환경변수(서버 전용, Vercel 에 등록)**
 
-- Notion 포폴 케이스 커버(썸네일) 업로드 대기 (`~/Desktop/projects/portfolio-thumbnails/` 시안 3종 제작됨)
-- 오늘수영 케이스 featured 여부 미결정
-- 빌드 연속 실행 시 Notion API 429 주의
+  | 키 | 역할 | 없을 때 |
+  |---|---|---|
+  | `NOTION_API_KEY` | 블로그·포트폴리오 조회 | 콘텐츠 페이지 빌드 실패 |
+  | `GMAIL_APP_PASSWORD` | `/api/send-email` 발신(연락 폼) | 메일 발송 실패 |
+  | `GOOGLE_PRIVATE_KEY` | GA4 Data API 서비스 계정 키 | 조회수 등 GA 데이터 비표시 |
 
-## 링크
+  공개 상수(사이트 URL·연락 메일·Notion 데이터소스 ID·GTM/GA ID)는 env 가 아니라 `src/lib/config.ts` 한 곳에서 관리한다.
+- **운영·검증 함정**
+  - 빌드를 연속 실행하면 Notion API 429 가 난다. 재시도 간격을 둔다.
+  - Notion 이미지는 만료 URL 이라 `/api/notion-image` 프록시를 거친다. 직접 URL 을 캐시하지 않는다.
+  - 배포 후 확인: `curl -s -o /dev/null -w '%{http_code}' https://yoramilji.kr` 가 200, 없는 경로(`/zzz-nonexistent-control`)가 404(soft-404 아님, 2026-10-26 실측), 홈 히어로·블로그 목록 렌더.
+  - 공개 리포다. 커밋 전 개인정보·이력서 자료가 섞이지 않았는지 본다. 한 번 push 된 파일은 삭제 커밋으로 히스토리에서 사라지지 않는다.
 
-- GitHub: Yeonji-Gonji/yoram-ilji
-- 케이스 데이터 정본: Notion 포폴 DB / 이력서 정본: `src`의 resume.ts
+## 아키텍처 · 기능 모듈 지도
+
+| 영역 | 경로 / 모듈 | 역할 및 고정 규칙 |
+| --- | --- | --- |
+| 홈 | `src/app/page.tsx`, `src/components/home/`, `hero.ts` | 3D 히어로(react-three-fiber) + Development·Design·Blog 섹션 |
+| 블로그 | `src/app/(content)/blog/`, `src/services/*.notion.api.ts` | Notion 데이터소스 → 목록·상세. `feed.xml`·`llms.txt` 도 같은 소스 |
+| 포트폴리오 | `src/app/(content)/portfolio/`, `src/components/portfolio/`, `src/data/portfolio.ts`, `src/lib/portfolio-content.ts` | Notion 포트폴리오 DB + 리포 내 케이스 메타 |
+| 프로필 | `src/app/(content)/profile/` | 공개 프로필만. 이력서 본문·PDF 는 두지 않는다 |
+| CBT 퀴즈 | `src/app/(content)/quiz/`(exam·practice·review), `src/data/quiz/*.json` | noindex. 기록은 localStorage |
+| API 라우트 | `src/app/api/notion-image`, `src/app/api/send-email` | 이미지 프록시, 연락 메일 발신 |
+| SEO·메타 | `src/lib/seo.ts`, `src/app/sitemap.ts`·`robots.ts`·`opengraph-image.tsx` | JSON-LD·동적 OG. 기준 URL 은 `config.ts` |
+| 설정 단일 출처 | `src/lib/config.ts` | 공개 상수 전부. 시크릿만 env |
+
+## 참고 / 외부 링크
+
+- 이슈 추적: GitHub Issues
+- 의사결정 기록: `docs/adr/` (첫 ADR 작성 시 생성)
+- 과거 검증 리포트: `docs/archive/report-*.md`
