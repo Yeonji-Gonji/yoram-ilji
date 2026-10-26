@@ -7,7 +7,8 @@
     "dev": "pnpm run lint && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run"
   },
   "dependencies": {
     "@google-analytics/data": "^6.1.0",
@@ -59,7 +60,8 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.26",
     "raw-loader": "^4.0.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "4.1.10"
   },
   "main": "index.js",
   "repository": "https://github.com/Yeonji-Gonji/yoram-ilji.git",

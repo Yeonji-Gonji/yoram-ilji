@@ -31,11 +31,12 @@ GOOGLE_PRIVATE_KEY=<GA4 Data API 서비스 계정 private_key>
 | `pnpm dev` | lint 후 개발 서버 |
 | `pnpm lint` | ESLint |
 | `pnpm exec tsc --noEmit` | 타입 검사 |
+| `pnpm test` | vitest 단위테스트(퀴즈 채점·출제·문제 은행 무결성) |
 | `pnpm build` | 프로덕션 빌드(Notion API 호출, 연속 실행 시 429 주의) |
 
 ## CI/CD
 
-- **CI**: `.github/workflows/ci.yml`. PR·main 푸시마다 lint → typecheck (문서 전용 변경 제외). 빌드는 Notion 키가 필요해 Vercel 이 최종 게이트다.
+- **CI**: `.github/workflows/ci.yml`. PR·main 푸시마다 lint → typecheck → test (main 푸시는 문서 전용 변경 제외). 빌드는 Notion 키가 필요해 Vercel 이 최종 게이트다.
 - **배포**: Vercel Git 연동. main 직접 push 대신 브랜치 → PR → CI 통과 → 머지.
 
 ## 주의

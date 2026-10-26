@@ -25,6 +25,7 @@ updated: 2026-10-26
 - **도메인 / 배포 타겟**: `https://yoramilji.kr` (Vercel, main push 자동 배포)
 - **콘텐츠 소스**: Notion API (블로그·포트폴리오 데이터소스 ID 는 `src/lib/config.ts`)
 - **계측**: GTM + GA4 + Search Console (식별자는 `src/lib/config.ts`, 서비스 계정 키만 env)
+- **테스트**: vitest `src/**/*.test.ts` (퀴즈 채점 정규화·자동 채점·모의고사 출제·문제 은행 ID 중복·정답 공란 검사). CI = lint → tsc → test
 
 ## 배포 · 환경 구조 (고정 규칙 및 함정)
 
@@ -53,7 +54,7 @@ updated: 2026-10-26
 | 블로그 | `src/app/(content)/blog/`, `src/services/*.notion.api.ts` | Notion 데이터소스 → 목록·상세. `feed.xml`·`llms.txt` 도 같은 소스 |
 | 포트폴리오 | `src/app/(content)/portfolio/`, `src/components/portfolio/`, `src/data/portfolio.ts`, `src/lib/portfolio-content.ts` | Notion 포트폴리오 DB + 리포 내 케이스 메타 |
 | 프로필 | `src/app/(content)/profile/` | 공개 프로필만. 이력서 본문·PDF 는 두지 않는다 |
-| CBT 퀴즈 | `src/app/(content)/quiz/`(exam·practice·review), `src/data/quiz/*.json` | noindex. 기록은 localStorage |
+| CBT 퀴즈 | `src/app/(content)/quiz/`(exam·practice·review), `src/lib/quiz/`, `src/data/quiz/*.json` | noindex. 오답 노트·풀이 기록은 문제 ID 로 localStorage 에 저장하므로 ID 는 겹치면 안 된다(테스트가 검사). 기출은 `past.json` 하나가 원본이고 회차별 카테고리로 쪼개 쓴다 |
 | API 라우트 | `src/app/api/notion-image`, `src/app/api/send-email` | 이미지 프록시, 연락 메일 발신 |
 | SEO·메타 | `src/lib/seo.ts`, `src/app/sitemap.ts`·`robots.ts`·`opengraph-image.tsx` | JSON-LD·동적 OG. 기준 URL 은 `config.ts` |
 | 설정 단일 출처 | `src/lib/config.ts` | 공개 상수 전부. 시크릿만 env |
