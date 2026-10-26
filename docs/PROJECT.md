@@ -40,7 +40,7 @@ updated: 2026-10-26
 
   공개 상수(사이트 URL·연락 메일·Notion 데이터소스 ID·GTM/GA ID)는 env 가 아니라 `src/lib/config.ts` 한 곳에서 관리한다.
 - **운영·검증 함정**
-  - 빌드를 연속 실행하면 Notion API 429 가 난다. 재시도 간격을 둔다.
+  - Notion 공개 API 한도(통합당 3 req/s): 빌드는 `src/services/notion.client.ts` 의 간격 제한·재시도와 정적 생성 워커 1개로 한도 아래를 유지한다([ADR-0001](adr/ADR-0001-notion-api-rate-limit-build.md)). 빌드는 약 5분 걸린다. Notion 클라이언트를 따로 만들지 않는다.
   - Notion 이미지는 만료 URL 이라 `/api/notion-image` 프록시를 거친다. 직접 URL 을 캐시하지 않는다.
   - 배포 후 확인: `curl -s -o /dev/null -w '%{http_code}' https://yoramilji.kr` 가 200, 없는 경로(`/zzz-nonexistent-control`)가 404(soft-404 아님, 2026-10-26 실측), 홈 히어로·블로그 목록 렌더.
   - 공개 리포다. 커밋 전 개인정보·이력서 자료가 섞이지 않았는지 본다. 한 번 push 된 파일은 삭제 커밋으로 히스토리에서 사라지지 않는다.
@@ -61,5 +61,5 @@ updated: 2026-10-26
 ## 참고 / 외부 링크
 
 - 이슈 추적: GitHub Issues
-- 의사결정 기록: `docs/adr/` (첫 ADR 작성 시 생성)
+- 의사결정 기록: [`docs/adr/`](adr/)
 - 과거 검증 리포트: `docs/archive/report-*.md`
