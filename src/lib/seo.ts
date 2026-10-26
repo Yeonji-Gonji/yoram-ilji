@@ -9,7 +9,7 @@ export const siteConfig = {
   author: {
     name: 'MODAC',
     url: 'https://github.com/Yeonji-Gonji',
-    email: 'juni940302@gmail.com',
+    email: appConfig.contactEmail,
   },
   locale: 'ko_KR',
   language: 'ko',

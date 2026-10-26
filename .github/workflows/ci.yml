@@ -28,4 +28,5 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm lint
       - run: pnpm exec tsc --noEmit
+      - run: pnpm test
       # build 는 Notion API 키가 필요해 Vercel 빌드가 최종 게이트다.

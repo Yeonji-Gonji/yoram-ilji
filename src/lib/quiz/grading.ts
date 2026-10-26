@@ -1,14 +1,15 @@
 import type { QuizAnswerDTO, QuizQuestion } from '@/types/quiz.type';
 
 /**
- * 채점용 정규화: 앞뒤 공백 제거, 소문자화, 모든 공백·따옴표 통일 제거,
+ * 채점용 정규화: 앞뒤 공백 제거, 소문자화, 모든 공백·따옴표(곧은·둥근) 제거,
  * 문장 끝 세미콜론·마침표 제거. 실기 단답 채점의 표기 편차를 흡수한다.
  */
 export function normalizeAnswerText(value: string): string {
   return value
     .trim()
     .toLowerCase()
-    .replace(/[""'''`]/g, '')
+    // 곧은 따옴표와 둥근 따옴표(“ ” ‘ ’, 맥·iOS 자동 치환)를 모두 지운다
+    .replace(/["'`\u2018\u2019\u201C\u201D]/g, '')
     .replace(/\s+/g, '')
     .replace(/[;.]+$/, '');
 }

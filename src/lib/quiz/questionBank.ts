@@ -134,12 +134,21 @@ export function buildExam(
   const order = pools
     .map((pool, idx) => idx)
     .sort((a, b) => pools[b].length - pools[a].length);
-  for (const idx of order) {
-    if (remaining === 0) break;
-    const delta = remaining > 0 ? 1 : -1;
-    if (quotas[idx] + delta >= 1 && quotas[idx] + delta <= pools[idx].length) {
-      quotas[idx] += delta;
-      remaining -= delta;
+  // 합이 size 와 같아질 때까지 큰 풀부터 1씩 여러 바퀴 조정한다. 한 바퀴만 돌면 최소 1문제 보장으로
+  // 합이 size 를 넘는 경우(카테고리가 많은 전 범위 출제)에 초과분이 남고, 마지막 slice 가 무작위로 잘라
+  // 1문제뿐인 카테고리가 통째로 빠졌다. 카테고리 수가 size 보다 많으면 보장은 애초에 불가능하다.
+  let changed = true;
+  while (remaining !== 0 && changed) {
+    changed = false;
+    for (const idx of order) {
+      if (remaining === 0) break;
+      const delta = remaining > 0 ? 1 : -1;
+      const next = quotas[idx] + delta;
+      if (next >= 1 && next <= pools[idx].length) {
+        quotas[idx] = next;
+        remaining -= delta;
+        changed = true;
+      }
     }
   }
   pools.forEach((pool, idx) => {
