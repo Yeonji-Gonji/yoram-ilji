@@ -1,15 +1,12 @@
 import { appConfig } from '@/lib/config';
+import { notion } from '@/services/notion.client';
 import { NotionPage } from '@/types/notion.type';
 import {
-  Client,
   GetPageResponse,
   ListBlockChildrenResponse,
 } from '@notionhq/client';
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints';
-
-const notion = new Client({
-  auth: process.env.NOTION_API_KEY,
-});
+import { cache } from 'react';
 
 const dataSourceId = appConfig.notion.blogDataSourceId;
 
@@ -31,7 +28,8 @@ export const getPublishedPosts = async () => {
   return response;
 };
 
-export async function getBlogPosts() {
+/** 발행 글 목록. 같은 렌더 안에서는 한 번만 조회한다(cache). */
+export const getBlogPosts = cache(async (): Promise<NotionPage[]> => {
   if (!dataSourceId) {
     throw new Error('NOTION_DATA_SOURCE_ID가 설정되지 않았습니다.');
   }
@@ -58,7 +56,7 @@ export async function getBlogPosts() {
     console.error('Notion API Error:', error);
     return []; // 오류 발생 시 빈 배열 반환
   }
-}
+});
 
 /**
  * 목록·카드용 본문 요약. DB에 요약 property가 없어 본문 앞쪽 paragraph의
@@ -108,10 +106,11 @@ export const getPostExcerpt = async (
   }
 };
 
-export const getPost = async (id: string): Promise<GetPageResponse> => {
+/** 페이지 메타. generateMetadata 와 페이지 본문이 같은 렌더에서 두 번 부르므로 cache 로 1회만 조회한다. */
+export const getPost = cache(async (id: string): Promise<GetPageResponse> => {
   const response = await notion.pages.retrieve({ page_id: id });
   return response;
-};
+});
 
 /** 단일 블록을 ID로 직접 조회 (중첩·페이지네이션과 무관하게 안전). */
 export const getBlock = async (blockId: string) => {
