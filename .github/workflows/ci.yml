@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '**.md'
+  # PR 에는 문서 전용 변경에도 CI 를 돌린다. main 보호 룰셋이 이 체크를 필수로 요구하므로 체크가 안 뜨면 머지가 막힌다.
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10   # package.json 에 packageManager 가 없어 여기서 고정(lockfileVersion 9.0 호환)
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm exec tsc --noEmit
+      # build 는 Notion API 키가 필요해 Vercel 빌드가 최종 게이트다.
