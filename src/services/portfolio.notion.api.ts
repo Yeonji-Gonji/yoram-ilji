@@ -1,9 +1,8 @@
 import { PortfolioCategory } from '@/data/portfolio';
 import { appConfig } from '@/lib/config';
 import { PortfolioCard } from '@/lib/portfolio-content';
-import { Client } from '@notionhq/client';
-
-const notion = new Client({ auth: process.env.NOTION_API_KEY });
+import { notion } from '@/services/notion.client';
+import { cache } from 'react';
 
 // API 키(NOTION_API_KEY)는 블로그와 동일한 integration을 재사용한다.
 const PORTFOLIO_DS_ID = appConfig.notion.portfolioDataSourceId;
@@ -114,7 +113,7 @@ function toCard(m: PortfolioNotionMeta): PortfolioCard {
 }
 
 /** 발행된 모든 케이스 메타 (정렬: 순서 오름차순 → 기간 역순). */
-async function getAllMeta(): Promise<PortfolioNotionMeta[]> {
+const getAllMeta = cache(async (): Promise<PortfolioNotionMeta[]> => {
   try {
     const res = await notion.dataSources.query({
       data_source_id: PORTFOLIO_DS_ID,
@@ -126,7 +125,7 @@ async function getAllMeta(): Promise<PortfolioNotionMeta[]> {
     console.error('[Portfolio Notion] query error:', error);
     return [];
   }
-}
+});
 
 /** 목록/홈용 카드. category로 필터. */
 export async function getPortfolioCards(
