@@ -18,9 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 10   # package.json 에 packageManager 가 없어 여기서 고정(lockfileVersion 9.0 호환)
+      - uses: pnpm/action-setup@v4   # 버전은 package.json 의 packageManager 를 따른다
       - uses: actions/setup-node@v4
         with:
           node-version: 22
