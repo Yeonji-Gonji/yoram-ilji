@@ -1,13 +1,11 @@
 import { appConfig } from '@/lib/config';
+import {
+  escapeHtml,
+  toMailtoHref,
+  validateContactInput,
+} from '@/lib/contact-email';
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-
-interface EmailRequestBody {
-  name: string;
-  email: string;
-  subject: string;
-  message: string;
-}
 
 // Gmail SMTP 트랜스포터 생성
 const transporter = nodemailer.createTransport({
@@ -20,25 +18,25 @@ const transporter = nodemailer.createTransport({
 
 export async function POST(request: NextRequest) {
   try {
-    const body: EmailRequestBody = await request.json();
-    const { name, email, subject, message } = body;
+    // JSON 이 아닌 본문은 null 로 받아 검증에서 400 으로 거절한다.
+    const body: unknown = await request.json().catch(() => null);
 
-    // 필수 필드 검증
-    if (!name || !email || !subject || !message) {
-      return NextResponse.json(
-        { error: '모든 필드를 입력해주세요.' },
-        { status: 400 },
-      );
+    // 필수·타입·길이·이메일 형식 검증
+    const validation = validateContactInput(body);
+    if (!validation.ok) {
+      return NextResponse.json({ error: validation.error }, { status: 400 });
     }
+    const { name, email, subject, message } = validation.input;
 
-    // 이메일 형식 검증
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: '올바른 이메일 형식이 아닙니다.' },
-        { status: 400 },
-      );
-    }
+    // HTML 템플릿에는 이스케이프한 값만 넣는다(임의 태그·링크 삽입 방지).
+    // 메일 헤더(replyTo·subject)는 nodemailer 가 인코딩하고 개행을 공백으로 접는다.
+    const html = {
+      name: escapeHtml(name),
+      email: escapeHtml(email),
+      subject: escapeHtml(subject),
+      message: escapeHtml(message),
+      replyHref: escapeHtml(toMailtoHref(email)),
+    };
 
     // Gmail SMTP를 통해 이메일 전송
     await transporter.sendMail({
@@ -75,10 +73,10 @@ export async function POST(request: NextRequest) {
                         <strong style="color: #2d2c2a;">보낸 사람</strong>
                       </p>
                       <p style="margin: 0 0 8px 0; font-size: 16px; color: #2d2c2a;">
-                        ${name}
+                        ${html.name}
                       </p>
                       <p style="margin: 0; font-size: 14px; color: #f56a33;">
-                        ${email}
+                        ${html.email}
                       </p>
                     </td>
                   </tr>
@@ -92,7 +90,7 @@ export async function POST(request: NextRequest) {
                         <strong>제목</strong>
                       </p>
                       <p style="margin: 0; font-size: 18px; color: #2d2c2a; font-weight: 600;">
-                        ${subject}
+                        ${html.subject}
                       </p>
                     </td>
                   </tr>
@@ -106,7 +104,7 @@ export async function POST(request: NextRequest) {
                         <strong>메시지</strong>
                       </p>
                       <div style="padding: 20px; background-color: #fdfcfa; border-left: 4px solid #f56a33; border-radius: 0 8px 8px 0;">
-                        <p style="margin: 0; font-size: 15px; color: #2d2c2a; line-height: 1.7; white-space: pre-wrap;">${message}</p>
+                        <p style="margin: 0; font-size: 15px; color: #2d2c2a; line-height: 1.7; white-space: pre-wrap;">${html.message}</p>
                       </div>
                     </td>
                   </tr>
@@ -116,7 +114,7 @@ export async function POST(request: NextRequest) {
                 <table width="100%" cellpadding="0" cellspacing="0">
                   <tr>
                     <td style="text-align: center; padding-top: 16px;">
-                      <a href="mailto:${email}" style="display: inline-block; padding: 14px 32px; background-color: #f56a33; color: #ffffff; text-decoration: none; font-weight: 600; border-radius: 8px; font-size: 15px;">
+                      <a href="${html.replyHref}" style="display: inline-block; padding: 14px 32px; background-color: #f56a33; color: #ffffff; text-decoration: none; font-weight: 600; border-radius: 8px; font-size: 15px;">
                         답장하기
                       </a>
                     </td>
