@@ -1,6 +1,7 @@
 'use client';
 
 import { appConfig } from '@/lib/config';
+import { CONTACT_MAX_LENGTH } from '@/lib/contact-email';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Loader2, Mail, Send, X } from 'lucide-react';
 import { FormEvent, useEffect, useState } from 'react';
@@ -67,7 +68,8 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
         body: JSON.stringify(formData),
       });
 
-      const data = await response.json();
+      // 방화벽 429·플랫폼 오류처럼 JSON 이 아닌 응답이 와도 기본 안내로 떨어지게 한다.
+      const data: { error?: string } = await response.json().catch(() => ({}));
 
       if (!response.ok) {
         throw new Error(data.error || '이메일 전송에 실패했습니다.');
@@ -187,6 +189,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
                       value={formData.name}
                       onChange={handleChange}
                       required
+                      maxLength={CONTACT_MAX_LENGTH.name}
                       placeholder="홍길동"
                       className="w-full px-4 py-3 rounded-xl border border-light-400 dark:border-dark-600 bg-light-50 dark:bg-dark-700 focus:outline-none focus:ring-2 focus:ring-point/50 focus:border-point transition-all"
                     />
@@ -206,6 +209,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
                       value={formData.email}
                       onChange={handleChange}
                       required
+                      maxLength={CONTACT_MAX_LENGTH.email}
                       placeholder="example@email.com"
                       className="w-full px-4 py-3 rounded-xl border border-light-400 dark:border-dark-600 bg-light-50 dark:bg-dark-700 focus:outline-none focus:ring-2 focus:ring-point/50 focus:border-point transition-all"
                     />
@@ -225,6 +229,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
                       value={formData.subject}
                       onChange={handleChange}
                       required
+                      maxLength={CONTACT_MAX_LENGTH.subject}
                       placeholder="문의 제목을 입력해주세요"
                       className="w-full px-4 py-3 rounded-xl border border-light-400 dark:border-dark-600 bg-light-50 dark:bg-dark-700 focus:outline-none focus:ring-2 focus:ring-point/50 focus:border-point transition-all"
                     />
@@ -243,6 +248,7 @@ export default function EmailModal({ isOpen, onClose }: EmailModalProps) {
                       value={formData.message}
                       onChange={handleChange}
                       required
+                      maxLength={CONTACT_MAX_LENGTH.message}
                       rows={5}
                       placeholder="문의 내용을 입력해주세요"
                       className="w-full px-4 py-3 rounded-xl border border-light-400 dark:border-dark-600 bg-light-50 dark:bg-dark-700 focus:outline-none focus:ring-2 focus:ring-point/50 focus:border-point transition-all resize-none"
