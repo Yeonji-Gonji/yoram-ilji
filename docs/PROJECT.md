@@ -21,7 +21,7 @@ updated: 2026-10-26
 ## 핵심 사양
 
 - **스택**: Next.js 16 (App Router) · React 19 · TypeScript · HeroUI · Tailwind 4 · react-three-fiber(홈 히어로)
-- **패키지 매니저 / dev 포트**: pnpm / `pnpm dev` → http://localhost:3000 (`dev` 스크립트가 lint 를 먼저 돌린다)
+- **패키지 매니저 / dev 포트**: pnpm 10(`package.json` 의 `packageManager` 로 고정, CI 도 같은 값. 전역 pnpm 11 도 이 버전으로 바꿔 실행한다) / `pnpm dev` → http://localhost:3000 (`dev` 스크립트가 lint 를 먼저 돌린다)
 - **도메인 / 배포 타겟**: `https://yoramilji.kr` (Vercel, main push 자동 배포)
 - **콘텐츠 소스**: Notion API (블로그·포트폴리오 데이터소스 ID 는 `src/lib/config.ts`)
 - **계측**: GTM + GA4 + Search Console (식별자는 `src/lib/config.ts`, 서비스 계정 키만 env)

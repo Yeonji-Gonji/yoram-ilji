@@ -1,6 +1,8 @@
+# 설치 스크립트 허용 목록(pnpm 10.34.9·11 이 읽는다. package.json 의 pnpm 필드는 pnpm 11 이 읽지 않는다)
+# @heroui/shared-utils 는 postinstall 이 React 19 용 dist 를 복사하므로 꺼지면 안 된다.
 allowBuilds:
-  '@heroui/shared-utils': false
+  '@heroui/shared-utils': true
   esbuild: true
-  protobufjs: false
-  sharp: false
-  unrs-resolver: false
+  protobufjs: true
+  sharp: true
+  unrs-resolver: true

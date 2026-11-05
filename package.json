@@ -67,12 +67,5 @@
   "repository": "https://github.com/Yeonji-Gonji/yoram-ilji.git",
   "author": "modac <115679647+Yeonji-Gonji@users.noreply.github.com>",
   "license": "MIT",
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "sharp",
-      "protobufjs",
-      "@heroui/shared-utils",
-      "unrs-resolver"
-    ]
-  }
+  "packageManager": "pnpm@10.34.9"
 }
