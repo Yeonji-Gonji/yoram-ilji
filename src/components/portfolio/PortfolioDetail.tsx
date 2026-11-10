@@ -1,100 +1,20 @@
-import NotionBlock from '@/components/common/NotionBlock';
-import RichText from '@/components/common/RechText';
-import { PortfolioNotionMeta } from '@/services/portfolio.notion.api';
-import { BlockWithChildren } from '@/services/notion.api';
-import {
-  getBlockImageProxyUrl,
-  isNotionS3Url,
-} from '@/utils/notion-image-url';
-import { ArrowLeft, ArrowRight, Github, Globe } from 'lucide-react';
-import Link from 'next/link';
-import { ReactNode } from 'react';
 import ViewCount from '@/components/common/ViewCount';
+import PortfolioBlocks from '@/components/portfolio/PortfolioBlocks';
+import type { PortfolioBlock, PortfolioMeta } from '@/types/portfolio.type';
+import { ArrowLeft, ArrowRight, Github, Globe } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
-  meta: PortfolioNotionMeta;
-  blocks: BlockWithChildren[];
-  prev: PortfolioNotionMeta | null;
-  next: PortfolioNotionMeta | null;
-  /** 이 프로젝트의 누적 조회수 (GA4). 미설정/실패 시 null. */
+  meta: PortfolioMeta;
+  blocks: PortfolioBlock[];
+  prev: PortfolioMeta | null;
+  next: PortfolioMeta | null;
+  /** 이 프로젝트의 누적 조회수 (GA4). 미설정·실패 시 null. */
   views?: number | null;
 }
 
-/**
- * 연속된 numbered_list_item / bulleted_list_item 을 하나의 <ol>/<ul>로 묶어
- * 번호가 매 항목마다 1로 리셋되지 않도록 렌더한다. 그 외 블록은 NotionBlock에 위임.
- */
-function renderBlocks(blocks: BlockWithChildren[], pageId: string): ReactNode[] {
-  const nodes: ReactNode[] = [];
-  for (let i = 0; i < blocks.length; ) {
-    const type = blocks[i].type;
-    // 이미지: aspect-video 강제 대신 자연 비율로 (세로 이미지·GIF 대응)
-    if (type === 'image') {
-      const img = (blocks[i] as any).image;
-      const orig = img.type === 'file' ? img.file.url : img.external.url;
-      const src = isNotionS3Url(orig)
-        ? getBlockImageProxyUrl(pageId, blocks[i].id)
-        : orig;
-      const cap = img.caption?.[0]?.plain_text ?? '';
-      nodes.push(
-        <figure key={blocks[i].id} className="my-4">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={cap || 'portfolio image'}
-            loading="lazy"
-            className="mx-auto w-full rounded-lg"
-          />
-          {cap && (
-            <figcaption className="mt-2 text-center text-sm text-dark-400">
-              {cap}
-            </figcaption>
-          )}
-        </figure>,
-      );
-      i++;
-      continue;
-    }
-    if (type === 'numbered_list_item' || type === 'bulleted_list_item') {
-      const run: BlockWithChildren[] = [];
-      while (i < blocks.length && blocks[i].type === type) {
-        run.push(blocks[i]);
-        i++;
-      }
-      const ordered = type === 'numbered_list_item';
-      const ListTag = (ordered ? 'ol' : 'ul') as 'ol' | 'ul';
-      nodes.push(
-        <ListTag
-          key={run[0].id}
-          className={`my-4 space-y-1.5 pl-6 ${ordered ? 'list-decimal' : 'list-disc'}`}>
-          {run.map((item) => {
-            const rt = (item as any)[type].rich_text;
-            return (
-              <li key={item.id} className="leading-relaxed marker:text-point">
-                <RichText richTexts={rt} />
-                {item.children && item.children.length > 0 && (
-                  <div className="mt-1">
-                    {item.children.map((c) => (
-                      <NotionBlock key={c.id} block={c} pageId={pageId} />
-                    ))}
-                  </div>
-                )}
-              </li>
-            );
-          })}
-        </ListTag>,
-      );
-      continue;
-    }
-    nodes.push(
-      <NotionBlock key={blocks[i].id} block={blocks[i]} pageId={pageId} />,
-    );
-    i++;
-  }
-  return nodes;
-}
-
-export default function PortfolioNotionDetail({
+export default function PortfolioDetail({
   meta,
   blocks,
   prev,
@@ -105,11 +25,13 @@ export default function PortfolioNotionDetail({
     <div className="w-full dark:bg-dark-800">
       {meta.coverImage && (
         <div className="relative h-[38vh] w-full overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={meta.coverImage}
             alt={meta.title}
-            className="h-full w-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
         </div>
       )}
@@ -143,11 +65,11 @@ export default function PortfolioNotionDetail({
 
           {meta.skills.length > 0 && (
             <ul className="flex flex-wrap gap-2 mt-5">
-              {meta.skills.map((s) => (
+              {meta.skills.map((skill) => (
                 <li
-                  key={s}
+                  key={skill}
                   className="px-2.5 py-1 text-xs rounded-full bg-light-200 text-dark-500 dark:bg-dark-700 dark:text-dark-300">
-                  {s}
+                  {skill}
                 </li>
               ))}
             </ul>
@@ -180,19 +102,19 @@ export default function PortfolioNotionDetail({
         {/* 핵심 지표 */}
         {meta.metrics.length > 0 && (
           <div className="grid gap-3 mb-10 sm:grid-cols-2 lg:grid-cols-3">
-            {meta.metrics.map((m) => (
+            {meta.metrics.map((metric) => (
               <div
-                key={m}
+                key={metric}
                 className="border-l-2 border-point pl-3 text-sm text-dark-600 dark:text-dark-300">
-                {m}
+                {metric}
               </div>
             ))}
           </div>
         )}
 
-        {/* 본문 (Notion 블록) */}
+        {/* 본문 */}
         <article className="text-dark-900 dark:text-light-300">
-          {renderBlocks(blocks, meta.pageId)}
+          <PortfolioBlocks blocks={blocks} />
         </article>
 
         {/* 이전 / 다음 */}

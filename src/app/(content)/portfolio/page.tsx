@@ -1,10 +1,11 @@
 import PortfolioListClient from '@/components/portfolio/PortfolioListClient';
-import { PortfolioCategory } from '@/data/portfolio';
+import { getPortfolioCards } from '@/services/portfolio.api';
+import type { PortfolioCategory } from '@/types/portfolio.type';
 import { getPageViewsMap } from '@/lib/analytics';
-import { getPortfolioCards } from '@/services/portfolio.notion.api';
 import { siteConfig } from '@/lib/seo';
 import { Metadata } from 'next';
 
+// 본문은 Git 정본이라 재생성이 필요 없고, 이 주기는 GA4 조회수를 다시 읽기 위한 것입니다.
 export const revalidate = 60;
 
 export const metadata: Metadata = {

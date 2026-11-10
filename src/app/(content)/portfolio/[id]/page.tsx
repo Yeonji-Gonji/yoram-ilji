@@ -1,16 +1,16 @@
-import PortfolioNotionDetail from '@/components/portfolio/PortfolioNotionDetail';
+import PortfolioDetail from '@/components/portfolio/PortfolioDetail';
 import { getViewsForPath } from '@/lib/analytics';
 import {
   generateBreadcrumbJsonLd,
   generatePortfolioJsonLd,
   siteConfig,
 } from '@/lib/seo';
-import { getPostContentWithChildren } from '@/services/notion.api';
 import {
   getAdjacent,
+  getPortfolioBlocks,
   getPortfolioBySlug,
   getPortfolioSlugs,
-} from '@/services/portfolio.notion.api';
+} from '@/services/portfolio.api';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -18,6 +18,7 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
+// 본문은 Git 정본이라 재생성이 필요 없고, 이 주기는 GA4 조회수를 다시 읽기 위한 것입니다.
 export const revalidate = 60;
 
 export async function generateStaticParams() {
@@ -49,7 +50,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: 'article',
       url: `${siteConfig.url}/portfolio/${id}`,
       images: meta.thumbnail
-        ? [{ url: meta.thumbnail, width: 1200, height: 630, alt: meta.title }]
+        ? [
+            {
+              url: meta.thumbnail,
+              width: meta.coverWidth,
+              height: meta.coverHeight,
+              alt: meta.title,
+            },
+          ]
         : undefined,
     },
   };
@@ -64,7 +72,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
   }
 
   const [blocks, adjacent, views] = await Promise.all([
-    getPostContentWithChildren(meta.pageId),
+    getPortfolioBlocks(id),
     getAdjacent(id),
     getViewsForPath(`/portfolio/${id}`),
   ]);
@@ -93,7 +101,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <PortfolioNotionDetail
+      <PortfolioDetail
         meta={meta}
         blocks={blocks}
         prev={adjacent.prev}
