@@ -4,7 +4,7 @@ const item: PortfolioItem = {
   "id": "anneklein",
   "title": "ANNE KLEIN Promotion",
   "subtitle": "앤클라인 프로모션 페이지 디자인",
-  "description": "2021 시즌 룩북 촬영 현장을 보조하고, 선별한 컷으로 프로모션 페이지를 디자인했습니다.",
+  "description": "2021 시즌 룩북 촬영 현장을 보조하고 선별한 컷으로 프로모션 페이지를 디자인했습니다.",
   "category": "design",
   "period": "2021",
   "role": "웹 디자인",
@@ -25,7 +25,7 @@ const item: PortfolioItem = {
       "type": "paragraph",
       "text": [
         {
-          "text": "룩북 촬영 현장을 보조하며 얻은 감각을 살려, 시즌 무드와 셀링 포인트가 한눈에 들어오도록 컷을 선별·배치했습니다."
+          "text": "룩북 촬영 현장을 보조하며 얻은 감각을 살려 시즌 무드와 셀링 포인트가 한눈에 들어오도록 컷을 선별·배치했습니다."
         }
       ]
     },

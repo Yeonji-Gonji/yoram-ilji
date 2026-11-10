@@ -17,7 +17,7 @@ import anneklein from './anneklein';
 import andbag from './andbag';
 
 /**
- * 포트폴리오 정본. 배열 순서가 곧 노출 순서이고, 상세 페이지의 이전·다음도 이 순서를 따릅니다.
+ * 포트폴리오 정본. 배열 순서가 곧 노출 순서이고 상세 페이지의 이전·다음도 이 순서를 따릅니다.
  * 케이스를 추가하면 같은 폴더에 파일을 만들고 이 배열에 끼워 넣습니다.
  */
 export const portfolioItems: PortfolioItem[] = [
