@@ -9,7 +9,7 @@ import { getBlogPosts, getPostExcerpt } from '@/services/notion.api';
 import {
   getFeaturedCards,
   getPortfolioCards,
-} from '@/services/portfolio.notion.api';
+} from '@/services/portfolio.api';
 import dayjs from 'dayjs';
 import { Metadata } from 'next';
 

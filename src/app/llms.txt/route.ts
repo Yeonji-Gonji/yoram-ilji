@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/seo';
 import { getBlogPosts } from '@/services/notion.api';
-import { getPortfolioCards } from '@/services/portfolio.notion.api';
+import { getPortfolioCards } from '@/services/portfolio.api';
 import { getNotionBlogTitle } from '@/utils/getResource';
 
 export const revalidate = 3600;

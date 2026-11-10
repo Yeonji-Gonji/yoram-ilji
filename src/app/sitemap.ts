@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/seo';
 import { getBlogPosts } from '@/services/notion.api';
-import { getPortfolioSlugs } from '@/services/portfolio.notion.api';
+import { getPortfolioSlugs } from '@/services/portfolio.api';
 import { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

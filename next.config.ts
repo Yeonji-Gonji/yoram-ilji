@@ -1,8 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  // 정적 생성 시 Notion API 429 방지: 워커를 하나로 묶어(src/services/notion.client.ts 의 요청 간격 제한이
+  // 블로그 정적 생성 시 Notion API 429 방지: 워커를 하나로 묶어(src/services/notion.client.ts 의 요청 간격 제한이
   // 프로세스 단위라서) 전체 요청 속도를 한도 아래로 유지하고, 실패한 페이지는 재시도한다.
+  // 포트폴리오는 Git 정본이라 외부 호출이 없다(docs/adr/ADR-0002).
   experimental: {
     staticGenerationMinPagesPerWorker: 10_000,
     staticGenerationMaxConcurrency: 4,

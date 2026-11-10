@@ -12,10 +12,12 @@ export const appConfig = {
   /** 연락처 겸 Gmail 발신/수신 계정 (공개 값, 시크릿 아님) */
   contactEmail: 'juni940302@gmail.com',
 
-  /** Notion 데이터소스 ID (시크릿 아님, API 키만 .env로 관리) */
+  /**
+   * Notion 데이터소스 ID (시크릿 아님, API 키만 .env로 관리).
+   * 블로그 전용입니다. 포트폴리오 정본은 `src/content/portfolio/*.ts` 로 옮겼습니다(ADR-0002).
+   */
   notion: {
     blogDataSourceId: '2ec765fe-8b67-80fb-94d5-000b1661d660',
-    portfolioDataSourceId: '390765fe-8b67-804b-9445-000b5c5ed7d1',
   },
 
   /**

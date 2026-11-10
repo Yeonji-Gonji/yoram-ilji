@@ -2,7 +2,7 @@
 
 import CarouselDots from '@/components/common/CarouselDots';
 import SectionHeader from '@/components/common/SectionHeader';
-import { PortfolioCard } from '@/lib/portfolio-content';
+import type { PortfolioCard } from '@/types/portfolio.type';
 import { ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';

@@ -1,7 +1,10 @@
 'use client';
 
-import { categoryLabels, PortfolioCategory } from '@/data/portfolio';
-import { PortfolioCard } from '@/lib/portfolio-content';
+import { categoryLabels } from '@/data/portfolio';
+import type {
+  PortfolioCard,
+  PortfolioCategory,
+} from '@/types/portfolio.type';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
