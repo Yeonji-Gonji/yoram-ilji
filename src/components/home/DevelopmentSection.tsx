@@ -20,7 +20,7 @@ const RADIUS = 980;
 const VISIBLE_RANGE = 2;
 
 /**
- * 홈 Selected Work — 개발 케이스를 부채꼴(fan)로 펼친 갤러리.
+ * 홈 Selected Work: 개발 케이스를 부채꼴(fan)로 펼친 갤러리.
  * 카드들이 호를 따라 기울어져 늘어서고, 가운데 카드만 똑바로 서서
  * 확대되며 설명이 펼쳐진다. 드래그·스와이프·가로 휠로 회전, 무한 루프,
  * 옆 카드 클릭은 가운데로, 가운데 카드 클릭은 상세로 이동.
@@ -115,7 +115,7 @@ export default function DevelopmentSection({ cards }: Props) {
                   isActive={isActive}
                   onClick={(e) => {
                     // 드래그 끝에 발생한 클릭은 무시, 옆 카드는 가운데로.
-                    // 네비게이션을 취소할 땐 전파도 끊는다 — RouteChangeLoader가
+                    // 네비게이션을 취소할 땐 전파도 끊는다. RouteChangeLoader가
                     // document 클릭으로 로더를 켜서, 이동 없는 클릭에도
                     // 풀스크린 로더가 8초간 떠버린다
                     if (drag.current.moved) {

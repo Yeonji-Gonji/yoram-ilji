@@ -93,7 +93,7 @@ export interface NotionSelectProperty extends NotionPropertyBase {
 }
 
 /**
- * "날짜" 속성 (type: "date") — 글의 실제 발행일
+ * "날짜" 속성 (type: "date"): 글의 실제 발행일
  */
 export interface NotionDateProperty extends NotionPropertyBase {
   type: 'date';
