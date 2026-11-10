@@ -17,7 +17,7 @@ interface Props {
 }
 
 /**
- * 홈 Blog — 최신 글 4×2 그리드. 캐러셀 대신 제목+2줄 요약을 펼쳐서
+ * 홈 Blog: 최신 글 4×2 그리드. 캐러셀 대신 제목+2줄 요약을 펼쳐서
  * 한 화면에 최대한 많은 콘텐츠를 노출하는 전략.
  */
 export default function BlogSection({ posts }: Props) {

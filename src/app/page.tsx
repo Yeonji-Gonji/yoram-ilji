@@ -91,7 +91,7 @@ export default async function MainPage() {
         <DevelopmentSection cards={featuredDev} />
       </section>
 
-      {/* 섹션 2: 디자인 포트폴리오 — 화면 높이를 차지하지 않는 전폭 띠배너 (흐름 브레이크).
+      {/* 섹션 2: 디자인 포트폴리오: 화면 높이를 차지하지 않는 전폭 띠배너 (흐름 브레이크).
           섹션 높이가 100vh가 아니어도 BubbleModelScene이 DOM 경계로 섹션을 판정한다 */}
       <section
         className="flex items-center justify-center w-full py-16 pointer-events-auto"

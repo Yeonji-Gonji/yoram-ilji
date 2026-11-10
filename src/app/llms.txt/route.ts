@@ -6,7 +6,7 @@ import { getNotionBlogTitle } from '@/utils/getResource';
 export const revalidate = 3600;
 
 /**
- * llms.txt — LLM 크롤러용 사이트 안내 문서 (https://llmstxt.org 표준 형식).
+ * llms.txt: LLM 크롤러용 사이트 안내 문서 (https://llmstxt.org 표준 형식).
  * Notion fetch 실패 시에도 정적 부분은 항상 반환한다.
  */
 export async function GET() {

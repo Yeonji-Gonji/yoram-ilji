@@ -12,6 +12,8 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 
 const publicDir = path.resolve(import.meta.dirname, '../../../public');
+/** em dash. 리터럴로 적으면 이 파일 자체가 검사에 걸린다. */
+const EM_DASH = '\u2014';
 
 describe('포트폴리오 정본 데이터', () => {
   it('발행 케이스 16건이 모두 로드되고 slug 가 유일하다', () => {
@@ -64,7 +66,7 @@ describe('포트폴리오 정본 데이터', () => {
       ...item.metrics,
     ]);
     for (const text of texts) {
-      expect(text.includes('—'), text).toBe(false);
+      expect(text.includes(EM_DASH), text).toBe(false);
     }
   });
 });
