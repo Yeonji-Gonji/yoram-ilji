@@ -9,16 +9,18 @@ import {
 } from '@/lib/seo';
 import {
   getBlogPosts,
-  getPost,
   getPostContentWithChildren,
+  getPublishedPost,
 } from '@/services/notion.api';
-import { NotionPage } from '@/types/notion.type';
 import { getNotionBlogImageUrl, getNotionBlogTitle } from '@/utils/getResource';
 import { getProxiedCoverUrl } from '@/utils/notion-image-url';
 import dayjs from 'dayjs';
 import { Metadata } from 'next';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
+// dynamicParams 는 기본값(true)을 유지한다: 새로 발행한 글이 재배포 없이 요청 시점에 렌더되어야 한다.
+// 그래서 목록에 없는 ID 도 여기까지 오므로, 발행 여부는 getPublishedPost 로 매 렌더 다시 판별한다.
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
 
@@ -35,7 +37,8 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const post = (await getPost(id)) as NotionPage;
+  const post = await getPublishedPost(id);
+  if (!post) notFound();
   const title = getNotionBlogTitle(post);
   const coverImage = getNotionBlogImageUrl(post);
   const category = post.properties.카테고리.select?.name;
@@ -74,7 +77,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PostPage({ params }: Props) {
   const { id } = await params;
-  const post = (await getPost(id)) as NotionPage;
+  const post = await getPublishedPost(id);
+  if (!post) notFound();
   const blocks = await getPostContentWithChildren(id);
   const views = await getViewsForPath(`/blog/${id}`);
   const category = post.properties.카테고리.select?.name;
