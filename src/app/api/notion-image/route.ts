@@ -1,5 +1,4 @@
-import { getBlock, getPost } from '@/services/notion.api';
-import { NotionPage } from '@/types/notion.type';
+import { getBlock, getPublishedPost } from '@/services/notion.api';
 import { BlockObjectResponse } from '@notionhq/client';
 import { NextRequest, NextResponse } from 'next/server';
 
@@ -13,9 +12,9 @@ export async function GET(request: NextRequest) {
     let imageUrl: string | null = null;
 
     if (type === 'cover' && pageId) {
-      // 페이지 커버 이미지
-      const post = (await getPost(pageId)) as NotionPage;
-      const cover = post.cover;
+      // 블로그 글 커버 이미지. 상세 페이지와 같은 기준으로 미발행·없는 글은 404 로 떨어진다.
+      const post = await getPublishedPost(pageId);
+      const cover = post?.cover;
 
       if (cover?.type === 'file') {
         imageUrl = cover.file.url;

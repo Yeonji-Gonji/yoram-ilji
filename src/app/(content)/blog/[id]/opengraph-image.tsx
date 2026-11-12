@@ -1,7 +1,7 @@
 import { siteConfig } from '@/lib/seo';
-import { getPost } from '@/services/notion.api';
-import { NotionPage } from '@/types/notion.type';
+import { getPublishedPost } from '@/services/notion.api';
 import { getNotionBlogTitle } from '@/utils/getResource';
+import { notFound } from 'next/navigation';
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
@@ -20,7 +20,9 @@ export default async function Image({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const post = (await getPost(id)) as NotionPage;
+  // 상세 페이지와 같은 기준: 미발행·없는 글은 제목이 이미지로 새지 않게 404
+  const post = await getPublishedPost(id);
+  if (!post) notFound();
   const title = getNotionBlogTitle(post);
   const category = post.properties.카테고리?.select?.name || '블로그';
 

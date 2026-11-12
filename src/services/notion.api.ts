@@ -1,3 +1,7 @@
+import {
+  isMissingNotionPageError,
+  isPublishedBlogPost,
+} from '@/lib/blog-post-visibility';
 import { appConfig } from '@/lib/config';
 import { notion } from '@/services/notion.client';
 import { NotionPage } from '@/types/notion.type';
@@ -111,6 +115,24 @@ export const getPost = cache(async (id: string): Promise<GetPageResponse> => {
   const response = await notion.pages.retrieve({ page_id: id });
   return response;
 });
+
+/**
+ * ID 로 공개 블로그 글을 조회한다. 발행되지 않았거나(`발행` 체크 해제·휴지통) 없는 ID 면 null.
+ * 블로그 글을 ID 로 여는 경로(상세·OG 이미지·커버 프록시)는 getPost 대신 이것을 쓴다.
+ * 한도 초과·5xx 같은 일시 오류는 그대로 던진다(판별 기준은 `@/lib/blog-post-visibility`).
+ */
+export const getPublishedPost = cache(
+  async (id: string): Promise<NotionPage | null> => {
+    let page: GetPageResponse;
+    try {
+      page = await getPost(id);
+    } catch (error) {
+      if (isMissingNotionPageError(error)) return null;
+      throw error;
+    }
+    return isPublishedBlogPost(page) ? page : null;
+  },
+);
 
 /** 단일 블록을 ID로 직접 조회 (중첩·페이지네이션과 무관하게 안전). */
 export const getBlock = async (blockId: string) => {

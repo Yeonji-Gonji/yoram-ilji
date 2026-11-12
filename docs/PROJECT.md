@@ -26,7 +26,7 @@ updated: 2026-11-10
 - **도메인 / 배포 타겟**: `https://yoramilji.kr` (Vercel, main push 자동 배포)
 - **콘텐츠 소스**: 블로그 = Notion API(데이터소스 ID는 `src/lib/config.ts`) / 포트폴리오 = `src/content/portfolio/*.ts` + `public/portfolio/` 정적 이미지
 - **계측**: GTM + GA4 + Search Console (식별자는 `src/lib/config.ts`, 서비스 계정 키만 env)
-- **테스트**: vitest `src/**/*.test.ts` (퀴즈 채점 정규화·자동 채점·모의고사 출제·문제 은행 ID 중복·정답 공란 검사, 연락 폼 입력 검증·메일 HTML 이스케이프, 포트폴리오 정본 무결성·조회 API). CI = lint → tsc → test
+- **테스트**: vitest `src/**/*.test.ts` (퀴즈 채점 정규화·자동 채점·모의고사 출제·문제 은행 ID 중복·정답 공란 검사, 연락 폼 입력 검증·메일 HTML 이스케이프, 포트폴리오 정본 무결성·조회 API, 블로그 미발행 글 404). CI = lint → tsc → test
 
 ## 배포 · 환경 구조 (고정 규칙 및 함정)
 
@@ -43,6 +43,7 @@ updated: 2026-11-10
   공개 상수(사이트 URL·연락 메일·Notion 블로그 데이터소스 ID·GTM/GA ID)는 env가 아니라 `src/lib/config.ts` 한 곳에서 관리한다.
 - **운영·검증 함정**
   - Notion 공개 API 한도(통합당 3 req/s): 빌드는 `src/services/notion.client.ts`의 간격 제한·재시도와 정적 생성 워커 1개로 한도 아래를 유지한다([ADR-0001](adr/ADR-0001-notion-api-rate-limit-build.md)). 빌드는 약 5분 걸린다. Notion 클라이언트를 따로 만들지 않는다.
+  - 블로그 글 공개 기준은 `발행` 체크박스다. 목록·`feed.xml`·`llms.txt`·sitemap은 데이터소스 쿼리 필터로 거르지만, 글을 ID로 여는 경로(상세 `/blog/[id]`·`generateMetadata`·`opengraph-image`·커버 프록시)는 필터가 걸리지 않는다. 그래서 이 경로는 `getPost`가 아니라 `getPublishedPost`(`src/services/notion.api.ts`)를 쓰고, 판별은 `src/lib/blog-post-visibility.ts` 한 곳에 둔다. 미발행·없는 ID는 404이고, Notion 한도 초과·5xx는 404로 바꾸지 않는다(재검증 중 장애로 발행 글이 404로 캐시되지 않게). `dynamicParams`는 기본값(true)이라 새로 발행한 글은 재배포 없이 열린다.
   - Notion 이미지(블로그)는 만료 URL이라 `/api/notion-image` 프록시를 거친다. 직접 URL을 캐시하지 않는다. 포트폴리오는 이 프록시를 쓰지 않는다. 이미지가 `public/portfolio/`에 있고 테스트가 경로 존재를 검사한다.
   - 포트폴리오 케이스를 더하거나 고칠 때는 `src/content/portfolio/<slug>.ts`를 쓰고 `index.ts` 배열에 끼운다(배열 순서 = 노출 순서 = 이전·다음 순서). 이미지는 `public/portfolio/<slug>/`에 webp로 두고 가로 1600px를 넘기지 않는다.
   - 배포 후 확인: `curl -s -o /dev/null -w '%{http_code}' https://yoramilji.kr`가 200, 없는 경로(`/zzz-nonexistent-control`)가 404(soft-404 아님, 2026-10-26 실측), 홈 히어로·블로그 목록 렌더.
