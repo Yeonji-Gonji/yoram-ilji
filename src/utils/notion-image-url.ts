@@ -44,3 +44,24 @@ export function getProxiedCoverUrl(
   // 외부 영구 URL은 그대로 사용
   return originalUrl;
 }
+
+/**
+ * 페이지 밖에서 읽히는 커버 URL(og:image, twitter:image, JSON-LD image)을 만듭니다.
+ *
+ * 공유 미리보기 수집기와 검색 봇은 HTML에 적힌 URL을 나중에 따로 받아 갑니다.
+ * S3 임시 URL을 그대로 적으면 만료 뒤 403이 되므로 프록시의 절대 URL로 바꾸고,
+ * 외부 영구 URL은 그대로 반환합니다.
+ */
+export function getShareableCoverUrl(
+  originalUrl: string | null,
+  pageId: string,
+  siteUrl: string
+): string | null {
+  const coverUrl = getProxiedCoverUrl(originalUrl, pageId);
+  if (!coverUrl) return null;
+
+  // 프록시 URL은 경로만 있으므로 사이트 주소를 붙여 절대 URL로 만든다
+  return coverUrl.startsWith("/")
+    ? new URL(coverUrl, siteUrl).toString()
+    : coverUrl;
+}
