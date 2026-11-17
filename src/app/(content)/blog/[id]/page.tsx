@@ -13,7 +13,10 @@ import {
   getPublishedPost,
 } from '@/services/notion.api';
 import { getNotionBlogImageUrl, getNotionBlogTitle } from '@/utils/getResource';
-import { getProxiedCoverUrl } from '@/utils/notion-image-url';
+import {
+  getProxiedCoverUrl,
+  getShareableCoverUrl,
+} from '@/utils/notion-image-url';
 import dayjs from 'dayjs';
 import { Metadata } from 'next';
 import Image from 'next/image';
@@ -40,7 +43,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPublishedPost(id);
   if (!post) notFound();
   const title = getNotionBlogTitle(post);
-  const coverImage = getNotionBlogImageUrl(post);
+  // og:image·twitter:image 는 수집기가 나중에 따로 받아 가므로 만료되는 S3 임시 URL 을 쓰지 않는다.
+  const coverImage = getShareableCoverUrl(
+    getNotionBlogImageUrl(post),
+    id,
+    siteConfig.url,
+  );
   const category = post.properties.카테고리.select?.name;
   const publishedTime = post.properties.생성일.created_time;
 
@@ -96,7 +104,7 @@ export default async function PostPage({ params }: Props) {
     publishedTime,
     modifiedTime: post.properties.생성일.created_time,
     author: siteConfig.author.name,
-    image: coverImage,
+    image: getShareableCoverUrl(originalCoverImage, id, siteConfig.url),
     url: `${siteConfig.url}/blog/${id}`,
   });
 
